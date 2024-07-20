@@ -4522,6 +4522,9 @@ Expected
 
 <hr>
 
+> Day : Sunday, 21st July 2024
+
+
 
 ## Template for Solving
 
@@ -4546,6 +4549,256 @@ Expected
 ```
 
 - [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+# Interview Questions
+
+## Table of Contents interview
+1. Infosys Questions
+	- [Monster Killing](#monster-killing)
+
+- [Template for interview questions](#template-for-interview-questions)
+
+
+## Monster Killing
+
+**Question**: 
+While playing an RPG game, you were assigned to complete one of the hardest quests in this game.
+There are n monsters you'll need to defeat in this quest. Each monster i is described with two integer numbers - $power_i$ and $bonus_i$. To defeat this monster, you'll need at least $power_i$ experience points. If you try fighting this monster without having enough experience points, you lose immediately. You will also gain $bonus_i$ experience points if you defeat this monster. You can defeat monsters in any order.
+The quest turned out to be very hard - you try to defeat the monsters but keep losing repeatedly. Your friend told you that this quest is impossible to complete. Knowing that, you're interested, what is the maximum possible number of monsters you can defeat? (Question difficulty level: Hardest)
+
+`Input:`
+The first line contains an integer, n, denoting the number of monsters.
+The next line contains an integer, e, denoting your initial experience.
+Each line `i` of the `n` subsequent lines (where `0 ≤ i < n`) contains an integer, $power_i$, which represents power of the corresponding monster.
+Each line `i` of the `n` subsequent lines (where `0 ≤ i < n`) contains an integer, $bonus_i$, which represents bonus for defeating the corresponding monster.
+
+[**Solution**](https://chatgpt.com/share/15544e13-5a45-49c9-80a7-58e8b5132ac9) : 
+
+> [Stack Overflow Solution](https://stackoverflow.com/questions/68694587/what-is-the-maximum-possible-number-of-monsters-you-can-defeat)
+
+###  Solving Method
+This is a relatively simple quesiton where the input will be in the form of a linear array and they have mentioned where to access what given values. WIth this a simple check at each iteration of the loop, to compare the experience of the fighter with the monster will let us know if he can go ahead and defeat it.
+1. In this case it isn't mentioned that the user has to defeat them in order and if a weaker monster exists further in the arrya, he can defeat that and gain bonus exp points
+2. This will let him defeat the other monsters
+
+:red_circle: **Major note to keep in mind is that I've assumed they're going to be given in a singular array, whereas it is mentioned in the question that they will be individual inputs ( so we are to input them as follows in the terminal line and not pass it as an array )**
+
+### Java Code ( My approach )
+```java
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class MonsterKiller {
+    public static void main(String[] args) {
+        int[][] arrays = {
+            {2, 123, 78, 130, 10, 0},
+            {3, 100, 101, 100, 304, 100, 1, 524}
+        };
+
+        for (int[] array : arrays) {
+            int result = monsterKiller(array);
+            System.out.println("Monsters defeated: " + result);
+        }
+    }
+
+    public static int monsterKiller(int[] array){
+
+        if (array.length == 0){
+            return 0;
+        }
+
+        int defeated = 0;
+        int n = array[0];
+        int user_exp = array[1];
+
+        // Here we will initialize the array based on my defined monster arrau
+        Monster[] monsters = new Monster[n];
+        // This is to input the respective bonus values connected to the each monster
+        for(int i =0; i < n; i ++){
+            monsters[i] = new Monster(array[i+2], array[i+2+n]);
+        }
+
+        // Now the sorting
+        Arrays.sort(monsters,Comparator.comparingInt(m -> m.strength));
+
+        // This method is when you have to linearly iterate through an array without needing to use the variable for any other previous checks
+        for(Monster monster : monsters){
+            if(monster.strength > user_exp){
+                return defeated;
+            }
+            else{
+                defeated++;
+                user_exp += monster.bonus;
+            }
+        }       
+        
+        return defeated;
+    }
+
+}
+
+// This class is to create an array of type monster that stores the strength and the bonus value along with it
+
+// This is helpful in learning user defined datatypes that can help in solving questions of such format
+// If you don't do this then you'll have to create two loops to manually sort the function instead of depending on the higher order 'sort()' function in the java.util.Arrays package.
+
+class Monster{
+    int strength;
+    int bonus;
+
+    Monster(int strength, int bonus){
+        this.strength = strength;
+        this.bonus = bonus;
+    }
+}
+
+```
+
+### Java code ( Chatgpt approach )
+```java
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+public class RPGGame {
+    static class Monster {
+        int power;
+        int bonus;
+
+        Monster(int power, int bonus) {
+            this.power = power;
+            this.bonus = bonus;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter the number of monsters:");
+        int n = scanner.nextInt();
+
+        System.out.println("Enter the initial experience:");
+        int e = scanner.nextInt();
+
+        int[] power = new int[n];
+        int[] bonus = new int[n];
+
+        System.out.println("Enter the power of each monster:");
+        for (int i = 0; i < n; i++) {
+            power[i] = scanner.nextInt();
+        }
+
+        System.out.println("Enter the bonus for each monster:");
+        for (int i = 0; i < n; i++) {
+            bonus[i] = scanner.nextInt();
+        }
+
+        System.out.println(maxDefeatedMonsters(n, e, power, bonus));
+    }
+
+    public static int maxDefeatedMonsters(int n, int e, int[] power, int[] bonus) {
+        Monster[] monsters = new Monster[n];
+        for (int i = 0; i < n; i++) {
+            monsters[i] = new Monster(power[i], bonus[i]);
+        }
+
+        Arrays.sort(monsters, new Comparator<Monster>() {
+            public int compare(Monster m1, Monster m2) {
+                if (m1.power != m2.power) {
+                    return Integer.compare(m1.power, m2.power);
+                }
+                return Integer.compare(m2.bonus, m1.bonus);
+            }
+        });
+
+        int defeated = 0;
+        for (Monster monster : monsters) {
+            if (e >= monster.power) {
+                e += monster.bonus;
+                defeated++;
+            } else {
+                break;
+            }
+        }
+        return defeated;
+    }
+}
+
+
+```
+
+### Python code ( Chatgpt approach )
+```python
+def max_defeated_monsters(n, e, power, bonus):
+    monsters = sorted(zip(power, bonus), key=lambda x: (x[0], -x[1]))
+    
+    defeated = 0
+    for p, b in monsters:
+        if e >= p:
+            e += b
+            defeated += 1
+        else:
+            break
+    return defeated
+
+# Example usage:
+if __name__ == "__main__":
+    n = int(input("Enter the number of monsters: "))
+    e = int(input("Enter the initial experience: "))
+    
+    power = []
+    bonus = []
+    
+    print("Enter the power of each monster:")
+    for _ in range(n):
+        power.append(int(input()))
+    
+    print("Enter the bonus for each monster:")
+    for _ in range(n):
+        bonus.append(int(input()))
+    
+    print(max_defeated_monsters(n, e, power, bonus))
+
+
+```
+
+
+### Output
+```
+Monsters defeated: 2
+Monsters defeated: 2
+
+```
+
+- [Return to TOC](#table-of-contents-interview)
+
+<hr>
+
+## Template for interview questions
+
+**Question**: 
+
+
+[**Solution**]() : 
+
+
+###  Solving Method
+
+
+### Python Code 
+```python
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-interview)
 
 <hr>
 
