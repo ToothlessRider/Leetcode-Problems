@@ -4524,6 +4524,131 @@ Expected
 
 > Day : Sunday, 21st July 2024
 
+## Build a Matrix With Conditions
+
+[**Question**](https://leetcode.com/problems/build-a-matrix-with-conditions/?envType=daily-question&envId=2024-07-21): 
+You are given a  **positive**  integer  `k`. You are also given:
+
+-   a 2D integer array  `rowConditions`  of size  `n`  where  `rowConditions[i] = [abovei, belowi]`, and
+-   a 2D integer array  `colConditions`  of size  `m`  where  `colConditions[i] = [lefti, righti]`.
+
+The two arrays contain integers from  `1`  to  `k`.
+
+You have to build a  `k x k`  matrix that contains each of the numbers from  `1`  to  `k`  **exactly once**. The remaining cells should have the value  `0`.
+
+The matrix should also satisfy the following conditions:
+
+-   The number  `abovei`  should appear in a  **row**  that is strictly  **above**  the row at which the number  `belowi`  appears for all  `i`  from  `0`  to  `n - 1`.
+-   The number  `lefti`  should appear in a  **column**  that is strictly  **left**  of the column at which the number  `righti`  appears for all  `i`  from  `0`  to  `m - 1`.
+
+Return  _**any**  matrix that satisfies the conditions_. If no answer exists, return an empty matrix.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2022/07/06/gridosdrawio.png)
+
+**Input:** k = 3, rowConditions = [[1,2],[3,2]], colConditions = [[2,1],[3,2]]
+**Output:** [[3,0,0],[0,0,1],[0,2,0]]
+**Explanation:** The diagram above shows a valid example of a matrix that satisfies all the conditions.
+The row conditions are the following:
+- Number 1 is in row 1, and number 2 is in row 2, so 1 is above 2 in the matrix.
+- Number 3 is in row 0, and number 2 is in row 2, so 3 is above 2 in the matrix.
+The column conditions are the following:
+- Number 2 is in column 1, and number 1 is in column 2, so 2 is left of 1 in the matrix.
+- Number 3 is in column 0, and number 2 is in column 1, so 3 is left of 2 in the matrix.
+Note that there may be multiple correct answers.
+
+[**Solution**]() : 
+###  Solving Method
+So the idea here is that we individually align the rowCondition and colCondition
+
+### Java Code 
+```java
+class Solution {
+    public int[][] buildMatrix(int k, int[][] rowConditions, int[][] colConditions) {
+        List<Integer> row_sorting = topo_sort(rowConditions, k);
+        List<Integer> col_sorting = topo_sort(colConditions, k);
+        if (row_sorting.isEmpty() || col_sorting.isEmpty())
+            return new int[0][0];
+
+        Map<Integer, int[]> value_position = new HashMap<>();
+        for (int n = 1; n <= k; ++n) {
+            value_position.put(n, new int[2]);  // element -> [row_index, col_index]
+        }
+        for (int ind = 0; ind < row_sorting.size(); ++ind) {
+            value_position.get(row_sorting.get(ind))[0] = ind;
+        }
+        for (int ind = 0; ind < col_sorting.size(); ++ind) {
+            value_position.get(col_sorting.get(ind))[1] = ind;
+        }
+
+        int[][] res = new int[k][k];
+        for (int value = 1; value <= k; ++value) {
+            int row = value_position.get(value)[0];
+            int column = value_position.get(value)[1];
+            res[row][column] = value;
+        }
+
+        return res;
+    }
+
+    // return True if all okay and return False if cycle was found
+    private boolean dfs(int src, Map<Integer, List<Integer>> graph, Set<Integer> visited, Set<Integer> cur_path, List<Integer> res) {
+        if (cur_path.contains(src)) return false;  // cycle detected
+        if (visited.contains(src)) return true;  // all okay, but we've already visited this node
+
+        visited.add(src);
+        cur_path.add(src);
+
+        for (int neighbor : graph.getOrDefault(src, Collections.emptyList())) {
+            if (!dfs(neighbor, graph, visited, cur_path, res))  // if any child returns false
+                return false;
+        }
+
+        cur_path.remove(src);  // backtrack path
+        res.add(src);
+        return true;
+    }
+
+    // if there will be cycle - return empty array, in other case return 1d array as described above
+    private List<Integer> topo_sort(int[][] edges, int k) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        for (int[] edge : edges) {
+            graph.computeIfAbsent(edge[0], x -> new ArrayList<>()).add(edge[1]);
+        }
+
+        Set<Integer> visited = new HashSet<>();
+        Set<Integer> cur_path = new HashSet<>();
+        List<Integer> res = new ArrayList<>();
+
+        for (int src = 1; src <= k; ++src) {
+            if (!dfs(src, graph, visited, cur_path, res))
+                return Collections.emptyList();
+        }
+
+        Collections.reverse(res);  // we will have res as reversed so we need to reverse it one more time
+        return res;
+    }
+}
+```
+
+### Output
+```
+Input
+k =
+3
+rowConditions = [[1,2],[3,2]]
+colConditions = [[2,1],[3,2]]
+Output
+[[3,0,0],[0,0,1],[0,2,0]]
+Expected
+[[3,0,0],[0,0,1],[0,2,0]]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
 
 
 ## Template for Solving
@@ -4557,6 +4682,7 @@ Expected
 ## Table of Contents interview
 1. Infosys Questions
 	- [Monster Killing](#monster-killing)
+	- [Unique Birthday Gift](#unique-birthday-gift)
 
 - [Template for interview questions](#template-for-interview-questions)
 
@@ -4573,6 +4699,8 @@ The first line contains an integer, n, denoting the number of monsters.
 The next line contains an integer, e, denoting your initial experience.
 Each line `i` of the `n` subsequent lines (where `0 ≤ i < n`) contains an integer, $power_i$, which represents power of the corresponding monster.
 Each line `i` of the `n` subsequent lines (where `0 ≤ i < n`) contains an integer, $bonus_i$, which represents bonus for defeating the corresponding monster.
+
+**![](https://lh7-us.googleusercontent.com/docsz/AD_4nXeEL9_C8RuW7xw5jKdAgVr2Unws5VJApEUI16lFEtT3iKLfQpk2Zug7Xe0TtXA7fC-oMFTmNM15xDL1z6M6FoyndfVEh5vts9dWdJE81Xa7ASU2aZreO4mvXgExaF2Eh5aKUnLuO47JWZV65QpaGJ83bjE?key=ZHy1vNG2cH9g5PquhAKV5g)**
 
 [**Solution**](https://chatgpt.com/share/15544e13-5a45-49c9-80a7-58e8b5132ac9) : 
 
@@ -4769,6 +4897,40 @@ if __name__ == "__main__":
 ```
 Monsters defeated: 2
 Monsters defeated: 2
+
+```
+
+- [Return to TOC](#table-of-contents-interview)
+
+<hr>
+
+## Unique Birthday Gift
+
+**Question**: 
+Your birthday is coming soon and one of your friends, Alex, is thinking about a gift for you. He knows that you really like integer arrays with interesting properties.
+
+He selected two numbers, N and K and decided to write down on paper all integer arrays of length K (in form a[1], a[2], ..., a[K]), where every number a[i] is in range from 1 to N, and, moreover, a[i+1] is divisible by a[i] (where 1 < i <= K), and give you this paper as a birthday present.
+Alex is very patient, so he managed to do this. Now you're wondering, how many different arrays are written down on this paper?
+Since the answer can be really large, print it modulo 10000.
+
+`Input:`
+The first line contains an integer, n, denoting the maximum possible value in the arrays.
+The next line contains an integer, k, denoting the length of the arrays.
+
+**![](https://lh7-us.googleusercontent.com/docsz/AD_4nXdBRGNIg5RvwDD3cFVz4smy6sB5uY1bxEJfRIZ9KiPDJE8cnmAgg1jYvn_daF4DwHliXGoaK-q63waVdNjxhXlacj8xAD95uFIuRzJjtlAN4Wg3-cgYSE8qnJsXPgg0q-juqrmROB93pFcj_fRKO2umDcL8?key=ZHy1vNG2cH9g5PquhAKV5g)**
+
+[**Solution**]() : 
+###  Solving Method
+Use the scanner to accept the maximum possible values for the array and then the length of the arrays
+
+### Java Code 
+```java
+
+```
+
+### Output
+```
+
 
 ```
 
@@ -5422,6 +5584,7 @@ Hi Aaron
 ## Table of Contents Java Functions
 1. [Strings](#strings)
 2. [String Builder](#string-builder)
+3. [Scanner to accept input](#scanner-to-accept-input)
 
 
 
@@ -5567,6 +5730,24 @@ These methods provide a broad range of functionality for manipulating and inspec
 
 A string builder is something we can use to be able to perform actions on a given string, since strings in Java are immutable.
 [Usage of String builder](#stringbuilder-usage)
+
+<hr>
+
+## Scanner to accept input
+> [Return to Table of Contents](#table-of-contents-java-functions)
+
+```java
+
+import  java.util.Scanner;
+public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+
+    }
+
+```
+
+
 
 <hr>
 
