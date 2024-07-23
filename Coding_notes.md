@@ -59,13 +59,16 @@
 	-	[if condition writing](#if-condition-writing)
 	-	[New shortcut for **bold** and *italicized* text](#new-shortcut-discovered)
 43. :rocket: [Set Matrix Zeroes](#set-matrix-zeroes)
-44. [Delete Nodes And Return Forest](#delete-nodes-and-return-forest)
+44. :red_circle:[Delete Nodes And Return Forest](#delete-nodes-and-return-forest)
 45. :red_circle:[Number of Good Leaf Nodes](#number-of-good-leaf-nodes)
 46. :star: [Lucky Numbers in a Matrix](#lucky-numbers-in-a-matrix)
 47. :rocket:[Pascals Triangle](#pascals-triangle)
 48. :rocket::red_circle:[Next Permutation](#next-permutation)
 49. :red_circle:[Find Valid Matrix Given Row and Column Sums](#find-valid-matrix-given-row-and-column-sums)
-50. [Template for solving](#template-for-solving)
+50. [Build a matrix with Conditions](#build-a-matrix-with-conditions)
+51. [Sort the People](#sort-the-people)
+52. [Sort Array by increasing Frequency](#sort-array-by-increasing-frequency)
+53. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -4650,6 +4653,206 @@ Expected
 
 <hr>
 
+> Day : Monday, 22nd July 2024
+
+## Sort the people
+
+[**Question**](https://leetcode.com/problems/sort-the-people/description/?envType=daily-question&envId=2024-07-22): 
+You are given an array of strings  `names`, and an array  `heights`  that consists of  **distinct**  positive integers. Both arrays are of length  `n`.
+
+For each index  `i`,  `names[i]`  and  `heights[i]`  denote the name and height of the  `ith`  person.
+
+Return  `names` _sorted in  **descending**  order by the people's heights_.
+
+**Example 1:**
+
+**Input:** names = ["Mary","John","Emma"], heights = [180,165,170]
+**Output:** ["Mary","Emma","John"]
+**Explanation:** Mary is the tallest, followed by Emma and John.
+
+**Example 2:**
+
+**Input:** names = ["Alice","Bob","Bob"], heights = [155,185,150]
+**Output:** ["Bob","Alice","Bob"]
+**Explanation:** The first Bob is the tallest, followed by Alice and the second Bob.
+
+**Constraints:**
+
+-   `n == names.length == heights.length`
+-   `1 <= n <= 103`
+-   `1 <= names[i].length <= 20`
+-   `1 <= heights[i] <= 105`
+-   `names[i]`  consists of lower and upper case English letters.
+-   All the values of  `heights`  are distinct.
+
+[**Solution**](https://chatgpt.com/share/c4f54004-795c-45e2-b770-7363478fc209) : 
+
+
+###  Solving Method
+This was an easy question but over here I've created a `user_defined method` named `Person` so that i can interlink the two variables from the two arrays and then sort one based on the other.
+
+### Java Code 
+```java
+class Solution {
+    public String[] sortPeople(String[] names, int[] heights) {
+        int n = heights.length;
+        Person[] people = new Person[n];
+
+        for(int i =0; i < n; i++){
+            people[i] = new Person(names[i], heights[i]);
+        }
+
+        Arrays.sort(people,(a, b) -> b.height - a.height);
+
+        for(int i=0;i<n;i++){
+            names[i] = people[i].name;
+        }
+
+        return names;
+
+    }
+}
+
+class Person{
+    String name;
+    int height;
+    Person(String name, int height){
+            this.name = name;
+            this.height = height;
+    }
+}
+```
+
+### Output
+```
+Input
+names = ["Mary","John","Emma"]
+heights = [180,165,170]
+Output
+["Mary","Emma","John"]
+Expected
+["Mary","Emma","John"]
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Tuesday, 23rd July 2024
+
+## Sort Array by Increasing Frequency
+
+[**Question**](https://leetcode.com/problems/sort-array-by-increasing-frequency/description/?envType=daily-question&envId=2024-07-23): 
+Given an array of integers  `nums`, sort the array in  **increasing**  order based on the frequency of the values. If multiple values have the same frequency, sort them in  **decreasing**  order.
+
+Return the  _sorted array_.
+
+**Example 1:**
+
+**Input:** nums = [1,1,2,2,2,3]
+**Output:** [3,1,1,2,2,2]
+**Explanation:** '3' has a frequency of 1, '1' has a frequency of 2, and '2' has a frequency of 3.
+
+**Example 2:**
+
+**Input:** nums = [2,3,1,3,2]
+**Output:** [1,3,3,2,2]
+**Explanation:** '2' and '3' both have a frequency of 2, so they are sorted in decreasing order.
+
+**Example 3:**
+
+**Input:** nums = [-1,1,-6,4,5,-6,1,4,1]
+**Output:** [5,-1,4,4,-6,-6,1,1,1]
+
+**Constraints:**
+
+-   `1 <= nums.length <= 100`
+-   `-100 <= nums[i] <= 100`
+
+[**Solution**]() : 
+###  Solving Method
+1. We create a set ? Then we can get the count of elements with respect to elements of the set ?
+2. Once that is done we sort the elements in increasing order ( added condition of equal count numbers being sorted in decreasing order )
+3. Then we print out said element count number of times in the new array, it should work.
+
+
+### Actual solving method
+1. We will create a HashMap of a pair of values ( The value itself and the count of it in the array )
+2. Then we will create the output array ( newNums) and further define the comparator.
+
+> This question can also be solve using tuples / dictionaries ( as used in python )
+
+
+### Python Code ( chatgpt's )
+```python
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        r = Counter(nums).most_common()
+        r.sort(key = lambda x: x[0], reverse=True)
+        r.sort(key = lambda x: x[1])
+        t = []
+
+        for i in r:
+            a, b = i
+            t.extend([a]*b)
+        return t
+```
+
+### Java Code ( My approach , but used a leetcode solution )
+```java
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        HashMap<Integer, Integer> freq = new HashMap<>();
+        Integer[] newNums = new Integer[nums.length];
+
+        // Now let us input the unique values and their count
+        for( int i = 0; i < nums.length; i++){
+            freq.put(nums[i], freq.getOrDefault(nums[i], 0) + 1);
+            // This means, " Put the key nums[i], with the corresponding count being = Already existing key nums[i] count + 1 OR 0"
+            newNums[i] = nums[i];
+            // Input it into the new array so as to now perform operations on the original one
+        }
+
+        Comparator<Integer> com = new Comparator<Integer>(){
+            public int compare(Integer n1, Integer n2){
+                if( freq.get(n1) != freq.get(n2)){
+                    return freq.get(n1) - freq.get(n2);
+                    // So if the frequency of n1 is lesser then it will return a NEGATIVE value, and it won't be swapped
+                }else
+                    return n2 - n1;
+            }
+        };
+
+        Arrays.sort(newNums, com);
+        
+        for(int i = 0; i < nums.length; i++){
+            nums[i] = newNums[i];
+        }
+        return nums;
+
+        
+    }
+}
+
+
+```
+
+### Output
+```
+Input
+nums = [1,1,2,2,2,3]
+Output
+[3,1,1,2,2,2]
+Expected
+[3,1,1,2,2,2]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
 
 ## Template for Solving
 
@@ -5585,6 +5788,9 @@ Hi Aaron
 1. [Strings](#strings)
 2. [String Builder](#string-builder)
 3. [Scanner to accept input](#scanner-to-accept-input)
+4. [ Using a comparator in Java](#using-a-comparator-in-java)
+5. [Sorting a string based on length](#sorting-a-string-based-on-length)
+6. [Frequency calculation with HashMap](#frequency-calculation-with-hashmap)
 
 
 
@@ -5748,6 +5954,222 @@ public static void main(String[] args) {
 ```
 
 
+### Using a comparator in Java
+
+> [Link to video](https://www.youtube.com/watch?v=ZA2oNhtNk3w&ab_channel=Telusko)
+
+A comparator is basically an `Interface` that is part of the util class which is used as an additional parameter for the sort function ( be it in a collection or an array ) and it can be given a specfic method of comparision to use so that it sorts it based on that.
+
+**Case 1:**
+- When you have to sort two inter dependent values, you can create a user based function to tie them together and then go ahead and sort the entire combined value by targeting one variable using the comparator.
+
+**Java Code**
+```java
+import java.util.Collections;
+import java.util.List;
+import java.util.Comparator;
+import java.util.ArrayList;
+
+public class ComparativeSorting{
+    public static void main(String[] args) {
+        
+       Comparator<Integer> com = new Comparator<Integer>(){
+            public int compare(Integer i, Integer j){
+                // Here the logic is if you return 1, it will swap. If you don't return 1 it won't swap
+
+                if(i%10 > j%10){
+                    return 1;
+                } else
+                    retuwherrn -1;
+            }
+       };
+       
+        // First lets create a list of integers
+        List<Integer> nums = new ArrayList<>();
+        nums.add(43);
+        nums.add(31);
+        nums.add(92);
+        nums.add(64);
+
+        //Collections.sort(nums);
+        // Now instead of this basic logic we will add our own logic.
+        Collections.sort(nums, com);
+        
+        
+        System.out.println(nums);
+
+        // Output is [31, 92, 43, 64] which has sorted based on the second number / units digit of each of these numbers
+
+
+    }
+
+}
+
+```
+
+### Output
+```
+[31, 92, 43, 64]
+```
+
+<hr>
+
+### Sorting a string based on length
+
+**Java Code**
+```java
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
+
+public class StringSorting {
+    public static void main(String[] args) {
+        
+        List<String> names = new ArrayList<>();
+
+        names.add("Aaron");
+        names.add("Rishikesh");
+        names.add("Shravan");
+        names.add("Sreedev");
+
+        Comparator<String> com = new Comparator<String>() {
+            // Over here the compare function will still be of the int type since it will return 1 or -1 as a boolean to swap or not to swap
+
+            public int compare(String i, String j){
+                // If the sign is > then it will sort in ascending. 
+                // if the sign is < then it will sort in descending.
+                if(i.length() < j.length()){
+                    return 1;
+                }
+                else
+                    return -1;
+            }
+        };
+
+        Collections.sort(names,com);
+
+        System.out.println("The names in increasing order of length are : "+ names);
+    }
+}
+
+
+```
+
+**Output**
+```
+The names in increasing order of length are : [Rishikesh, Sreedev, Shravan, Aaron]
+
+```
+<hr>
+
+### Frequency calculation with HashMap
+A comparator will need you to define the compare function. So in the compare function, if you `return 1` then it will swap the two elements in question, whereas if you `return -1` it will not. Based on that we have to solve the given question above by defining that in the comparator that is being used.
+
+```java
+Comparator<Integer> com = new Comparator<Integer>(){
+            public int compare(Integer n1, Integer n2){
+                if( freq.get(n1) != freq.get(n2)){
+                    return freq.get(n1) - freq.get(n2);
+                    // So if the frequency of n1 is lesser then it will return a NEGATIVE value, and it won't be swapped
+                }else
+                    return n2 - n1;
+            }
+        };
+
+```
+
+## Recursion in Java
+In java or any other language recursion is extremely important since it helps solve certain problems in unique ways that do not require repetitive looping of sorts.
+
+The only additional problem is it may not always be the most optimal solution nor might it take the least space since we call a function repeatedly
+
+### Problems solved with Recursion
+In the following code certain problems have been soplved with the help of recursion
+1. Printing a name 5 times
+2. Printing numbers from 1 to N
+3. Printing numbers from  N to 1
+
+
+```java
+import java.util.Scanner;
+
+
+public class RecursionPractice {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Choose between the options. \n1. Print name \n2. Print numbers from 1 to n \n3. Print numbers from N to 1 ");
+        int choice = sc.nextInt();
+        if(choice == 1){
+            System.out.println("Input the name you wish to print :");
+            String name = sc.next();
+            returnName(name,1);
+        }
+        else if(choice == 2){
+            System.out.println("Input the Number you want to print till :");
+            int num = sc.nextInt();
+            printNums(num, 1);
+            
+        }
+        else if(choice == 3){
+            System.out.println("Input the Number you want to print from :");
+            int num = sc.nextInt();
+            reverseNums(num);
+        }
+
+
+        sc.close();
+    }
+
+    public static void returnName(String name, int m){
+        if(m > 5){
+            return;
+        }
+        System.out.println("Your name is :"+name);
+        returnName(name,m+1);
+        
+    }
+
+    public static void printNums(int num, int start){
+        if(start > num){
+            return;
+        }
+        System.out.println(start); 
+        printNums(num,start+1);
+    }
+
+    public static void reverseNums(int num){
+        if(num == 0){
+            return;
+        }
+        System.out.println(num);
+        reverseNums(num-1);
+    }
+
+    
+}
+
+
+```
+
+### Output
+```
+Choose between the options. 
+1. Print name
+2. Print numbers from 1 to n
+3. Print numbers from N to 1
+3
+Input the Number you want to print from :
+7
+7
+6
+5
+4
+3
+2
+1
+```
 
 <hr>
 
