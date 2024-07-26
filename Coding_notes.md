@@ -69,7 +69,9 @@
 51. [Sort the People](#sort-the-people)
 52. [Sort Array by increasing Frequency](#sort-array-by-increasing-frequency)
 53. :red_circle:[Sort the Jumbled Numbers](#sort-the-jumbled-numbers)
-54. [Template for solving](#template-for-solving)
+54. [Sort an Array](#sort-an-array)
+55. [Find the City With the Smallest Number of Neighbors at a Threshold Distance](#find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance)
+57. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -4391,8 +4393,8 @@ The replacement must be  **[in place](http://en.wikipedia.org/wiki/In-place_algo
 
 [**Solution**]() : 
 
-
-###  Two Pointers
+###  Using recursion
+To geenrate these permutations we're going to use recursion ( Along with a stack I think )
 
 
 
@@ -4948,6 +4950,131 @@ Expected
 - [Return to TOC](#table-of-contents-dsa)
 
 <hr>
+
+> Day : Thursday, 25th July 2024
+
+## Sort an Array
+
+[**Question**](https://leetcode.com/problems/sort-an-array/?envType=daily-question&envId=2024-07-25): 
+Given an array of integers  `nums`, sort the array in ascending order and return it.
+
+You must solve the problem  **without using any built-in**  functions in  `O(nlog(n))`  time complexity and with the smallest space complexity possible.
+
+**Example 1:**
+
+**Input:** nums = [5,2,3,1]
+**Output:** [1,2,3,5]
+**Explanation:** After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).
+
+[**Solution**]() : 
+###  Solving Method
+Let's use merge sort over here. IN this case they're basically asking us to code out one of the better sorting algorithms
+1. First we need to split the array from the median
+
+
+### Python Code 
+```python
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        # Merge sort basically uses minimum time complexity of O(nlogn)
+        if len(nums) <= 1:
+            return nums
+        mid = len(nums)//2
+        leftHalf = nums[0:mid]
+        rightHalf = nums[mid:]
+        leftSorted = self.sortArray(leftHalf)
+        rightSorted = self.sortArray(rightHalf)
+
+        return self.merge(leftSorted, rightSorted)
+        
+    def merge(self, left : List[int], right : List[int])-> List[int]:       
+        result = []
+        leftIdx = 0
+        rightIdx = 0
+
+        # Merge the two arrays
+        while leftIdx < len(left) and rightIdx < len(right):
+            if left[leftIdx] <= right[rightIdx]:
+                result.append(left[leftIdx])
+                leftIdx += 1
+            else :
+                result.append(right[rightIdx])
+                rightIdx += 1
+        
+        while leftIdx < len(left):
+            result.append(left[leftIdx])
+            leftIdx += 1
+        
+        while rightIdx < len(right):
+            result.append(right[rightIdx])
+            rightIdx += 1
+
+        return result
+
+
+        
+```
+
+### Output
+```
+Input
+nums = [5,2,3,1]
+Output
+[1,2,3,5]
+Expected
+[1,2,3,5]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Friday, 26th July 2024
+
+
+## Find the City With the Smallest Number of Neighbors at a Threshold Distance
+
+[**Question**](https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/?envType=daily-question&envId=2024-07-26): 
+There are  `n`  cities numbered from  `0`  to  `n-1`. Given the array  `edges`  where  `edges[i] = [fromi, toi, weighti]`  represents a bidirectional and weighted edge between cities  `fromi`  and  `toi`, and given the integer  `distanceThreshold`.
+
+Return the city with the smallest number of cities that are reachable through some path and whose distance is  **at most**  `distanceThreshold`, If there are multiple such cities, return the city with the greatest number.
+
+Notice that the distance of a path connecting cities  _**i**_  and  _**j**_  is equal to the sum of the edges' weights along that path.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/01/16/find_the_city_01.png)
+
+**Input:** n = 4, edges = [[0,1,3],[1,2,1],[1,3,4],[2,3,1]], distanceThreshold = 4
+**Output:** 3
+**Explanation:** The figure above describes the graph. 
+The neighboring cities at a distanceThreshold = 4 for each city are:
+City 0 -> [City 1, City 2] 
+City 1 -> [City 0, City 2, City 3] 
+City 2 -> [City 0, City 1, City 3] 
+City 3 -> [City 1, City 2] 
+Cities 0 and 3 have 2 neighboring cities at a distanceThreshold = 4, but we have to return city 3 since it has the greatest number.
+
+[**Solution**]() : 
+###  Solving Method
+
+
+### Python Code 
+```python
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
 
 ## Template for Solving
 
@@ -5886,6 +6013,8 @@ Hi Aaron
 4. [ Using a comparator in Java](#using-a-comparator-in-java)
 5. [Sorting a string based on length](#sorting-a-string-based-on-length)
 6. [Frequency calculation with HashMap](#frequency-calculation-with-hashmap)
+7. [Recursion in Java](#recursion-in-java)
+8. [Printing all permutations of an Array with recursion](#printing-all-permutations-of-an-array-with-recursion)
 
 
 
@@ -6051,6 +6180,8 @@ public static void main(String[] args) {
 
 ### Using a comparator in Java
 
+
+> [Return to Table of Contents](#table-of-contents-java-functions)
 > [Link to video](https://www.youtube.com/watch?v=ZA2oNhtNk3w&ab_channel=Telusko)
 
 A comparator is basically an `Interface` that is part of the util class which is used as an additional parameter for the sort function ( be it in a collection or an array ) and it can be given a specfic method of comparision to use so that it sorts it based on that.
@@ -6111,6 +6242,8 @@ public class ComparativeSorting{
 
 ### Sorting a string based on length
 
+> [Return to Table of Contents](#table-of-contents-java-functions)
+
 **Java Code**
 ```java
 import java.util.List;
@@ -6160,6 +6293,9 @@ The names in increasing order of length are : [Rishikesh, Sreedev, Shravan, Aaro
 <hr>
 
 ### Frequency calculation with HashMap
+
+> [Return to Table of Contents](#table-of-contents-java-functions)
+
 A comparator will need you to define the compare function. So in the compare function, if you `return 1` then it will swap the two elements in question, whereas if you `return -1` it will not. Based on that we have to solve the given question above by defining that in the comparator that is being used.
 
 ```java
@@ -6175,7 +6311,12 @@ Comparator<Integer> com = new Comparator<Integer>(){
 
 ```
 
+<hr>
+
 ## Recursion in Java
+
+> [Return to Table of Contents](#table-of-contents-java-functions)
+
 In java or any other language recursion is extremely important since it helps solve certain problems in unique ways that do not require repetitive looping of sorts.
 
 The only additional problem is it may not always be the most optimal solution nor might it take the least space since we call a function repeatedly
@@ -6265,6 +6406,121 @@ Input the Number you want to print from :
 2
 1
 ```
+
+<hr>
+
+## Printing all permutations of an Array with recursion
+
+> [Return to Table of Contents](#table-of-contents-java-functions)
+
+Now if we're faced with a permutation problem where we need to print the permutation that can fill `n` spaces with `k` elements then we will follow the following approach where we are using an additional data structure to keep track of used elements ( [not In-Place](https://chatgpt.com/share/aacf4587-1bbf-4183-8841-3025b7fcd3a6) )
+
+
+### Pseudocode 
+```
+Func( DataStr, Map ) :
+	loop( 1 .... n-1 ) :
+		if ( i is !map ) : 
+			DataStr.add(a[i])
+			map[i] = 1
+			func( DatStr, Map )
+	// Stop condition
+	If(DataStr.size == n ) :
+		Answer.add(DataStr)
+		break
+```
+
+`Time Complexity` : $n!\times n$
+`Space Complexity`: $O(n) + O(n)$
+
+### Java Code 
+```java
+import java.util.List;
+import java.util.ArrayList;
+
+public class PermutationPrinting {
+    private void recurPermute(int[] nums, List<Integer> ds,List<List<Integer>> ans, boolean[] freq){
+        if( ds.size() == nums.length){
+            ans.add(new ArrayList<>(ds));
+            return;
+            // This return will simple end that inner recursion and go back to the parent one, which will backtrack till it adds all possible permutations
+        }
+        for( int i =0; i<nums.length;i++){
+            // This means that if the current element is 1 it'll return 0 so it won't enter the if statement
+            if(!freq[i]){
+                ds.add(nums[i]);
+                freq[i] = true;
+                recurPermute(nums, ds, ans, freq);
+                // This will remove the last element in the Data structure
+                ds.remove(ds.size() -1);
+                // Why reset this ?
+                freq[i] = false;
+            }
+        }
+    }
+    public List<List<Integer>> permute(int[] nums){
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> ds = new ArrayList<>();
+        boolean freq[] = new boolean[nums.length];  
+        recurPermute(nums, ds, ans, freq);
+        return ans;
+    }
+    public static void main(String[] args) {
+        int[] nums = {1,2,3};
+        // Create an instance of the class 
+        PermutationPrinting obj = new PermutationPrinting();
+        // Use that instance to access the function permute
+        System.out.println(obj.permute(nums));
+    }
+}
+
+
+```
+
+For an in-place solution to this answer we have the following complexities : 
+`Time Complexity` : $n!\times n$
+`Space Complexity`: $O(n) + O(n)$
+
+### Pseudocode
+```
+func(indx, arr[])
+	loop(i -> n-1):
+		swap(a[indx],a[i])
+		func(indx++,arr[])
+	
+	//Base case to return	
+	if(indx == n ):
+		return 
+
+```
+
+### In Place solving with lesser space complexity
+```java
+
+```
+
+### Output
+```
+[[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+```
+
+<hr>
+
+
+## Lists
+Lists are a very important structure in both Java and Python and hold a lot of importance since you can keep adding to them.
+
+`Initialization`
+```java
+List<List<Integer>> listOfLists = new ArrayList<>();
+        listOfLists.add(List.of(1, 2, 3));
+        listOfLists.add(List.of(4, 5, 6));
+        listOfLists.add(List.of(7, 8, 9));
+
+```
+
+
+
 
 <hr>
 
