@@ -63,15 +63,22 @@
 45. :red_circle:[Number of Good Leaf Nodes](#number-of-good-leaf-nodes)
 46. :star: [Lucky Numbers in a Matrix](#lucky-numbers-in-a-matrix)
 47. :rocket:[Pascals Triangle](#pascals-triangle)
-48. :rocket::red_circle:[Next Permutation](#next-permutation)
+48. :rocket:[Next Permutation](#next-permutation)
 49. :red_circle:[Find Valid Matrix Given Row and Column Sums](#find-valid-matrix-given-row-and-column-sums)
 50. [Build a matrix with Conditions](#build-a-matrix-with-conditions)
 51. [Sort the People](#sort-the-people)
 52. [Sort Array by increasing Frequency](#sort-array-by-increasing-frequency)
 53. :red_circle:[Sort the Jumbled Numbers](#sort-the-jumbled-numbers)
 54. [Sort an Array](#sort-an-array)
-55. [Find the City With the Smallest Number of Neighbors at a Threshold Distance](#find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance)
-57. [Template for solving](#template-for-solving)
+55. :red_circle:[Find the City With the Smallest Number of Neighbors at a Threshold Distance](#find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance)
+56. [Minimum Cost to Convert String 1](#minimum-cost-to-convert-string-1)
+57. :red_circle:[Second Minimum Time to Reach Destination](#second-minimum-time-to-reach-destination)
+58. [Longest Consecutive Sequence](#longest-consecutive-sequence)
+59. :rocket:[Maximum Subarray](#maximum-subarray)
+	- :rocket:[Kadane's algorithm](#kadanes-algorithm)
+60. :rocket:[Sort Colors](#sort-colors)
+61. :rocket:[Best time to buy and sell stocks](#best-time-to-buy-and-sell-stocks)
+62. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -177,11 +184,13 @@ class Solution:
 
 > Tags : Binary Search Tree, 
 [**Question**](https://leetcode.com/problems/balance-a-binary-search-tree/?envType=daily-question&envId=2024-06-26) :
+
 Given the  `root`  of a binary search tree, return  _a  **balanced**  binary search tree with the same node values_. If there is more than one answer, return  **any of them**.
 
 A binary search tree is  **balanced**  if the depth of the two subtrees of every node never differs by more than  `1`.
 
 [**Solution**](https://chatgpt.com/share/c2955429-d2fa-49ca-b968-82559bfda610) : 
+
 So since the depth of the two subtrees can't differ by more than one, that means it has to be wide and can't be going down in a single file like it was initially
 
 ![](https://assets.leetcode.com/uploads/2021/08/10/balance1-tree.jpg)
@@ -326,6 +335,7 @@ Output = [2,1,3,null,null,null,4]
 ## Two-Sum
 
 [**Question**](https://leetcode.com/problems/two-sum/) : 
+
 Given an array of integers  `nums` and an integer  `target`, return  _indices of the two numbers such that they add up to  `target`_.
 
 You may assume that each input would have  **_exactly_  one solution**, and you may not use the  _same_  element twice.
@@ -336,6 +346,7 @@ You can return the answer in any order.
 **Explanation:** Because nums[0] + nums[1] == 9, we return [0, 1].
 
 [**Solution**](https://chatgpt.com/share/16662c91-43ac-4b4d-b965-9529e4c19ea8):
+
 The idea here is to check for which two values can add up to the given target variable
 
 ### Algorithm : 
@@ -439,6 +450,7 @@ Expected [7,0,8]
 ## Center of Star Graph
 
 [**Question**](https://leetcode.com/problems/find-center-of-star-graph/?envType=daily-question&envId=2024-06-27):
+
 There is an undirected  **star**  graph consisting of  `n`  nodes labeled from  `1`  to  `n`. A star graph is a graph where there is one  **center**  node and  **exactly**  `n - 1`  edges that connect the center node with every other node.
 
 You are given a 2D integer array  `edges`  where each  `edges[i] = [ui, vi]`  indicates that there is an edge between the nodes  `ui`  and  `vi`. Return the center of the given star graph.
@@ -448,6 +460,7 @@ Output: 2
 Explanation: As shown in the figure above, node 2 is connected to every other node, so 2 is the center.
 
 [**Solution**](https://chatgpt.com/share/8442c8b5-b264-49d3-9a9c-a27ab7063a94):
+
 The main idea here is that one edge will be linked to almost every other edge so we just need to check for that common edge
 
 ### Algorithm 
@@ -481,10 +494,10 @@ Expected
 
 <hr>
 
-## 
-Longest Substring
+## Longest Substring
 
 [***Question**](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) : 
+
 Given a string  `s`, find the length of the  **longest substring** without repeating characters.
 
 > Example 1
@@ -501,6 +514,7 @@ Given a string  `s`, find the length of the  **longest substring** without repea
 Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
 [**Solution**]()
+
 How do we figure out the longest ? By checking for repetition. So as long as unique characters are found we can add the count to the integer variable and then return the int value the moment a string has been repeated.
 
 > This problem has to be solved using the [Sliding Window](https://www.youtube.com/watch?v=jhW7VwP2Djw&ab_channel=TAPACADEMY) technique. 
@@ -546,6 +560,7 @@ Expected
 ## Median of two sorted arrays
 
 [**Question**](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) : 
+
 Given two sorted arrays  `nums1`  and  `nums2`  of size  `m`  and  `n`  respectively, return  **the median**  of the two sorted arrays.
 
 The overall run time complexity should be  `O(log (m+n))`.
@@ -557,11 +572,12 @@ The overall run time complexity should be  `O(log (m+n))`.
 **Explanation:** merged array = [1,2,3] and median is 2.
 
 [**Solution**](https://chatgpt.com/share/83b3f39d-4a06-4737-9ca8-b6a9b24b5e17) : 
+
 For this solution we can actually calculate the individual medians of the two, then use weighted mean concept to caculate it for the two combined arrays.
 
 ### Algortihm : 
 1. First we combine the two arrays and then we sort them 
-2. 
+
 
 ### Python Code 
 ```python 
@@ -598,6 +614,7 @@ Expected
 ## Maximum total importance of Roads
 
 [**Question**](https://leetcode.com/problems/maximum-total-importance-of-roads/?envType=daily-question&envId=2024-06-28) : 
+
 You are given an integer  `n`  denoting the number of cities in a country. The cities are numbered from  `0`  to  `n - 1`.
 
 You are also given a 2D integer array  `roads`  where  `roads[i] = [ai, bi]`  denotes that there exists a  **bidirectional**  road connecting cities  `ai`  and  `bi`.
@@ -657,6 +674,7 @@ class Solution:
 ## All Ancestors of a Node in a Directed Acyclic Graph
 
 [**Question**](https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/description/?envType=daily-question&envId=2024-06-29) : 
+
 You are given a positive integer  `n`  representing the number of nodes of a  **Directed Acyclic Graph**  (DAG). The nodes are numbered from  `0`  to  `n - 1`  (**inclusive**).
 
 You are also given a 2D integer array  `edges`, where  `edges[i] = [fromi, toi]`  denotes that there is a  **unidirectional**  edge from  `fromi`  to  `toi`  in the graph.
@@ -764,14 +782,13 @@ Return  _the maximum number of edges you can remove, or return_  `-1`  _if Alice
 **Explanation:** If we remove the 2 edges [1,1,2] and [1,1,3]. The graph will still be fully traversable by Alice and Bob. Removing any additional edge will not make it so. So the maximum number of edges we can remove is 2.
 
 [**Solution**](https://chatgpt.com/share/d5c70285-3c5c-4e3c-bb76-a492f099128e) : 
+
 The idea here is to remove n number of edges so that the edge type where both Alice and Bob can traverse is connecting all possible edges
 
 The idea is that we check for any edge which has the type 3 connecting 2 vertices, and if the same combination of edges has any other type, it can be removed. Similarly if any edge doesn't have a type 3 then it must have both a type 1 and 2 connecting it or else it'll be non traversable.
 
 ### Things to know
-**Union Find**
-
-
+**Union Find** : Research on what this i and add the code to the respective [java function](#java-functions) or [pyton
 
 ### Java Code 
 ```java
@@ -3105,7 +3122,7 @@ If there is no common prefix, return an empty string  `""`.
 [**Solution**]() : 
 
 
-### Solving Method
+### Approach
 1. Since it's prefix, that means to a certain extent from the starting character.
 2. Since the prefix has to exist within each word we can use a single word's size as reference.
 3. Decide to character to compare
@@ -3174,7 +3191,7 @@ Return  _the  **smallest**  integer_  `x`  _missing from_  `nums`  _such that_  
 
 [**Solution**]() : 
 
-###  Solving Method
+###  Approach
 The idea is to calculate the sum of the longest sequential prefix, so we will implementa loop that will find it first
 
 ### Python Code 
@@ -3231,7 +3248,7 @@ The test cases are generated so that all the values in the output fit in a  **32
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 
 
 ### Python Code 
@@ -3321,7 +3338,7 @@ The resulting binary tree is shown in the diagram.
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 
 
 ### Python Code 
@@ -3430,7 +3447,7 @@ Return  _the step-by-step directions of the  **shortest path**  from node_ `s` _
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 
 
 ### Java Code 
@@ -3547,7 +3564,7 @@ Notice that the order of the output and the order of the triplets does not matte
 [**Solution**](https://chatgpt.com/share/022752b7-8048-4db7-b0cb-ad1ff29ac1c7) : 
 
 
-###  Solving Method
+###  Approach
 So there are two things to cehck in this case. First that the numbers are not equal and second, that the sum is somehow 0.
 
 3 nested for loops should od the trick, but the better way to go about this should be,
@@ -3635,7 +3652,7 @@ A mapping of digits to letters (just like on the telephone buttons) is given bel
 [**Solution**](https://chatgpt.com/share/e6013b52-3d8e-4c06-9769-2dc82c5c63b9) : 
 
 
-### :red_circle: Solving Method
+### :red_circle: Approach
 Recursion is what we use here where we recursively pass the ( **I do not understand the recursion here so this question has to be solved again**)
 
 ### Python Code 
@@ -3715,7 +3732,7 @@ An input string is valid if:
 [**Solution**]() : 
 
 
-###  Solving Method
+### Approach
 There are effectively 3 kinds of parenthesis
 Using a stack for this might be the best idea.
 First we put all the parenthesis in a stack and then we go ahead and check for each one and we pop the value till we encounter it.
@@ -4114,7 +4131,7 @@ Return  _the number of good leaf node pairs_  in the tree.
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 
 
 ### Python Code 
@@ -4150,7 +4167,7 @@ A  **lucky number**  is an element of the matrix such that it is the minimum ele
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 We need to iterate through the column adn the row at the same time and then we need to check for the minimum 
 
 1. Create a while loop that is dependent on both the variables reaching the max of the rows and columns
@@ -4304,7 +4321,7 @@ In  **Pascal's triangle**, each number is the sum of the two numbers directly ab
 **Output:** [[1]]
 
 [**Solution**](https://chatgpt.com/share/8ef7d05f-cff8-471a-b6b6-3c5184ecd1ef) : 
-###  Solving Method
+###  Approach
 The logic behing this is that we just have to add the previous two elements so let us figure out the math behind this. Each row contains an increasing number of elements so 
 `row 1` : 1 element
 `row 2` : 2 elements
@@ -4391,23 +4408,169 @@ The replacement must be  **[in place](http://en.wikipedia.org/wiki/In-place_algo
 -   `1 <= nums.length <= 100`
 -   `0 <= nums[i] <= 100`
 
-[**Solution**]() : 
+[**Solution**](https://chatgpt.com/share/15234ddb-a9ef-40ff-8fa3-bf686f1dce0f) : 
 
 ###  Using recursion
 To geenrate these permutations we're going to use recursion ( Along with a stack I think )
 
+### Java Code ( My incorrect approach )
+```java
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int[] renum = nums.clone();
+        Arrays.sort(renum);
+        
+        List<List<Integer>> listofperm = new ArrayList<>(permute(renum));
 
+        Comparator<List<Integer>> com = new Comparator<List<Integer>>(){
+            public int compare(List<Integer> l1, List<Integer> l2){
+                for(int i =0; i < l1.size(); i++){
+                    int cmp = l1.get(i).compareTo(l2.get(i));
+                    if(cmp != 0)
+                        return cmp;
+                }
+                return 0;
+            }
+        };
+        Collections.sort(listofperm, com);
 
+        List<Integer> currentPermutation = new ArrayList<>();
+        for (int num : nums) {
+            currentPermutation.add(num);
+        }
 
+        int currIdx = listofperm.indexOf(currentPermutation);
+        if(currIdx != -1 && currIdx < listofperm.size() - 1){
+            List<Integer> nextPermutation = listofperm.get(currIdx + 1);
+            for(int i =0; i < nums.length;i++){
+                nums[i] = nextPermutation.get(i);
+            }
 
-### Python Code 
-```python
+        }else{
+            for(int i =0; i<nums.length;i++){
+                nums[i] = renum[i];
+            }
+        }
+
+        
+    }
+    private void recurPermute(int index, int[] nums, List<List<Integer>> ans){
+        //base case 
+        if(index == nums.length){
+            List<Integer> ds = new ArrayList<>();
+            for(int num : nums){
+                ds.add(num);
+            }
+            ans.add(ds);
+            return;
+        }
+        HashSet<Integer> seen = new HashSet<>();
+        for(int i = index;i<nums.length;i++){
+            if(seen.add(nums[i])){
+                // This will make sure that it will only proceed if the number didn't exist in the set before
+                swap(index,i, nums);
+                recurPermute(index+1,nums,ans);
+                swap(index, i,nums);
+            }
+        }
+    }
+    public void swap(int i, int j, int[] nums){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp; 
+    }
+    public List<List<Integer>> permute(int[] nums){
+        List<List<Integer>> ans = new ArrayList<>();
+        recurPermute(0, nums, ans);
+        return ans;
+    }
+}
+```
+
+### Java Code 
+```java
+ class Solution {
+    public void nextPermutation(int[] nums) {
+        int index = -1;
+        int n = nums.length;
+        for(int i = n-2; i>= 0; i--){
+            // Starting at minus two because we're using the if statement in this way
+            if(nums[i] < nums[i+1]){
+                index = i;
+                break;
+                // It'll exit the for loop here
+
+            }
+        }
+        // Case where the permutation is the greatest
+        if( index == -1 ){
+            Arrays.sort(nums);
+            return;
+        }
+
+        for(int i = n - 1; i>index;i--){
+            if(nums[i] > nums[index]){
+                swap(nums, i,index);
+                break;
+                // Leaves the for loop
+            }
+
+        }
+        // Time to reverse the index by sorting the remainder.
+        Arrays.sort(nums, index+1, n);
+    
+    }
+
+    public void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+        
+}
 
 ```
+
+### Attempting to find the longest prefix match
+The previous approach, solves the problem, but for larger input it takes way too much time hence makingt the brute force approach ineffective.
+In this approach we need t o follow this logic : 
+1. First we look at the given value. The next value will just be slightly greater and has to be formed by interchanging the digits. 
+2. If we have array = `[2 1 5 4 3 0 0]` then the next immediate value can be found by checking prefix matches.
+3. If in the array = [**2 1 5 4 3 0** 0] we take `215430` as the prefix. Then we are left with just 0, which we can't really re-arrange. Let's try another one
+4. If in the array = [**2 1 5 4 3** 0 0] we take `21543` as the prefix we now have 2 0's, for which re arranging doesn't help
+5. If in the array = [**2 1 5 4** 3 0 0] we take `2154` as the prefix then we get 300, which we can rearrage as `003 or 030` but neither of those are greater than 300
+6. This clearly means that we need to get a value in the prefix that is GREATER than the last. Now if we have multiple choices then we need to find one that will be greater than the number in question but smaller than the remaining values.
+
+### Steps to follow
+1. Find index where a dip in value occurs, if a dip doesn't occur and index == -1 then we return an empty set since it's the largest possible value
+2. Then check for a valuethat is greater than that number, but smallest among the remaining
+3. Then once you swap it, you can go ahead and reverse the remaining array to get the smallest possible value ( since it will already be in descending order till the number where the trend has dipped )
+
 
 ### Output
 ```
+Input
+nums =
+[3,2,1]
+Output
+[1,2,3]
+Expected
+[1,2,3]
+```
 
+### Important Comparator Logic
+```java
+Comparator<List<Integer>> com = new Comparator<List<Integer>>(){
+            public int compare(List<Integer> l1, List<Integer> l2){
+                for(int i =0; i < l1.size(); i++){
+                    int cmp = l1.get(i).compareTo(l2.get(i));
+                    if(cmp != 0)
+                        return cmp;
+                }
+                return 0;
+            }
+        };
 
 ```
 
@@ -4456,7 +4619,7 @@ Another possible matrix is: [[1,2],
 [**Solution**]() : 
 
 
-###  Solving Method
+### Approach
 The simple idea would be giving the numbers varibles and then solving the number accordingly. Quadratic equations witll only be valid for certain cases.
 
 Example case : 
@@ -4565,7 +4728,7 @@ The column conditions are the following:
 Note that there may be multiple correct answers.
 
 [**Solution**]() : 
-###  Solving Method
+###  Approach
 So the idea here is that we individually align the rowCondition and colCondition
 
 ### Java Code 
@@ -4691,7 +4854,7 @@ Return  `names` _sorted in  **descending**  order by the people's heights_.
 [**Solution**](https://chatgpt.com/share/c4f54004-795c-45e2-b770-7363478fc209) : 
 
 
-###  Solving Method
+### Approach
 This was an easy question but over here I've created a `user_defined method` named `Person` so that i can interlink the two variables from the two arrays and then sort one based on the other.
 
 ### Java Code 
@@ -4773,13 +4936,13 @@ Return the  _sorted array_.
 -   `-100 <= nums[i] <= 100`
 
 [**Solution**]() : 
-###  Solving Method
+### Approach
 1. We create a set ? Then we can get the count of elements with respect to elements of the set ?
 2. Once that is done we sort the elements in increasing order ( added condition of equal count numbers being sorted in decreasing order )
 3. Then we print out said element count number of times in the new array, it should work.
 
 
-### Actual solving method
+### Actual Approach
 1. We will create a HashMap of a pair of values ( The value itself and the count of it in the array )
 2. Then we will create the output array ( newNums) and further define the comparator.
 
@@ -4888,7 +5051,7 @@ Thus, the sorted array is [338,38,991].
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 
 
 ### Java Code 
@@ -4967,7 +5130,7 @@ You must solve the problem  **without using any built-in**  functions in  `O(nlo
 **Explanation:** After sorting the array, the positions of some numbers are not changed (for example, 2 and 3), while the positions of other numbers are changed (for example, 1 and 5).
 
 [**Solution**]() : 
-###  Solving Method
+###  Approach
 Let's use merge sort over here. IN this case they're basically asking us to code out one of the better sorting algorithms
 1. First we need to split the array from the median
 
@@ -5057,8 +5220,98 @@ City 3 -> [City 1, City 2]
 Cities 0 and 3 have 2 neighboring cities at a distanceThreshold = 4, but we have to return city 3 since it has the greatest number.
 
 [**Solution**]() : 
-###  Solving Method
+###  Approach
 
+
+### Python Code 
+```python
+from typing import List
+
+class Solution:
+    def findTheCity(self, n: int, edges: List[List[int]], distanceThreshold: int) -> int:
+        # Initialize the distance matrix with infinity
+        dist = [[float('inf')] * n for _ in range(n)]
+        
+        # Distance to itself is 0
+        for i in range(n):
+            dist[i][i] = 0
+        
+        # Populate the distance matrix with the given edges
+        for u, v, w in edges:
+            dist[u][v] = w
+            dist[v][u] = w
+        
+        # Floyd-Warshall algorithm
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    if dist[i][j] > dist[i][k] + dist[k][j]:
+                        dist[i][j] = dist[i][k] + dist[k][j]
+        
+        # Find the city with the smallest number of reachable cities
+        # and if there is a tie, choose the city with the greatest number.
+        minReachableCities = float('inf')
+        bestCity = -1
+        
+        for i in range(n):
+            reachableCities = 0
+            for j in range(n):
+                if dist[i][j] <= distanceThreshold:
+                    reachableCities += 1
+            
+            if reachableCities <= minReachableCities:
+                minReachableCities = reachableCities
+                bestCity = i
+        
+        return bestCity
+```
+
+### Output
+```
+Input
+n = 4
+edges = [[0,1,3],[1,2,1],[1,3,4],[2,3,1]]
+distanceThreshold =
+4
+Output
+3
+Expected
+3
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## Minimum Cost to Convert String 1
+
+[**Question**](https://leetcode.com/problems/minimum-cost-to-convert-string-i/description/?envType=daily-question&envId=2024-07-27): 
+
+You are given two  **0-indexed**  strings  `source`  and  `target`, both of length  `n`  and consisting of  **lowercase**  English letters. You are also given two  **0-indexed**  character arrays  `original`  and  `changed`, and an integer array  `cost`, where  `cost[i]`  represents the cost of changing the character  `original[i]`  to the character  `changed[i]`.
+
+You start with the string  `source`. In one operation, you can pick a character  `x`  from the string and change it to the character  `y`  at a cost of  `z`  **if**  there exists  **any**  index  `j`  such that  `cost[j] == z`,  `original[j] == x`, and  `changed[j] == y`.
+
+Return  _the  **minimum**  cost to convert the string_ `source` _to the string_ `target` _using  **any**  number of operations. If it is impossible to convert_  `source`  _to_  `target`,  _return_  `-1`.
+
+**Note**  that there may exist indices  `i`,  `j`  such that  `original[j] == original[i]`  and  `changed[j] == changed[i]`.
+
+**Example 1:**
+
+**Input:** source = "abcd", target = "acbe", original = ["a","b","c","c","e","d"], changed = ["b","c","b","e","b","e"], cost = [2,5,5,1,2,20]
+**Output:** 28
+**Explanation:** To convert the string "abcd" to string "acbe":
+- Change value at index 1 from 'b' to 'c' at a cost of 5.
+- Change value at index 2 from 'c' to 'e' at a cost of 1.
+- Change value at index 2 from 'e' to 'b' at a cost of 2.
+- Change value at index 3 from 'd' to 'e' at a cost of 20.
+The total cost incurred is 5 + 1 + 2 + 20 = 28.
+It can be shown that this is the minimum possible cost.
+
+[**Solution**]() : 
+###  Approach
+The concept that has to be used here is **Floyd Warshall Algorithm** because of it's ability to find the shortest weighted path among pairs of nodes in a weiughted graph
 
 ### Python Code 
 ```python
@@ -5075,6 +5328,523 @@ Cities 0 and 3 have 2 neighboring cities at a distanceThreshold = 4, but we have
 
 <hr>
 
+>Day : Sunday, 28th July 2024
+
+## Second Minimum Time to Reach Destination
+
+[**Question**](https://leetcode.com/problems/second-minimum-time-to-reach-destination/description/?envType=daily-question&envId=2024-07-28): 
+A city is represented as a  **bi-directional connected**  graph with  `n`  vertices where each vertex is labeled from  `1`  to  `n`  (**inclusive**). The edges in the graph are represented as a 2D integer array  `edges`, where each  `edges[i] = [ui, vi]`  denotes a bi-directional edge between vertex  `ui`  and vertex  `vi`. Every vertex pair is connected by  **at most one**  edge, and no vertex has an edge to itself. The time taken to traverse any edge is  `time`  minutes.
+
+Each vertex has a traffic signal which changes its color from  **green**  to  **red**  and vice versa every `change`  minutes. All signals change  **at the same time**. You can enter a vertex at  **any time**, but can leave a vertex  **only when the signal is green**. You  **cannot wait** at a vertex if the signal is  **green**.
+
+The  **second minimum value**  is defined as the smallest value **strictly larger** than the minimum value.
+
+-   For example the second minimum value of  `[2, 3, 4]`  is  `3`, and the second minimum value of  `[2, 2, 4]`  is  `4`.
+
+Given  `n`,  `edges`,  `time`, and  `change`, return  _the  **second minimum time**  it will take to go from vertex_ `1` _to vertex_ `n`.
+
+**Notes:**
+
+-   You can go through any vertex  **any**  number of times,  **including**  `1`  and  `n`.
+-   You can assume that when the journey  **starts**, all signals have just turned  **green**.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/09/29/e1.png)![](https://assets.leetcode.com/uploads/2021/09/29/e2.png)
+
+**Input:** n = 5, edges = [[1,2],[1,3],[1,4],[3,4],[4,5]], time = 3, change = 5
+**Output:** 13
+**Explanation:**
+The figure on the left shows the given graph.
+The blue path in the figure on the right is the minimum time path.
+The time taken is:
+- Start at 1, time elapsed=0
+- 1 -> 4: 3 minutes, time elapsed=3
+- 4 -> 5: 3 minutes, time elapsed=6
+Hence the minimum time needed is 6 minutes.
+
+The red path shows the path to get the second minimum time.
+- Start at 1, time elapsed=0
+- 1 -> 3: 3 minutes, time elapsed=3
+- 3 -> 4: 3 minutes, time elapsed=6
+- Wait at 4 for 4 minutes, time elapsed=10
+- 4 -> 5: 3 minutes, time elapsed=13
+Hence the second minimum time is 13 minutes.
+
+[**Solution**]() : 
+
+
+###  Approach
+
+
+### Java Code 
+```java
+class Solution {
+    public int secondMinimum(int n, int[][] edges, int time, int change) {
+        // Create adjacency list for the graph
+        Map<Integer, List<Integer>> adj = new HashMap<>();
+        for (int[] edge : edges) {
+            int a = edge[0], b = edge[1];
+            adj.computeIfAbsent(a, value -> new ArrayList<>()).add(b);
+            adj.computeIfAbsent(b, value -> new ArrayList<>()).add(a);
+        }
+
+        // Initialize distance arrays and frequency array
+        int[] dist1 = new int[n + 1];
+        int[] dist2 = new int[n + 1];
+        int[] freq = new int[n + 1];
+
+        // Initialize arrays
+        for (int i = 1; i <= n; i++) {
+            dist1[i] = Integer.MAX_VALUE;
+            dist2[i] = Integer.MAX_VALUE;
+        }
+
+        // Priority queue for Dijkstra's algorithm
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[1]));
+        pq.offer(new int[]{1, 0});
+        dist1[1] = 0;
+
+        while (!pq.isEmpty()) {
+            int[] temp = pq.poll();
+            int node = temp[0];
+            int currentTime = temp[1];
+
+            freq[node]++;
+
+            // If the node is being visited for the second time and is node n, return the answer
+            if (freq[node] == 2 && node == n) {
+                return currentTime;
+            }
+
+            // If the current light is red, wait till the path turns green
+            if ((currentTime / change) % 2 == 1) {
+                currentTime = change * (currentTime / change + 1) + time;
+            } else {
+                currentTime = currentTime + time;
+            }
+
+            if (!adj.containsKey(node)) {
+                continue;
+            }
+
+            for (int neighbor : adj.get(node)) {
+                // Ignore nodes that have already popped out twice
+                if (freq[neighbor] == 2) {
+                    continue;
+                }
+
+                // Update dist1 if it's more than the current time and store its value in dist2
+                if (dist1[neighbor] > currentTime) {
+                    dist2[neighbor] = dist1[neighbor];
+                    dist1[neighbor] = currentTime;
+                    pq.offer(new int[]{neighbor, currentTime});
+                } else if (dist2[neighbor] > currentTime && dist1[neighbor] != currentTime) {
+                    dist2[neighbor] = currentTime;
+                    pq.offer(new int[]{neighbor, currentTime});
+                }
+            }
+        }
+        return 0; // If the second minimum distance is not found
+    }
+}
+
+```
+
+### Output
+```
+Input
+n =
+5
+edges =
+[[1,2],[1,3],[1,4],[3,4],[4,5]]
+time =
+3
+change =
+5
+Output
+13
+Expected
+13
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Longest Consecutive Sequence
+
+[**Question**](https://leetcode.com/problems/longest-consecutive-sequence/): 
+Given an unsorted array of integers  `nums`, return  _the length of the longest consecutive elements sequence._
+
+You must write an algorithm that runs in `O(n)` time.
+
+**Example 1:**
+
+**Input:** nums = [100,4,200,1,3,2]
+**Output:** 4
+**Explanation:** The longest consecutive elements sequence is `[1, 2, 3, 4]`. Therefore its length is 4.
+
+**Example 2:**
+
+**Input:** nums = [0,3,7,2,5,8,4,6,0,1]
+**Output:** 9
+
+[**Solution**]() : 
+###  Approach
+So since the question specifies that we need to solve this in linear time i.e. `You must write an algorithm that runs in `$O(1)$` time.` then we need to figure out another way of solving this WITHOUT sorting the array first.
+1. Firstly we put the elements of the array into a hashset.
+2. Then we check, if there exists a number smaller than the chosen number ( Since we can use the `contains()` function and get that in linear time ) 
+3. Once we do that we can initiate a length variable and then we can use it to calculate the length of the sequence as long as a consecutive value exists.
+
+
+### Python Code 
+```python
+class Solution(object):
+    def longestConsecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        numSet = set(nums)
+        # This is a hashset ? Wtf easy as heck
+        longest = 0
+
+        for n in numSet : 
+            if (n-1) not in numSet:
+                length = 1
+                while(n + length) in numSet :
+                    length += 1
+                longest = max(length, longest)
+        return longest
+        
+```
+
+### Output
+```
+Input
+nums = [100,4,200,1,3,2]
+Output
+4
+Expected
+4
+
+
+```
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Maximum Subarray
+
+[**Question**](https://leetcode.com/problems/maximum-subarray/description/): 
+Given an integer array  `nums`, find the
+
+subarray
+
+with the largest sum, and return  _its sum_.
+
+**Example 1:**
+
+**Input:** nums = [-2,1,-3,4,-1,2,1,-5,4]
+**Output:** 6
+**Explanation:** The subarray [4,-1,2,1] has the largest sum 6.
+
+**Example 2:**
+
+**Input:** nums = [1]
+**Output:** 1
+**Explanation:** The subarray [1] has the largest sum 1.
+
+**Example 3:**
+
+**Input:** nums = [5,4,-1,7,8]
+**Output:** 23
+**Explanation:** The subarray [5,4,-1,7,8] has the largest sum 23.
+
+[**Solution**](https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/) : 
+
+
+###  Brute force Approach
+```java 
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int m_sum = Integer.MIN_VALUE;
+        int n = nums.length;
+
+        if(n == 0){
+            return 0;
+        }
+
+        // Brute force approach is we can calculate the sum of all possible subarrays
+        for(int i = 0; i < n; i++){
+            int c_sum = 0;
+            for( int j = i; j < n; j++){
+                c_sum += nums[j];
+                m_sum = Math.max(c_sum,m_sum);
+            }
+        }
+        return m_sum;
+    }
+
+}
+```
+
+> This doesn't work at all.
+
+## Kadane's algorithm
+In this question we basically need the largest sum of a contiguous subarray, so what kadane's algorithm does is that it basically will keep a variable that will store the maximum sum so far ( of the elements and continuously evaluate between the current eelement and the next ( since the existence of negative variables can reduce the total sum )
+
+Now the code given below basically takes care of all the additional things we would've had to look at like : 
+1. Check that if the sum of the numbers is  less than 0 then reset c_sum to 0. this is automatically take care off when we assin the value of the current number instead of transitioning to zero by using `Math.max()` functon.
+2. Additionally 
+
+### Java Code 
+```java
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int m_sum = nums[0];
+        int c_sum = nums[0];
+
+        // The other idea is that we keep the value stored in csum and compare it with the current number
+        for(int i =1; i < nums.length; i++){
+            c_sum = Math.max(nums[i], c_sum + nums[i]);
+            m_sum = Math.max(c_sum, m_sum);
+        }
+        return m_sum;
+    }
+
+
+}
+
+```
+
+### Output
+```
+Input
+nums =
+[1]
+Output
+1
+Expected
+1
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Sort colors
+
+[**Question**](https://leetcode.com/problems/sort-colors/): 
+Given an array  `nums`  with  `n`  objects colored red, white, or blue, sort them  **[in-place](https://en.wikipedia.org/wiki/In-place_algorithm)** so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
+
+We will use the integers  `0`,  `1`, and  `2`  to represent the color red, white, and blue, respectively.
+
+You must solve this problem without using the library's sort function.
+
+**Example 1:**
+
+**Input:** nums = [2,0,2,1,1,0]
+**Output:** [0,0,1,1,2,2]
+
+**Example 2:**
+
+**Input:** nums = [2,0,1]
+**Output:** [0,1,2]
+
+**Constraints:**
+
+-   `n == nums.length`
+-   `1 <= n <= 300`
+-   `nums[i]`  is either  `0`,  `1`, or  `2`.
+
+[**Solution**]() : 
+
+
+###  Brute force Approach
+Merge sort should be the best approach to sort this `in-place` but this will only have the time complexity of $O(nlogn)$
+
+### Mergesort Code
+```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        self.mergeSort(nums)
+        
+    def mergeSort(self, nums : List[int]) -> List[int]:
+        if len(nums) <= 1 : 
+            return nums
+        mid = len(nums)//2
+        left = nums[0:mid]
+        right = nums[mid:]
+        self.mergeSort(left)
+        self.mergeSort(right)
+
+        leftIdx = rightIdx = mainIdx = 0
+
+        while leftIdx < len(left) and rightIdx < len(right):
+            if left[leftIdx] <= right[rightIdx]:
+                nums[mainIdx] = left[leftIdx]
+                leftIdx += 1
+            else : 
+                nums[mainIdx] = right[rightIdx]
+                rightIdx += 1
+            mainIdx += 1
+
+        while leftIdx < len(left):
+            nums[mainIdx] = left[leftIdx]
+            leftIdx += 1
+            mainIdx += 1
+        # These cases are just to append the values in case of uneven arrays where one index reaches the end before the other
+
+        while rightIdx < len(right):
+            nums[mainIdx] = right[rightIdx]
+            rightIdx += 1
+            mainIdx += 1
+
+```
+
+### CounterCode
+```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+
+        one = two = zero = 0
+
+        for n in nums :
+            if n == 0:
+                zero += 1
+            elif n == 1 : 
+                one += 1
+            elif n == 2 :
+                two += 1
+        
+        for _ in range(0,zero):
+            nums[_] = 0
+        for _ in range(zero,zero+one):
+            nums[_] = 1
+        for _ in range(zero+one,zero+one+two):
+            nums[_] = 2
+
+```
+
+### Most Optimal Approach
+This algorithm will use three pointers.
+1. Everything from `0 to low-1 = 0`
+2. Everything from `low to mid-1 = 1`
+3. Everything from `mid+1 to n-1 = 2`
+> The fuck ? :confused:
+
+## The 3 pointer approach
+```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        low = 0
+        mid = 0
+        high = len(nums)-1
+
+        while low <= mid and mid <= high and high < len(nums): 
+            if nums[mid] == 0:
+                self.swap(nums, mid, low)
+                low += 1
+                mid += 1
+            elif nums[mid] == 1:
+                mid += 1     
+            elif nums[mid] == 2:
+                self.swap(nums,mid,high)
+                high -= 1
+
+    def swap(self, nums: List[int], i : int, j : int):
+        temp = nums[i]
+        nums[i] = nums[j] 
+        nums[j] = temp
+```
+
+
+### Output
+```
+Input
+nums = [2,0,2,1,1,0]
+Output
+[0,0,1,1,2,2]
+Expected
+[0,0,1,1,2,2]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Best time to buy and sell stocks
+
+[**Question**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/): 
+You are given an array  `prices`  where  `prices[i]`  is the price of a given stock on the  `ith`  day.
+
+You want to maximize your profit by choosing a  **single day**  to buy one stock and choosing a  **different day in the future**  to sell that stock.
+
+Return  _the maximum profit you can achieve from this transaction_. If you cannot achieve any profit, return  `0`.
+
+**Example 1:**
+
+**Input:** prices = [7,1,5,3,6,4]
+**Output:** 5
+**Explanation:** Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+
+[**Solution**]() : 
+
+
+###  Approach
+1. The idea here is to basically check the price of the current element with the previous element. 
+2. If it is gerater then we recalculate the minimum value between the previous element and the already existing minimum value.
+3. After that we calculate the maximum profit between the existing max profit and the new price - minimum value
+
+### Python Code 
+```python
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        min_val = float('inf')
+        max_profit = 0
+
+        for i in range(len(prices)):
+            if i == 0:
+                continue
+
+            if prices[i] > prices[i-1]:
+                min_val = min(min_val, prices[i-1])
+                max_profit = max(max_profit,prices[i] - min_val)
+
+        return max_profit
+                
+        
+```
+
+### Output
+```
+Input
+prices = [7,1,5,3,6,4]
+Output
+5
+Expected
+5
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
 
 ## Template for Solving
 
@@ -5084,7 +5854,7 @@ Cities 0 and 3 have 2 neighboring cities at a distanceThreshold = 4, but we have
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 
 
 ### Python Code 
@@ -5131,7 +5901,7 @@ Each line `i` of the `n` subsequent lines (where `0 ≤ i < n`) contains an inte
 
 > [Stack Overflow Solution](https://stackoverflow.com/questions/68694587/what-is-the-maximum-possible-number-of-monsters-you-can-defeat)
 
-###  Solving Method
+###  Approach
 This is a relatively simple quesiton where the input will be in the form of a linear array and they have mentioned where to access what given values. WIth this a simple check at each iteration of the loop, to compare the experience of the fighter with the monster will let us know if he can go ahead and defeat it.
 1. In this case it isn't mentioned that the user has to defeat them in order and if a weaker monster exists further in the arrya, he can defeat that and gain bonus exp points
 2. This will let him defeat the other monsters
@@ -5345,7 +6115,7 @@ The next line contains an integer, k, denoting the length of the arrays.
 **![](https://lh7-us.googleusercontent.com/docsz/AD_4nXdBRGNIg5RvwDD3cFVz4smy6sB5uY1bxEJfRIZ9KiPDJE8cnmAgg1jYvn_daF4DwHliXGoaK-q63waVdNjxhXlacj8xAD95uFIuRzJjtlAN4Wg3-cgYSE8qnJsXPgg0q-juqrmROB93pFcj_fRKO2umDcL8?key=ZHy1vNG2cH9g5PquhAKV5g)**
 
 [**Solution**]() : 
-###  Solving Method
+###  Approach
 Use the scanner to accept the maximum possible values for the array and then the length of the arrays
 
 ### Java Code 
@@ -5371,7 +6141,7 @@ Use the scanner to accept the maximum possible values for the array and then the
 [**Solution**]() : 
 
 
-###  Solving Method
+###  Approach
 
 
 ### Python Code 
@@ -6496,6 +7266,56 @@ func(indx, arr[])
 
 ### In Place solving with lesser space complexity
 ```java
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class PlacePermutation {
+    private void recurPermute(int index, int[] nums, List<List<Integer>> ans){
+        //Base case
+        if(index == nums.length){
+            // Copying the ds to ans
+            List<Integer> ds = new ArrayList<>();
+            for(int i = 0; i< nums.length;i++){
+                ds.add(nums[i]);
+            }
+            ans.add(new ArrayList<>(ds));
+            return;
+        }
+        for(int i = index; i< nums.length; i++){
+            swap(i, index, nums);
+            // Custom define the swap function if you're not allowed to use any higher order functions
+            recurPermute(index+1, nums, ans);
+            swap(i,index,nums);
+            // This swap is to restore nums array back to the index it had, so it doesn't affect the next recursion
+        }   
+    }
+    private void swap(int i, int j, int[] nums){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    public List<List<Integer>> permute(int[] nums){
+        List<List<Integer>> ans = new ArrayList<>();
+        recurPermute(0, nums, ans);
+        return ans;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the size of the array :");
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+        for(int i =0; i<n;i++){
+            System.out.println("Enter  value "+(i+1)+" :" );
+            nums[i] = sc.nextInt();
+        }
+        sc.close();
+        PlacePermutation ans = new PlacePermutation();
+        List<List<Integer>> answer = new ArrayList<>(ans.permute(nums));
+        System.out.println(answer);
+    }
+}
 
 ```
 
@@ -6507,10 +7327,41 @@ func(indx, arr[])
 <hr>
 
 
-## Lists
+
+<hr>
+
+# Python Functions
+## Table of Contents Python Functions
+1. [HashSet](#hashset)
+
+
+## HashSet
+A hashSet in python is much simpler to initiate and use than in any other language.
+
+```python
+numSet = 
+
+```
+
+
+
+> [Return to Table of Contents](#table-of-contents-python-functions)
+
+<hr>
+
+
+# Lists
 Lists are a very important structure in both Java and Python and hold a lot of importance since you can keep adding to them.
 
-`Initialization`
+## Table of Contents List
+1. [Initialization](#initialization)
+2. [Size of a List](#size-of-a-list)
+3. [Template](#template-for-lists)
+4. [Index of element](#index-of-element)
+
+### Initialization 
+
+>[Return to Table of Contents](#table-of-contents-list)
 ```java
 List<List<Integer>> listOfLists = new ArrayList<>();
         listOfLists.add(List.of(1, 2, 3));
@@ -6518,20 +7369,60 @@ List<List<Integer>> listOfLists = new ArrayList<>();
         listOfLists.add(List.of(7, 8, 9));
 
 ```
-
-
-
+During initialization you can use the `List.of( <int>, <string> )` depending on what datatype you have initialized it with.
 
 <hr>
 
-# Python Functions
-## Table of Contents Python Functions
-1. 
+## Size of a List
+
+>[Return to Table of Contents](#table-of-contents-list)
+
+When we normally use the `.length()` function for the length of strings and the `.length`  attribute for arrays and such, a List doesn't have that attribute, and hence to find the size of a list we need to use the `size()` function. 
+
+<hr>
+
+## Index of element
+>[Return to Table of Contents](#table-of-contents-list)
+
+### Java Code
+```java
+Integer  currIdx = listofperm.indexOf(currentPermutation);
+```
+
+This will basically give you the index of the given element that has the exact same value as what is passed as the parameter
+
+<hr>
+
+
+## Template for Lists
+>[Return to Table of Contents](#table-of-contents-list)
+
+### Java Code
+```java
+
+```
+
+### Output
+```
+
+```
+
+<hr>
+
+# Arrays
+## Table of Contents Arrays
+1. [Cloning an Array](#cloning)
 
 
 
 
+## Cloning
 
-> [Return to Table of Contents](#table-of-contents-python-functions)
+>[Return to Table of Contents](#table-of-contents-arrays)
+
+To simply clone an array into another one we can use the following code : 
+```java 
+int[] renum = nums.clone();
+```
 
 <hr>
