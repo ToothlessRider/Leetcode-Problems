@@ -78,7 +78,9 @@
 	- :rocket:[Kadane's algorithm](#kadanes-algorithm)
 60. :rocket:[Sort Colors](#sort-colors)
 61. :rocket:[Best time to buy and sell stocks](#best-time-to-buy-and-sell-stocks)
-62. [Template for solving](#template-for-solving)
+62. :rocket:[Rotate Image](#rotate-image)
+63. [Determine whether Matrix Can Be Obtained By Rotation](#determine-whether-matrix-can-be-obtained-by-rotation)
+64. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -5845,6 +5847,196 @@ Expected
 
 <hr>
 
+> Day : Monday 29th July 2024
+
+## Rotate Image
+
+[**Question**](https://leetcode.com/problems/rotate-image/): 
+You are given an  `n x n`  2D  `matrix`  representing an image, rotate the image by  **90**  degrees (clockwise).
+
+You have to rotate the image  [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm), which means you have to modify the input 2D matrix directly.  **DO NOT**  allocate another 2D matrix and do the rotation.
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2020/08/28/mat1.jpg)
+
+**Input:** matrix = [[1,2,3],[4,5,6],[7,8,9]]
+**Output:** [[7,4,1],[8,5,2],[9,6,3]]
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2020/08/28/mat2.jpg)
+
+**Input:** matrix = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]]
+**Output:** [[15,13,2,5],[14,3,4,1],[12,6,8,9],[16,7,10,11]]
+
+[**Solution**](https://chatgpt.com/share/560d40eb-da4d-44fa-b827-733285d710cd) : 
+
+
+###  Brute force Approach
+The idea is to figure out what if conditions to put for which elements.
+1. We have the corner cases. 5 which is at `1,1` will then become `1,4` for a 4x4 matrix. `1,4` goes to `4,4` and then finally `4,4` goes to `4,1`. 
+2. Using brute for we get this
+
+### Python Code 
+```python
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        
+        m = len(matrix[0])
+        result = [[0]* m for _ in range(m)]
+
+        for i in range(m):
+            for j in range(m):
+                result[j][m-i-1] = matrix[i][j]
+
+        for i in range (m):
+            for j in range(m):
+                matrix[i][j] = result[i][j]
+
+
+```
+
+### In-place Approach
+So now if we notice how they're set, instead of rotating by 90 degrees if we transpose it ( interchange the first row with the first column and so on ) and then reverse the respective rows, we will get the required answer.
+
+> How do we trasponse a matrix ??
+
+To transpose a matrix we ideally swap the matrix elements along the diagon while keeping the diagonal elements constant.
+
+### Error made 
+Made a big error here, sinnce I should've iterated only through either upper or lower triangle of the array, but instead I iterated through the whole thing swapping them all back to the original array.
+- Also this code can additionally be optimized by the direct element values to the swap function instead of passing indices adnw hatnot.
+
+### Python code ( transpose method )
+```python
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        # Doing the swapping
+        n = len(matrix)
+        for i in range(n):
+            for j in range(i+1,n):
+                if i == j:
+                    continue
+                self.swap(matrix, i , j)
+
+        # Once that is done we need to reverse the rows
+
+        for row in range(n):
+            for j in range(n//2):
+                self.swapRow(matrix,row,j,n)
+        
+
+    def swap(self, matrix : List[List[int]], i : int, j : int):
+        temp = matrix[i][j]
+        matrix[i][j] = matrix[j][i]
+        matrix[j][i] = temp
+
+    def swapRow(self, matrix : List[List[int]], row : int, i: int, n : int):
+        temp = matrix[row][i]
+        matrix[row][i] = matrix[row][n-1-i]
+        matrix[row][n-1-i] = temp
+
+```
+
+### Output
+```
+Input
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output
+[[7,4,1],[8,5,2],[9,6,3]]
+Expected
+[[7,4,1],[8,5,2],[9,6,3]]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+##  Determine whether Matrix Can Be Obtained By Rotation
+
+[**Question**](https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/description/): 
+Given two  `n x n`  binary matrices  `mat`  and  `target`, return  `true` _if it is possible to make_ `mat` _equal to_ `target` _by  **rotating**_ `mat` _in  **90-degree increments**, or_ `false` _otherwise._
+
+**Example 1:**
+
+![](https://assets.leetcode.com/uploads/2021/05/20/grid3.png)
+
+**Input:** mat = [[0,1],[1,0]], target = [[1,0],[0,1]]
+**Output:** true
+**Explanation:** We can rotate mat 90 degrees clockwise to make mat equal target.
+
+**Example 2:**
+
+![](https://assets.leetcode.com/uploads/2021/05/20/grid4.png)
+
+**Input:** mat = [[0,1],[1,1]], target = [[1,0],[0,1]]
+**Output:** false
+**Explanation:** It is impossible to make mat equal to target by rotating mat.
+
+
+[**Solution**](https://chatgpt.com/share/560d40eb-da4d-44fa-b827-733285d710cd) : 
+
+
+###  Approach
+Use the same reversing concept used in the previous question, and in this case you don't need to create any additional swap functuion, but instead use the simple syntax : 
+```python
+for i in range (n):
+                for j in range (i+1,n):
+                    matrix[i][j],matrix[j][i] = matrix[j][i], matrix[i][j]
+```
+
+### Python Code 
+```python
+class Solution:
+    def findRotation(self, mat: List[List[int]], target: List[List[int]]) -> bool:
+        n = len(mat)
+        def transpose(matrix: List[list[int]], n: int)-> None :
+            for i in range (n):
+                for j in range (i+1,n):
+                    matrix[i][j],matrix[j][i] = matrix[j][i], matrix[i][j]
+            # This is much easier instead of having to define a swap function
+        def reverseRow(matrix : List[List[int]], n: int):
+            for row in range(n):
+                matrix[row].reverse()
+                # this will allow you to reverse the elements of a given row.
+        
+        def isSame(matrix1 : List[List[int]], matrix2 : List[List[int]]):
+            return matrix1 == matrix2
+
+        # by rotating the matrix in 90 degree increments, ie at 0, 90, 180 and 270, we will be able to check if they're the same
+        for _ in range(4):
+            if isSame(mat,target):
+                return True
+            transpose(mat,n)
+            reverseRow(mat,n)
+
+
+```
+
+### Output
+```
+Input
+mat = [[0,1],[1,0]]
+target = [[1,0],[0,1]]
+Output
+true
+Expected
+true
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
 
 ## Template for Solving
 
@@ -7333,22 +7525,62 @@ public class PlacePermutation {
 # Python Functions
 ## Table of Contents Python Functions
 1. [HashSet](#hashset)
+2. [Initializing a 2d array](#initializing-a-2d-array)
 
 
 ## HashSet
 A hashSet in python is much simpler to initiate and use than in any other language.
 
 ```python
-numSet = 
+numSet = ()
 
 ```
-
-
 
 > [Return to Table of Contents](#table-of-contents-python-functions)
 
 <hr>
 
+## Initializing a 2d array
+To initialize a 2d array of 0's you can simply use this one line for statment
+```python
+result = [[0]* m for _ in range(m)]
+```
+
+<hr>
+
+## Reversing an array in python
+Using the in built function `reverse()` we can simply reverse a row in python using theeh following code : 
+
+
+```python 
+matrix[row].reverse()
+```
+
+But for a colum we have to do the following : 
+
+```python
+from typing import List
+
+def reverse_column(matrix: List[List[int]], col: int) -> None:
+    n = len(matrix)
+    for i in range(n // 2):
+        matrix[i][col], matrix[n - 1 - i][col] = matrix[n - 1 - i][col], matrix[i][col]
+
+# Example usage:
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+reverse_column(matrix, 1)  # Reverse the second column
+print(matrix)
+
+
+```
+
+
+<hr>
 
 # Lists
 Lists are a very important structure in both Java and Python and hold a lot of importance since you can keep adding to them.
