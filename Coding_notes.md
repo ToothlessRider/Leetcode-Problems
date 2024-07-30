@@ -87,7 +87,8 @@
 68. :dango:[Wordle](#wordle)
 69. :oden:[Different Consecutive Characters](#different-consecutive-characters)
 70. :doughnut:[Convert String to Title Case](#convert-string-to-title-case)
-71. [Template for solving](#template-for-solving)
+71. :lollipop:[Add One](#add-one)
+72. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -402,6 +403,7 @@ class Solution:
 ## Two Link Lists 
 
 [**Question**](https://leetcode.com/problems/add-two-numbers/) : 
+
 You are given two  **non-empty**  linked lists representing two non-negative integers. The digits are stored in  **reverse order**, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
 
 You may assume the two numbers do not contain any leading zero, except the number 0 itself.
@@ -906,6 +908,7 @@ class UnionFind {
 ## Longest Palindromic Substring
 
 [**Question**](https://leetcode.com/problems/longest-palindromic-substring/description/) : 
+
 Given a string  `s`, return  _the longest palindromic substring_ in  `s`.
 
 **Example 1:**
@@ -967,6 +970,7 @@ class Solution {
 ## Three Consecutive Odds
 
 [**Question**](https://leetcode.com/problems/three-consecutive-odds/description/?envType=daily-question&envId=2024-07-01):
+
 Given an integer array `arr`, return `true` if there are three consecutive odd numbers in the array. Otherwise, return `false`.
 
 **Example 1:**
@@ -1022,6 +1026,7 @@ class Solution {
 ## Zigzag Conversion
 
 [**Question**](https://leetcode.com/problems/zigzag-conversion/description/):
+
 The string  `"PAYPALISHIRING"`  is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
 
 
@@ -1073,6 +1078,7 @@ To solve this problem we need to figure out how to split them to create a zig za
 ## Intersection of Two Arrays 2
 
 [**Question**](https://leetcode.com/problems/intersection-of-two-arrays-ii/description/?envType=daily-question&envId=2024-07-02):
+
 Given two integer arrays  `nums1`  and  `nums2`, return  _an array of their intersection_. Each element in the result must appear as many times as it shows in both arrays and you may return the result in  **any order**.
 
 **Example 1:**
@@ -1135,6 +1141,7 @@ class Solution {
 ## Score of a string
 
 [**Question**](https://leetcode.com/problems/score-of-a-string/description/?envType=daily-question&envId=2024-06-01) : 
+
 You are given a string  `s`. The  **score**  of a string is defined as the sum of the absolute difference between the  **ASCII**  values of adjacent characters.
 
 Return the  **score**  of  `s`.
@@ -1299,6 +1306,7 @@ public class UniqueCharacters {
 ## Minimum Difference Between Largest and Smallest Value in Three Moves
 
 [**Question**](https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/?envType=daily-question&envId=2024-07-03) : 
+
 You are given an integer array  `nums`.
 
 In one move, you can choose one element of  `nums`  and change it to  **any value**.
@@ -1367,6 +1375,7 @@ class Solution {
 ## Reverse Integer
 
 [**Question**](https://leetcode.com/problems/reverse-integer/description/): 
+
 Given a signed 32-bit integer  `x`, return  `x` _with its digits reversed_. If reversing  `x`  causes the value to go outside the signed 32-bit integer range  `[-231, 231 - 1]`, then return  `0`.
 
 **Assume the environment does not allow you to store 64-bit integers (signed or unsigned).**
@@ -1419,6 +1428,7 @@ class Solution {
 ## Merge Nodes in Between Zeros
 
 [**Question**](https://leetcode.com/problems/merge-nodes-in-between-zeros/description/?envType=daily-question&envId=2024-07-04): 
+
 You are given the  `head`  of a linked list, which contains a series of integers  **separated**  by  `0`'s. The  **beginning**  and  **end**  of the linked list will have  `Node.val == 0`.
 
 For  **every** two consecutive  `0`'s,  **merge**  all the nodes lying in between them into a single node whose value is the  **sum**  of all the merged nodes. The modified list should not contain any  `0`'s.
@@ -1497,6 +1507,7 @@ Expected
 ##  Find the Minimum and Maximum Number of Nodes Between Critical Points
 
 [**Question**](https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/description/?envType=daily-question&envId=2024-07-05): 
+
 A  **critical point**  in a linked list is defined as  **either**  a  **local maxima**  or a  **local minima**.
 
 A node is a  **local maxima**  if the current node has a value  **strictly greater**  than the previous node and the next node.
@@ -1596,6 +1607,7 @@ Expected
 ## Pass the Pillow
 
 [**Question**](https://leetcode.com/problems/pass-the-pillow/description/?envType=daily-question&envId=2024-07-06): 
+
 There are  `n`  people standing in a line labeled from  `1`  to  `n`. The first person in the line is holding a pillow initially. Every second, the person holding the pillow passes it to the next person standing in the line. Once the pillow reaches the end of the line, the direction changes, and people continue passing the pillow in the opposite direction.
 
 -   For example, once the pillow reaches the  `nth`  person they pass it to the  `n - 1th`  person, then to the  `n - 2th`  person and so on.
@@ -1674,6 +1686,7 @@ class Solution:
 ## Water Bottles
 
 [**Question**](https://leetcode.com/problems/water-bottles/description/?envType=daily-question&envId=2024-07-07): 
+
 There are  `numBottles`  water bottles that are initially full of water. You can exchange  `numExchange`  empty water bottles from the market with one full water bottle.
 
 The operation of drinking a full water bottle turns it into an empty bottle.
@@ -1750,6 +1763,7 @@ class Solution(object):
 ## String to Integer
 
 [**Question**](https://leetcode.com/problems/string-to-integer-atoi/): 
+
 Implement the  `myAtoi(string s)`  function, which converts a string to a 32-bit signed integer.
 
 The algorithm for  `myAtoi(string s)`  is as follows:
@@ -1854,6 +1868,7 @@ Expected
 ## Find the Winner of the circular game	
 
 [**Question**](https://leetcode.com/problems/find-the-winner-of-the-circular-game/description/?envType=daily-question&envId=2024-07-08): 
+
 There are  `n`  friends that are playing a game. The friends are sitting in a circle and are numbered from  `1`  to  `n`  in  **clockwise order**. More formally, moving clockwise from the  `ith`  friend brings you to the  `(i+1)th`  friend for  `1 <= i < n`, and moving clockwise from the  `nth`  friend brings you to the  `1st`  friend.
 
 The rules of the game are as follows:
@@ -2004,6 +2019,7 @@ linked_list.display()
 ## Richest Customer Wealth
 
 [**Question**](https://leetcode.com/problems/richest-customer-wealth/description/): 
+
 You are given an  `m x n`  integer grid  `accounts`  where  `accounts[i][j]`  is the amount of money the  `i​​​​​​​​​​​th​​​​`  customer has in the  `j​​​​​​​​​​​th`​​​​ bank. Return _the  **wealth**  that the richest customer has._
 
 A customer's  **wealth**  is the amount of money they have in all their bank accounts. The richest customer is the customer that has the maximum  **wealth**.
@@ -2079,6 +2095,7 @@ Expected
 ## Fizz Buzz
 
 [**Question**](https://leetcode.com/problems/fizz-buzz/description/): 
+
 Given an integer  `n`, return  _a string array_ `answer` _(**1-indexed**) where_:
 
 -   `answer[i] == "FizzBuzz"`  if  `i`  is divisible by  `3`  and  `5`.
@@ -2167,6 +2184,7 @@ Expected
 ## Palindrome Number
 
 [**Question**](https://leetcode.com/problems/palindrome-number/description/): 
+
 Given an integer  `x`, return  `true` _if_ `x` _is a_
 
 _**palindrome**_
@@ -2243,6 +2261,7 @@ true
 ##  Average Waiting Time
 
 [**Question**](https://leetcode.com/problems/average-waiting-time/description/?envType=daily-question&envId=2024-07-09): 
+
 There is a restaurant with a single chef. You are given an array  `customers`, where  `customers[i] = [arrivali, timei]:`
 
 -   `arrivali`  is the arrival time of the  `ith`  customer. The arrival times are sorted in  **non-decreasing**  order.
@@ -2310,6 +2329,7 @@ Expected
 ## Crawler Log Folder
 
 [**Question**](https://leetcode.com/problems/crawler-log-folder/description/?envType=daily-question&envId=2024-07-10): 
+
 The Leetcode file system keeps a log each time some user performs a  _change folder_  operation.
 
 The operations are described below:
@@ -2375,6 +2395,7 @@ Expected
 ## Reverse Substrings between each pair of Parentheses
 
 [**Question**](https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/description/?envType=daily-question&envId=2024-07-11): 
+
 You are given a string  `s`  that consists of lower case English letters and brackets.
 
 Reverse the strings in each pair of matching parentheses, starting from the innermost one.
@@ -2453,6 +2474,7 @@ Expected
 ## Maximum Score from Removing substrings
 
 [**Question**](https://leetcode.com/problems/maximum-score-from-removing-substrings/description/?envType=daily-question&envId=2024-07-12): 
+
 You are given a string  `s`  and two integers  `x`  and  `y`. You can perform two types of operations any number of times.
 
 -   Remove substring  `"ab"`  and gain  `x`  points.
@@ -2608,6 +2630,7 @@ Expected
 ## Robot Collisions
 
 [**Question**](https://leetcode.com/problems/robot-collisions/description/?envType=daily-question&envId=2024-07-13): 
+
 There are  `n`  **1-indexed**  robots, each having a position on a line, health, and movement direction.
 
 You are given  **0-indexed**  integer arrays  `positions`,  `healths`, and a string  `directions`  (`directions[i]`  is either  **'L'**  for  **left**  or  **'R'**  for  **right**). All integers in  `positions`  are  **unique**.
@@ -2704,6 +2727,7 @@ Expected
 ## Roman to Integer
 
 [**Question**](https://leetcode.com/problems/roman-to-integer/): 
+
 Roman numerals are represented by seven different symbols: `I`,  `V`,  `X`,  `L`,  `C`,  `D`  and  `M`.
 
 **Symbol**       **Value**
@@ -2816,7 +2840,8 @@ Expected
 
 ## Integer to Roman
 
-[**Question**](): 
+[**Question**](https://leetcode.com/problems/integer-to-roman/): 
+
 Seven different symbols represent Roman numerals with the following values:
 
 Symbol
@@ -2881,6 +2906,7 @@ Even this one is the exact opposite to the first one we need to implement a diff
 ## Regular Expression Matching
 
 [**Question**](https://leetcode.com/problems/regular-expression-matching/): 
+
 Given an input string  `s` and a pattern  `p`, implement regular expression matching with support for  `'.'`  and  `'*'`  where:
 
 -   `'.'`  Matches any single character.​​​​
@@ -3054,6 +3080,7 @@ true
 ## Container with most water
 
 [**Question**](https://leetcode.com/problems/container-with-most-water/description/): 
+
 You are given an integer array  `height`  of length  `n`. There are  `n`  vertical lines drawn such that the two endpoints of the  `ith`  line are  `(i, 0)`  and  `(i, height[i])`.
 
 Find two lines that together with the x-axis form a container, such that the container contains the most water.
@@ -3113,6 +3140,7 @@ Expected
 ##  Longest Common Prefix
 
 [**Question**](https://leetcode.com/problems/longest-common-prefix/description/): 
+
 Write a function to find the longest common prefix string amongst an array of strings.
 
 If there is no common prefix, return an empty string  `""`.
@@ -3186,6 +3214,7 @@ Expected
 ## Smallest Missing Integer Greater Than Sequential Prefix Sum
 
 [**Question**](https://leetcode.com/problems/smallest-missing-integer-greater-than-sequential-prefix-sum/): 
+
 You are given a  **0-indexed**  array of integers  `nums`.
 
 A prefix  `nums[0..i]`  is  **sequential**  if, for all  `1 <= j <= i`,  `nums[j] = nums[j - 1] + 1`. In particular, the prefix consisting only of  `nums[0]`  is  **sequential**.
@@ -3222,6 +3251,7 @@ The idea is to calculate the sum of the longest sequential prefix, so we will im
 ## Number of Atoms
 
 [**Question**](https://leetcode.com/problems/number-of-atoms/description/?envType=daily-question&envId=2024-07-14): 
+
 Given a string  `formula`  representing a chemical formula, return  _the count of each atom_.
 
 The atomic element always starts with an uppercase character, then zero or more lowercase letters, representing the name.
@@ -3325,7 +3355,8 @@ Expected
 
 ## Create Binary Tree from Descriptions
 
-[**Question**](): 
+[**Question**](https://leetcode.com/problems/create-binary-tree-from-descriptions/description/): 
+
 You are given a 2D integer array  `descriptions`  where  `descriptions[i] = [parenti, childi, isLefti]`  indicates that  `parenti`  is the  **parent**  of  `childi`  in a  **binary**  tree of  **unique**  values. Furthermore,
 
 -   If  `isLefti == 1`, then  `childi`  is the left child of  `parenti`.
@@ -3435,6 +3466,7 @@ Expected
 ## Step-By-Step Directions From a Binary Tree Node to Another
 
 [**Question**](https://leetcode.com/problems/step-by-step-directions-from-a-binary-tree-node-to-another/description/?envType=daily-question&envId=2024-07-16): 
+
 You are given the  `root`  of a  **binary tree**  with  `n`  nodes. Each node is uniquely assigned a value from  `1`  to  `n`. You are also given an integer  `startValue`  representing the value of the start node  `s`, and a different integer  `destValue`  representing the value of the destination node  `t`.
 
 Find the  **shortest path**  starting from node  `s`  and ending at node  `t`. Generate step-by-step directions of such path as a string consisting of only the  **uppercase**  letters  `'L'`,  `'R'`, and  `'U'`. Each letter indicates a specific direction:
@@ -3555,6 +3587,7 @@ Expected
 ## Three Sum
 
 [**Question**](https://leetcode.com/problems/3sum/description/): 
+
 Given an integer array nums, return all the triplets  `[nums[i], nums[j], nums[k]]`  such that  `i != j`,  `i != k`, and  `j != k`, and  `nums[i] + nums[j] + nums[k] == 0`.
 
 Notice that the solution set must not contain duplicate triplets.
@@ -3637,6 +3670,7 @@ Expected
 ## Letter Combinations of a Phone Number
 
 [**Question**](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/): 
+
 Given a string containing digits from  `2-9`  inclusive, return all possible letter combinations that the number could represent. Return the answer in  **any order**.
 
 A mapping of digits to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
@@ -3715,6 +3749,7 @@ Expected
 ## Valid Parenthesis
 
 [**Question**](https://leetcode.com/problems/valid-parentheses/description/): 
+
 Given a string  `s`  containing just the characters  `'('`,  `')'`,  `'{'`,  `'}'`,  `'['`  and  `']'`, determine if the input string is valid.
 
 An input string is valid if:
@@ -3838,6 +3873,7 @@ Pressing `Ctrl + Shift + B` gives you an automatic template to enter bold text. 
 ## Set Matrix Zeroes
 
 [**Question**](https://leetcode.com/problems/set-matrix-zeroes/description/): 
+
 Given an  `m x n`  integer matrix  `matrix`, if an element is  `0`, set its entire row and column to  `0`'s.
 
 You must do it  [in place](https://en.wikipedia.org/wiki/In-place_algorithm).
@@ -3966,6 +4002,7 @@ Expected
 ## Delete Nodes And Return Forest
 
 [**Question**](https://leetcode.com/problems/delete-nodes-and-return-forest/description/?envType=daily-question&envId=2024-07-17): 
+
 Given the  `root`  of a binary tree, each node in the tree has a distinct value.
 
 After deleting all nodes with a value in  `to_delete`, we are left with a forest (a disjoint union of trees).
@@ -4111,6 +4148,7 @@ Size of the set is 2
 ## Number of Good Leaf Nodes
 
 [**Question**](https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/description/?envType=daily-question&envId=2024-07-18): 
+
 You are given the  `root`  of a binary tree and an integer  `distance`. A pair of two different  **leaf**  nodes of a binary tree is said to be good if the length of  **the shortest path**  between them is less than or equal to  `distance`.
 
 Return  _the number of good leaf node pairs_  in the tree.
@@ -4163,6 +4201,7 @@ Return  _the number of good leaf node pairs_  in the tree.
 ## Lucky numbers in a Matrix
 
 [**Question**](https://leetcode.com/problems/lucky-numbers-in-a-matrix/description/?envType=daily-question&envId=2024-07-19): 
+
 Given an  `m x n`  matrix of  **distinct** numbers, return  _all  **lucky numbers**  in the matrix in  **any** order_.
 
 A  **lucky number**  is an element of the matrix such that it is the minimum element in its row and maximum in its column.
@@ -4313,6 +4352,7 @@ Expected
 ## Pascal's Triangle
 
 [**Question**](https://leetcode.com/problems/pascals-triangle/): 
+
 Given an integer  `numRows`, return the first numRows of  **Pascal's triangle**.
 
 In  **Pascal's triangle**, each number is the sum of the two numbers directly above it as shown:
@@ -4383,6 +4423,7 @@ Expected
 ## Next Permutation
 
 [**Question**](https://leetcode.com/problems/next-permutation/description/): 
+
 A  **permutation**  of an array of integers is an arrangement of its members into a sequence or linear order.
 
 -   For example, for  `arr = [1,2,3]`, the following are all the permutations of  `arr`:  `[1,2,3], [1,3,2], [2, 1, 3], [2, 3, 1], [3,1,2], [3,2,1]`.
@@ -4592,6 +4633,7 @@ Comparator<List<Integer>> com = new Comparator<List<Integer>>(){
 ## Find Valid Matrix Given Row and Column Sums
 
 [**Question**](https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/description/?envType=daily-question&envId=2024-07-20): 
+
 You are given two arrays  `rowSum`  and  `colSum`  of non-negative integers where  `rowSum[i]`  is the sum of the elements in the  `ith`  row and  `colSum[j]`  is the sum of the elements of the  `jth`  column of a 2D matrix. In other words, you do not know the elements of the matrix, but you do know the sums of each row and column.
 
 Find any matrix of  **non-negative**  integers of size  `rowSum.length x colSum.length`  that satisfies the  `rowSum`  and  `colSum`  requirements.
@@ -4705,6 +4747,7 @@ Expected
 ## Build a Matrix With Conditions
 
 [**Question**](https://leetcode.com/problems/build-a-matrix-with-conditions/?envType=daily-question&envId=2024-07-21): 
+
 You are given a  **positive**  integer  `k`. You are also given:
 
 -   a 2D integer array  `rowConditions`  of size  `n`  where  `rowConditions[i] = [abovei, belowi]`, and
@@ -4833,6 +4876,7 @@ Expected
 ## Sort the people
 
 [**Question**](https://leetcode.com/problems/sort-the-people/description/?envType=daily-question&envId=2024-07-22): 
+
 You are given an array of strings  `names`, and an array  `heights`  that consists of  **distinct**  positive integers. Both arrays are of length  `n`.
 
 For each index  `i`,  `names[i]`  and  `heights[i]`  denote the name and height of the  `ith`  person.
@@ -4918,6 +4962,7 @@ Expected
 ## Sort Array by Increasing Frequency
 
 [**Question**](https://leetcode.com/problems/sort-array-by-increasing-frequency/description/?envType=daily-question&envId=2024-07-23): 
+
 Given an array of integers  `nums`, sort the array in  **increasing**  order based on the frequency of the values. If multiple values have the same frequency, sort them in  **decreasing**  order.
 
 Return the  _sorted array_.
@@ -5032,6 +5077,7 @@ Expected
 ## Sort the Jumbled Numbers
 
 [**Question**](https://leetcode.com/problems/sort-the-jumbled-numbers/description/?envType=daily-question&envId=2024-07-24): 
+
 You are given a  **0-indexed**  integer array  `mapping`  which represents the mapping rule of a shuffled decimal system.  `mapping[i] = j`  means digit  `i`  should be mapped to digit  `j`  in this system.
 
 The  **mapped value**  of an integer is the new integer obtained by replacing each occurrence of digit  `i`  in the integer with  `mapping[i]`  for all  `0 <= i <= 9`.
@@ -5128,6 +5174,7 @@ Expected
 ## Sort an Array
 
 [**Question**](https://leetcode.com/problems/sort-an-array/?envType=daily-question&envId=2024-07-25): 
+
 Given an array of integers  `nums`, sort the array in ascending order and return it.
 
 You must solve the problem  **without using any built-in**  functions in  `O(nlog(n))`  time complexity and with the smallest space complexity possible.
@@ -5208,6 +5255,7 @@ Expected
 ## Find the City With the Smallest Number of Neighbors at a Threshold Distance
 
 [**Question**](https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/description/?envType=daily-question&envId=2024-07-26): 
+
 There are  `n`  cities numbered from  `0`  to  `n-1`. Given the array  `edges`  where  `edges[i] = [fromi, toi, weighti]`  represents a bidirectional and weighted edge between cities  `fromi`  and  `toi`, and given the integer  `distanceThreshold`.
 
 Return the city with the smallest number of cities that are reachable through some path and whose distance is  **at most**  `distanceThreshold`, If there are multiple such cities, return the city with the greatest number.
@@ -5342,6 +5390,7 @@ The concept that has to be used here is **Floyd Warshall Algorithm** because of 
 ## Second Minimum Time to Reach Destination
 
 [**Question**](https://leetcode.com/problems/second-minimum-time-to-reach-destination/description/?envType=daily-question&envId=2024-07-28): 
+
 A city is represented as a  **bi-directional connected**  graph with  `n`  vertices where each vertex is labeled from  `1`  to  `n`  (**inclusive**). The edges in the graph are represented as a 2D integer array  `edges`, where each  `edges[i] = [ui, vi]`  denotes a bi-directional edge between vertex  `ui`  and vertex  `vi`. Every vertex pair is connected by  **at most one**  edge, and no vertex has an edge to itself. The time taken to traverse any edge is  `time`  minutes.
 
 Each vertex has a traffic signal which changes its color from  **green**  to  **red**  and vice versa every `change`  minutes. All signals change  **at the same time**. You can enter a vertex at  **any time**, but can leave a vertex  **only when the signal is green**. You  **cannot wait** at a vertex if the signal is  **green**.
@@ -5485,6 +5534,7 @@ Expected
 ## Longest Consecutive Sequence
 
 [**Question**](https://leetcode.com/problems/longest-consecutive-sequence/): 
+
 Given an unsorted array of integers  `nums`, return  _the length of the longest consecutive elements sequence._
 
 You must write an algorithm that runs in `O(n)` time.
@@ -5548,6 +5598,7 @@ Expected
 ## Maximum Subarray
 
 [**Question**](https://leetcode.com/problems/maximum-subarray/description/): 
+
 Given an integer array  `nums`, find the
 
 subarray
@@ -5647,6 +5698,7 @@ Expected
 ## Sort colors
 
 [**Question**](https://leetcode.com/problems/sort-colors/): 
+
 Given an array  `nums`  with  `n`  objects colored red, white, or blue, sort them  **[in-place](https://en.wikipedia.org/wiki/In-place_algorithm)** so that objects of the same color are adjacent, with the colors in the order red, white, and blue.
 
 We will use the integers  `0`,  `1`, and  `2`  to represent the color red, white, and blue, respectively.
@@ -5798,6 +5850,7 @@ Expected
 ## Best time to buy and sell stocks
 
 [**Question**](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/): 
+
 You are given an array  `prices`  where  `prices[i]`  is the price of a given stock on the  `ith`  day.
 
 You want to maximize your profit by choosing a  **single day**  to buy one stock and choosing a  **different day in the future**  to sell that stock.
@@ -5859,6 +5912,7 @@ Expected
 ## Rotate Image
 
 [**Question**](https://leetcode.com/problems/rotate-image/): 
+
 You are given an  `n x n`  2D  `matrix`  representing an image, rotate the image by  **90**  degrees (clockwise).
 
 You have to rotate the image  [**in-place**](https://en.wikipedia.org/wiki/In-place_algorithm), which means you have to modify the input 2D matrix directly.  **DO NOT**  allocate another 2D matrix and do the rotation.
@@ -5970,6 +6024,7 @@ Expected
 ##  Determine whether Matrix Can Be Obtained By Rotation
 
 [**Question**](https://leetcode.com/problems/determine-whether-matrix-can-be-obtained-by-rotation/description/): 
+
 Given two  `n x n`  binary matrices  `mat`  and  `target`, return  `true` _if it is possible to make_ `mat` _equal to_ `target` _by  **rotating**_ `mat` _in  **90-degree increments**, or_ `false` _otherwise._
 
 **Example 1:**
@@ -6047,6 +6102,7 @@ true
 ## Build Array from Permutation
 
 [**Question**](https://leetcode.com/problems/build-array-from-permutation/description/): 
+
 Given a  **zero-based permutation**  `nums`  (**0-indexed**), build an array  `ans`  of the  **same length**  where  `ans[i] = nums[nums[i]]`  for each  `0 <= i < nums.length`  and return it.
 
 A  **zero-based permutation**  `nums`  is an array of  **distinct**  integers from  `0`  to  `nums.length - 1`  (**inclusive**).
@@ -6135,6 +6191,7 @@ Expected
 ## Merge Intervals
 
 [**Question**](https://leetcode.com/problems/merge-intervals/description/): 
+
 Given an array of  `intervals` where  `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return  _an array of the non-overlapping intervals that cover all the intervals in the input_.
 
 **Example 1:**
@@ -6172,6 +6229,7 @@ A simple if condition to check if the `start[i] < end[i+1] < end[i]` and then co
 ## Merge Sorted array
 
 [**Question**](https://leetcode.com/problems/merge-sorted-array/): 
+
 You are given two integer arrays  `nums1`  and  `nums2`, sorted in  **non-decreasing order**, and two integers  `m`  and  `n`, representing the number of elements in  `nums1`  and  `nums2`  respectively.
 
 **Merge**  `nums1`  and  `nums2`  into a single array sorted in  **non-decreasing order**.
@@ -6216,7 +6274,8 @@ This needs to be done in place and nums1 is of m+n size.
 ## Count number of teams
 
 [**Question**](https://leetcode.com/problems/count-number-of-teams/description/?envType=daily-question&envId=2024-07-29): 
-here are  `n`  soldiers standing in a line. Each soldier is assigned a  **unique**  `rating`  value.
+
+There are  `n`  soldiers standing in a line. Each soldier is assigned a  **unique**  `rating`  value.
 
 You have to form a team of 3 soldiers amongst them under the following rules:
 
@@ -6314,6 +6373,7 @@ Expected
 ## DNA Storage
 
 [**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/DNASTORAGE): 
+
 For encoding an even-length binary string into a sequence of  `A`,  `T`,  `C`, and  `G`, we iterate from  **left to right**  and replace the characters as follows:
 
 -   `00`  is replaced with  `A`
@@ -6390,7 +6450,8 @@ CT
 
 ## Wordle
 
-[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/WORDLE): 
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/WORDLE):
+
 Chef invented a modified wordle.
 
 There is a hidden word  𝑆  and a guess word  𝑇, both of length  5.
@@ -6467,6 +6528,7 @@ GGBBG
 ## Different Consecutive Characters
 
 [**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/DIFFCONSEC): 
+
 Chef has a binary string  S  of length  N. Chef can perform the following operation on  S:
 
 -   Insert any character (0  or  1) at any position in  S.
@@ -6650,7 +6712,6 @@ Programming In PYTHON
 ## World Chess Championship
 
 [**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/WCC): 
-### World Chess Championship
 
 The World Chess Championship  2022  is about to start.  14  Classical games will be played between Chef and Carlsen in the championship, where each game has one of three outcomes — it can be won by Carlsen, won by Chef, or it can be a draw. The winner of a game gets  2  points, and the loser gets  0  points. If it’s a draw, both players get  1  point each.
 
@@ -8430,12 +8491,4 @@ List<List<Integer>> listOfLists = new ArrayList<>();
         listOfLists.add(List.of(7, 8, 9));
 
 ```
-During initialization you can use the `List.of( <int>, <string> )` depending on what datatype you have initialized it with.
-
-<hr>
-
-## Size of a List
-
->[Return to Table of Contents](#table-of-contents-list)
-
-When we normally use the `.length()` function for the l
+During initialization you can use the `List.of( <int>, <string> )` dep
