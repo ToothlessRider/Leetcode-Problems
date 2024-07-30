@@ -80,7 +80,14 @@
 61. :rocket:[Best time to buy and sell stocks](#best-time-to-buy-and-sell-stocks)
 62. :rocket:[Rotate Image](#rotate-image)
 63. [Determine whether Matrix Can Be Obtained By Rotation](#determine-whether-matrix-can-be-obtained-by-rotation)
-64. [Template for solving](#template-for-solving)
+64. [Build Array from Permutation](#build-array-from-permutation)
+65. :red_circle:[Merge Intervals](#merge-intervals)
+66. [Merge Sorted Array](#merge-sorted-array)
+67. :rice_cracker:[DNA Storage](#dna-storage)
+68. :dango:[Wordle](#wordle)
+69. :oden:[Different Consecutive Characters](#different-consecutive-characters)
+70. :doughnut:[Convert String to Title Case](#convert-string-to-title-case)
+71. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -6037,6 +6044,810 @@ true
 
 <hr>
 
+## Build Array from Permutation
+
+[**Question**](https://leetcode.com/problems/build-array-from-permutation/description/): 
+Given a  **zero-based permutation**  `nums`  (**0-indexed**), build an array  `ans`  of the  **same length**  where  `ans[i] = nums[nums[i]]`  for each  `0 <= i < nums.length`  and return it.
+
+A  **zero-based permutation**  `nums`  is an array of  **distinct**  integers from  `0`  to  `nums.length - 1`  (**inclusive**).
+
+**Example 1:**
+
+**Input:** nums = [0,2,1,5,3,4]
+**Output:** [0,1,2,4,5,3] **Explanation:** The array ans is built as follows: 
+ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+    = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]
+    = [0,1,2,4,5,3]
+
+**Example 2:**
+
+**Input:** nums = [5,0,1,2,3,4]
+**Output:** [4,5,0,1,2,3]
+**Explanation:** The array ans is built as follows:
+ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+    = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]
+    = [4,5,0,1,2,3]
+
+**Constraints:**
+
+-   `1 <= nums.length <= 1000`
+-   `0 <= nums[i] < nums.length`
+-   The elements in  `nums`  are  **distinct**.
+
+[**Solution**](https://chatgpt.com/share/72124e25-63b2-49a2-a07e-e8923d5e8a55) : 
+
+
+###  Approach solving it with an extra memory space
+So we're given an array : `nums = [0,2,1,5,3,4]` where we need to change the array in place and the new array should be such that it fulfils the condition `ans[i] = nums[nums[i]]`
+
+### Python Code 
+```python
+class Solution:
+    def buildArray(self, nums: List[int]) -> List[int]:
+        
+        n = len(nums)
+        answer = [0 * n for _ in range(n)]
+
+        for i in range (n):
+            answer[i] = nums[nums[i]]
+
+        return answer
+
+```
+
+### Approach by solving it in place
+It's mentioned that each element is unique, also for the array to exist, we need all the elements ranging from `0 to n`
+
+When we use list.append() and list.remove() we don't affect the original index values ( if i'm not mistaken ) So if we can append them to the end of the list and then remove the elements one by one, we can return the List from the index [n:2n]
+
+### Python code
+```python
+class Solution:
+    def buildArray(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+
+        for i in range (n):
+            nums[i] += n*(nums[nums[i]]%n)
+            # What this does is basically, it adds the value at nums[nums[i]] as the 10th place digit
+        
+        for i in range(n):
+            nums[i] //= n
+
+        return nums
+```
+
+### Output
+```
+Input
+nums = [0,2,1,5,3,4]
+Output
+[0,1,2,4,5,3]
+Expected
+[0,1,2,4,5,3]
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Merge Intervals
+
+[**Question**](https://leetcode.com/problems/merge-intervals/description/): 
+Given an array of  `intervals` where  `intervals[i] = [starti, endi]`, merge all overlapping intervals, and return  _an array of the non-overlapping intervals that cover all the intervals in the input_.
+
+**Example 1:**
+
+**Input:** intervals = [[1,3],[2,6],[8,10],[15,18]]
+**Output:** [[1,6],[8,10],[15,18]]
+**Explanation:** Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+
+**Example 2:**
+
+**Input:** intervals = [[1,4],[4,5]]
+**Output:** [[1,5]]
+**Explanation:** Intervals [1,4] and [4,5] are considered overlapping.
+
+[**Solution**](https://chatgpt.com/share/900ee52b-3a8a-4e84-97a9-ef1a52a04746) : 
+###  Approach
+A simple if condition to check if the `start[i] < end[i+1] < end[i]` and then combining the two by removing one and recorrecting the dn fo thre previous value.
+
+### Python Code 
+```python
+
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Merge Sorted array
+
+[**Question**](https://leetcode.com/problems/merge-sorted-array/): 
+You are given two integer arrays  `nums1`  and  `nums2`, sorted in  **non-decreasing order**, and two integers  `m`  and  `n`, representing the number of elements in  `nums1`  and  `nums2`  respectively.
+
+**Merge**  `nums1`  and  `nums2`  into a single array sorted in  **non-decreasing order**.
+
+The final sorted array should not be returned by the function, but instead be  _stored inside the array_ `nums1`. To accommodate this,  `nums1`  has a length of  `m + n`, where the first  `m`  elements denote the elements that should be merged, and the last  `n`  elements are set to  `0`  and should be ignored.  `nums2`  has a length of  `n`.
+
+**Example 1:**
+
+**Input:** nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+**Output:** [1,2,2,3,5,6]
+**Explanation:** The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+
+**Example 2:**
+
+**Input:** nums1 = [1], m = 1, nums2 = [], n = 0
+**Output:** [1]
+**Explanation:** The arrays we are merging are [1] and [].
+The result of the merge is [1].
+
+[**Solution**]() : 
+
+
+###  Approach
+This needs to be done in place and nums1 is of m+n size.
+
+### Python Code 
+```python
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Count number of teams
+
+[**Question**](https://leetcode.com/problems/count-number-of-teams/description/?envType=daily-question&envId=2024-07-29): 
+here are  `n`  soldiers standing in a line. Each soldier is assigned a  **unique**  `rating`  value.
+
+You have to form a team of 3 soldiers amongst them under the following rules:
+
+-   Choose 3 soldiers with index (`i`,  `j`,  `k`) with rating (`rating[i]`,  `rating[j]`,  `rating[k]`).
+-   A team is valid if: (`rating[i] < rating[j] < rating[k]`) or (`rating[i] > rating[j] > rating[k]`) where (`0 <= i < j < k < n`).
+
+Return the number of teams you can form given the conditions. (soldiers can be part of multiple teams).
+
+**Example 1:**
+
+**Input:** rating = [2,5,3,4,1]
+**Output:** 3
+**Explanation:** We can form three teams given the conditio
+
+[**Solution**]() : 
+
+
+### :red_circle: Approach
+
+
+### Java Code 
+```java
+class Solution {
+    public int numTeams(int[] rating) {
+        int n = rating.length;
+        if (n < 3) return 0;
+
+        int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
+        for (int num : rating) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+        
+        int[] leftTree = new int[max - min + 2];
+        int[] rightTree = new int[max - min + 2];
+        
+        for (int num : rating) {
+            update(rightTree, num - min, 1);
+        }
+        
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            update(rightTree, rating[i] - min, -1);
+            
+            int lessLeft = query(leftTree, rating[i] - min - 1);
+            int greaterLeft = i - lessLeft;
+            
+            int lessRight = query(rightTree, rating[i] - min - 1);
+            int greaterRight = (n - i - 1) - lessRight;
+            
+            count += lessLeft * greaterRight + greaterLeft * lessRight;
+            
+            update(leftTree, rating[i] - min, 1);
+        }
+        
+        return count;
+    }
+
+    private void update(int[] tree, int index, int value) {
+        index++;
+        while (index < tree.length) {
+            tree[index] += value;
+            index += index & (-index);
+        }
+    }
+
+    private int query(int[] tree, int index) {
+        int sum = 0;
+        index++;
+        while (index > 0) {
+            sum += tree[index];
+            index -= index & (-index);
+        }
+        return sum;
+    }
+}
+```
+
+### Output
+```
+Input
+rating =
+[2,5,3,4,1]
+Output
+3
+Expected
+3
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## DNA Storage
+
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/DNASTORAGE): 
+For encoding an even-length binary string into a sequence of  `A`,  `T`,  `C`, and  `G`, we iterate from  **left to right**  and replace the characters as follows:
+
+-   `00`  is replaced with  `A`
+-   `01`  is replaced with  `T`
+-   `10`  is replaced with  `C`
+-   `11`  is replaced with  `G`
+
+Given a binary string  𝑆  of length  𝑁  (𝑁  is even), find the encoded sequence.
+
+### Input Format
+
+-   First line will contain  𝑇, number of test cases. Then the test cases follow.
+-   Each test case contains two lines of input.
+-   First line contains a single integer  𝑁, the length of the sequence.
+-   Second line contains binary string  𝑆  of length  𝑁.
+
+### Output Format
+
+For each test case, output in a single line the encoded sequence.
+
+**Note:**  Output is  **case-sensitive**.
+
+[**Solution**]() : 
+###  Approach
+The approach is to create a slice of `s[i:i+2]` to accepss the two characters together and then compare them to the respective binary values.
+
+### Python Code 
+```python
+t = int(input())
+
+while t > 0:
+    n = int(input())
+    s = input()
+    # Your code goes here
+    result = ""
+    for i in range(0,n,2):
+        if s[i:i+2]=='00' :
+            result+='A'
+            
+        elif s[i:i+2]=='01':
+            result+='T'
+            
+        elif  s[i:i+2]=='10' :
+            result+='C'
+            
+        elif  s[i:i+2]=='11' :
+            result+='G'
+            
+    print(result)
+    t -= 1
+```
+
+### Output
+```
+Sample Input : 
+4
+2
+00
+4
+0011
+6
+
+Sample Output : 
+A
+AG
+CCC
+CT
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Wordle
+
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/WORDLE): 
+Chef invented a modified wordle.
+
+There is a hidden word  𝑆  and a guess word  𝑇, both of length  5.
+
+Chef defines a string  𝑀  to determine the correctness of the guess word. For the  𝑖𝑡ℎ  index:
+
+-   If the guess at the  𝑖𝑡  index is correct, the  𝑖𝑡  character of  𝑀  is  G.
+-   If the guess at the  𝑖𝑡ℎ  index is wrong, the  𝑖𝑡  character of  𝑀  is  B.
+
+Given the hidden word  𝑆  and guess  𝑇, determine string  𝑀.
+
+### Input Format
+
+-   First line will contain  𝑇, number of test cases. Then the test cases follow.
+-   Each test case contains of two lines of input.
+-   First line contains the string  𝑆  - the hidden word.
+-   Second line contains the string  𝑇  - the guess word.
+
+### Output Format
+
+For each test case, print the value of string  𝑀.
+
+You may print each character of the string in uppercase or lowercase (for example, the strings  BgBgB,  BGBGB,  bgbGB  and  bgbgb  will all be treated as identical).
+
+[**Solution**]() : 
+
+
+###  Approach
+Simple approach of comparing string values directly
+
+### Python Code 
+```python
+# cook your dish here
+n = int(input())
+answer = ""
+
+while n != 0 :
+    word = str(input())
+    guess = str(input())
+    for i in range (5):
+        if word[i] == guess[i]:
+            answer += 'G'
+        else :
+            answer += 'B'
+    
+    print(answer)
+    answer = ''
+    n -= 1
+    
+
+```
+
+### Output
+```
+Input : 
+3
+ABCDE
+EDCBA
+ROUND
+RINGS
+START
+STUNT
+
+Output : 
+BBGBB
+GBBBB
+GGBBG
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Different Consecutive Characters
+
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/DIFFCONSEC): 
+Chef has a binary string  S  of length  N. Chef can perform the following operation on  S:
+
+-   Insert any character (0  or  1) at any position in  S.
+
+Find the minimum number of operations Chef needs to perform so that no two consecutive characters are same in  S.
+
+### Input Format
+
+-   The first line contains a single integer  T  — the number of test cases. Then the test cases follow.
+-   The first line of each test case contains an integer  N  — the length of the binary string  S.
+-   The second line of each test case contains a binary string  S  of length  NN containing  0s and  1s only.
+
+### Output Format
+
+For each test case, output on a new line the minimum number of operations Chef needs to perform so that no two consecutive characters are same in  S.
+
+
+[**Solution**]() : 
+###  Approach
+We simply check if the current digit is one and the next digit is also 1 then we increment the counter, same for 0
+
+### Python Code 
+```python
+# cook your dish here
+n = int(input())
+counter = 0
+
+while n != 0:
+    size = int(input())
+    value = str(input())
+    for digit in range(size-1):
+        if value[digit] == '1' and value[digit+1] == '1':
+            counter += 1
+        elif value[digit] == '0' and value[digit+1] == '0':
+            counter += 1 
+    print(counter)
+    counter = 0
+    n -= 1
+            
+
+```
+
+### Output
+Sample Input
+
+```
+3
+2
+11
+4
+0101
+5
+00100
+
+```
+
+Your Output
+
+```
+1
+0
+2
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Convert String to Title Case
+
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/TITLECASE): 
+
+Given a string  `S`  consisting of only lowercase and uppercase English letters and spaces, your task is to convert it into title case. In title case, the first letter of each word is capitalized while the rest are in lowercase, except for words that are entirely in uppercase (considered as acronyms), which should remain unchanged.
+
+**Note:**
+
+-   Words are defined as contiguous sequences of English letters separated by spaces.
+-   Acronyms are words that are entirely in uppercase and should remain unchanged.
+-   Assume the input does not contain leading, trailing, or multiple spaces between words.
+
+### Input Format
+
+-   The first line contains a single integer  `T`, the number of test cases.
+-   Each of the next  `T`  lines contains a string  `S`.
+
+### Output Format
+
+For each test case, print a single line containing the string  `S`  converted into title case.
+
+[**Solution**]() : 
+
+
+###  Approach
+After every whitespace we change the word we are currently working on and then we convert the first letter to upper case
+
+### Python Code 
+```python
+# cook your dish here
+def listToString(s : list)-> str :
+    dummystr = ""
+    
+    for i in range(len(s)):
+        dummystr += s[i]+" "
+    
+    return dummystr
+    
+n = int(input())
+
+while n != 0:
+    string = str(input())
+    wordlist = string.split(" ")
+    wordcount = len(wordlist)
+    newlist = []
+    for i in range(0,wordcount):
+        word = wordlist[i]
+        if word[0].isupper() == False:
+            new_word = word[0].upper()+  word[1:].lower()
+        else :
+            new_word = word
+        newlist.append(new_word)
+    print(listToString(newlist))
+    n -= 1
+    
+
+```
+
+### Improvements here
+1. We can reduce the code required for `listToString()` function by simply using `return ' '.join(s)`
+
+```python
+# cook your dish here
+def listToString(s : list)-> str :
+    return ' '.join(s)
+    
+n = int(input())
+
+while n != 0:
+    string = str(input())
+    wordlist = string.split(" ")
+    wordcount = len(wordlist)
+    newlist = []
+    for i in range(0,wordcount):
+        word = wordlist[i]
+        if word[0].isupper() == False:
+            new_word = word[0].upper()+  word[1:].lower()
+        else :
+            new_word = word
+        newlist.append(new_word)
+    print(listToString(newlist))
+    n -= 1
+    
+
+```
+
+### Output
+Sample Input
+
+```
+5
+hello world
+this is a CODECHEF problem
+WELCOME to the JUNGLE
+the quick BROWN fOx
+programming in PYTHON
+```
+
+Your Output
+
+```
+Hello World 
+This Is A CODECHEF Problem 
+WELCOME To The JUNGLE 
+The Quick BROWN Fox 
+Programming In PYTHON 
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## World Chess Championship
+
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/WCC): 
+### World Chess Championship
+
+The World Chess Championship  2022  is about to start.  14  Classical games will be played between Chef and Carlsen in the championship, where each game has one of three outcomes — it can be won by Carlsen, won by Chef, or it can be a draw. The winner of a game gets  2  points, and the loser gets  0  points. If it’s a draw, both players get  1  point each.
+
+The total prize pool of the championship is  100⋅X. At end of the  14  Classical games, if one player has  **strictly more**  points than the other, he is declared the champion and gets  60⋅X  as his prize money, and the loser gets  40⋅X.
+
+If the total points are  **tied**, then the defending champion Carlsen is declared the winner. However, if this happens, the winner gets only  55⋅X, and the loser gets  45⋅X.
+
+Given the results of all the  1414  games, output the prize money that Carlsen receives.
+
+The results are given as a string of length  1414  consisting of the characters  `C`,  `N`, and  `D`.
+
+-   `C`  denotes a victory by Carlsen.
+-   `N`  denotes a victory by Chef.
+-   `D`  denotes a draw.
+
+### Input Format
+
+-   The first line of input contains an integer  T, denoting the number of test cases. The description of  T  test cases follows.
+-   The first line of each test case contains one integer  X, denoting that the total prize pool is  100⋅X
+-   The second line contains the results of the match, as a string of length  1414  containing only the characters  `C`,  `N`, and  `D`.
+
+### Output Format
+
+For each test case, output in a single line the total prize money won by Carlsen.
+
+[**Solution**]() : 
+###  Approach
+1. There are 14 games, winner gets 2 points, loser 0 and draw gets both 1 point each.
+2. In this case we can't split the values in the string, so we can access them using the for-loop and simply check after each iteration.
+3. Then once we increment the counters we can check for which is greater and directly print the outcome there using if and elif's.
+
+### Python Code 
+```python
+# cook your dish here
+tourney = int(input())
+
+while tourney != 0:
+    prize = int(input())
+    outcome = str(input())
+    carlsen = 0 
+    chef = 0
+    for i in range(len(outcome)):
+        if outcome[i] == 'C' :
+            carlsen += 1 
+        elif outcome[i] == 'N' : 
+            chef += 1 
+        elif outcome[i] == 'D' : 
+            carlsen += 1 
+            chef += 1 
+        
+    if carlsen == chef : 
+        print(55*prize)
+    elif chef < carlsen : 
+        print(60*prize)
+    elif chef > carlsen :
+        print(40*prize)
+        
+    tourney -= 1
+```
+
+### Sample Input
+
+```
+4
+100
+CCCCCCCCCCCCCC
+400
+CDCDCDCDCDCDCD
+30
+DDCCNNDDDCCNND
+1
+NNDNNDDDNNDNDN
+```
+
+Your Output
+
+```
+6000
+24000
+1650
+40
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Add One
+
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/ADDONE): 
+
+You are given a large number  N. You need to print the number N+1.
+
+Note: The number is very large and it will not fit in standard integer data type. You have to take the input as String and then manipulate the digits to convert it to  N+1.
+
+### Input Format
+
+-   The first line of the input contains a single integer  T  - the number of test cases. The description of  T  test cases follows.
+    
+-   The first line of each test case contains a single integer  N.
+    
+
+### Output Format
+
+-   For each test case, print a single line containing one integer - the number  N+1.
+
+[**Solution**](https://chatgpt.com/share/cd6517ff-734e-4a83-a9cb-c0c765feb286) : 
+###  Approach
+In this approach, I basically fun a check if the last element is a 9 or not. If it isn't then we just convert the last digit to int , add 1, convert it back and return it. 
+Other wise the better option is to learn and use the carry forward approach, where we basically decrement from the last index and then keep adding a carry as long as the carry exists.
+
+### Python Code 
+```python
+# cook your dish here
+n = int(input())
+
+while n != 0:
+    number = str(input())
+    size = len(number)
+    if number[-1] != '9':
+        result = number[0:size-1]+str(int(number[-1])+1)
+    else :
+        # We have to look for a number that is basically not 9. Take the values from there to the last index and add them. Then attach it to the remaining basestring
+        carry = 1
+        counter = size -1
+        number = list(number)
+        while carry != 0 and counter >= 0:
+            value = int(number[counter])+carry 
+            number[counter] = str(value%10)
+            carry = value // 10
+            counter -= 1 
+            if carry != 0 :
+                result = str(carry)+''.join(number)
+            else : 
+                result = ''.join(number)
+            
+    print(result)
+    n -= 1
+    
+
+```
+
+### Chatgpt's approach
+```python
+n = int(input())
+
+while n != 0:
+    number = input().strip()
+    size = len(number)
+    carry = 1
+    result = []
+
+    for i in range(size - 1, -1, -1):
+        if carry == 0:
+            result.append(number[i])
+        else:
+            value = int(number[i]) + carry
+            result.append(str(value % 10))
+            carry = value // 10
+
+    if carry != 0:
+        result.append(str(ccarry))
+
+    print(''.join(result[::-1]))
+    n -= 1
+
+
+```
+
+### Output
+Sample Input
+
+```
+6
+99
+17
+1
+599
+10000000000000000000
+549843954323494990404
+```
+
+Your Output
+
+```
+100
+18
+2
+600
+10000000000000000001
+549843954323494990405
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
 
 ## Template for Solving
 
@@ -7526,6 +8337,7 @@ public class PlacePermutation {
 ## Table of Contents Python Functions
 1. [HashSet](#hashset)
 2. [Initializing a 2d array](#initializing-a-2d-array)
+3. [Checking the case of a character](#checking-the-case-of-a-character)
 
 
 ## HashSet
@@ -7579,6 +8391,23 @@ print(matrix)
 
 ```
 
+> [Return to Table of Contents](#table-of-contents-python-functions)
+
+<hr>
+
+## Checking the case of a character
+To check the vase of a character / string in python we can use the function `isspper()` and to convert a string or character to upper case we can use the function `upper()` similarly wfor lower case we can use the `islower()` and `lower()` functions respectively
+
+```python
+
+
+```
+
+
+> [Return to Table of Contents](#table-of-contents-python-functions)
+
+<hr>
+
 
 <hr>
 
@@ -7609,52 +8438,4 @@ During initialization you can use the `List.of( <int>, <string> )` depending on 
 
 >[Return to Table of Contents](#table-of-contents-list)
 
-When we normally use the `.length()` function for the length of strings and the `.length`  attribute for arrays and such, a List doesn't have that attribute, and hence to find the size of a list we need to use the `size()` function. 
-
-<hr>
-
-## Index of element
->[Return to Table of Contents](#table-of-contents-list)
-
-### Java Code
-```java
-Integer  currIdx = listofperm.indexOf(currentPermutation);
-```
-
-This will basically give you the index of the given element that has the exact same value as what is passed as the parameter
-
-<hr>
-
-
-## Template for Lists
->[Return to Table of Contents](#table-of-contents-list)
-
-### Java Code
-```java
-
-```
-
-### Output
-```
-
-```
-
-<hr>
-
-# Arrays
-## Table of Contents Arrays
-1. [Cloning an Array](#cloning)
-
-
-
-
-## Cloning
-
->[Return to Table of Contents](#table-of-contents-arrays)
-
-To simply clone an array into another one we can use the following code : 
-```java 
-int[] renum = nums.clone();
-```
-
-<hr>
+When we normally use the `.length()` function for the l
