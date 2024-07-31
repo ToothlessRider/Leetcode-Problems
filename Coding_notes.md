@@ -82,14 +82,18 @@
 63. [Determine whether Matrix Can Be Obtained By Rotation](#determine-whether-matrix-can-be-obtained-by-rotation)
 64. [Build Array from Permutation](#build-array-from-permutation)
 65. :red_circle:[Merge Intervals](#merge-intervals)
-66. [Merge Sorted Array](#merge-sorted-array)
+66. :rocket:[Merge Sorted Array](#merge-sorted-array)
 67. :rice_cracker:[DNA Storage](#dna-storage)
 68. :dango:[Wordle](#wordle)
 69. :oden:[Different Consecutive Characters](#different-consecutive-characters)
 70. :doughnut:[Convert String to Title Case](#convert-string-to-title-case)
 71. :lollipop:[Add One](#add-one)
 72. :cookie:[Chef and happy String](#chef-and-happy-string)
-73. [Template for solving](#template-for-solving)
+73. [Filling Bookcase shelves](#filling-bookcase-shelves)
+74. [Find the Duplicate Number](#find-the-duplicate-number)
+75. [Fibonacci number](#fibonacci-number)
+76. [Generating Fibonacci Sequence](#generating-fibonacci-sequence)
+77. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -6251,20 +6255,51 @@ The result of the merge is [1,2,2,3,5,6] with the underlined elements coming fro
 **Explanation:** The arrays we are merging are [1] and [].
 The result of the merge is [1].
 
-[**Solution**]() : 
+[**Solution**](https://chatgpt.com/share/e13bd936-4804-4e21-bdd3-ec37c0040d87) : 
 
 
 ###  Approach
 This needs to be done in place and nums1 is of m+n size.
+1. First we iterate through nums1 in reverse and nums2 in reverse
 
 ### Python Code 
 ```python
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        i,j,k = m-1,n-1,m+n-1
+
+        # We create two pointers to iterate through the two arrays and then we 
+        while i >= 0 and j >= 0:
+            if nums1[i] > nums2[j]:
+                nums1[k] = nums1[i]
+                i -= 1
+            else :
+                nums1[k] = nums2[j]
+                j -= 1
+            k -= 1
+
+        # For all the remaining elements in  nums2
+        while j >= 0:
+            nums1[k] = nums2[j]
+            j -= 1
+            k -= 1
 
 ```
 
 ### Output
 ```
-
+Input
+nums1 = [1,2,3,0,0,0]
+m = 3
+nums2 = [2,5,6]
+n = 3
+Output
+[1,2,2,3,5,6]
+Expected
+[1,2,2,3,5,6]
 
 ```
 
@@ -6986,16 +7021,98 @@ HAPPY
 
 <hr>
 
-## Template for Solving
+> Day : Wednesday, 31st July 2024
 
-[**Question**](): 
+## Filling Bookcase Shelves
+[**Question**](https://leetcode.com/problems/filling-bookcase-shelves/description/?envType=daily-question&envId=2024-07-31): 
 
+You are given an array books where books[i] = [thicknessi, heighti] indicates the thickness and height of the ith book. You are also given an integer shelfWidth.
+
+We want to place these books in order onto bookcase shelves that have a total width shelfWidth.
+
+We choose some of the books to place on this shelf such that the sum of their thickness is less than or equal to shelfWidth, then build another level of the shelf of the bookcase so that the total height of the bookcase has increased by the maximum height of the books we just put down. We repeat this process until there are no more books to place.
+
+Note that at each step of the above process, the order of the books we place is the same order as the given sequence of books.
+
+For example, if we have an ordered list of 5 books, we might place the first and second book onto the first shelf, the third book on the second shelf, and the fourth and fifth book on the last shelf.
+Return the minimum possible height that the total bookshelf can be after placing shelves in this manner.
+
+ 
 
 [**Solution**]() : 
 
 
 ###  Approach
+The point of comparision here is basically the width of the given books in the list. 
+then we sum up the heights of the tallest bookshelves in each shelf and return it
 
+This can be sorted by simple if and else if statements
+
+### java Code 
+```java
+class Solution {
+    public int minHeightShelves(int[][] books, int shelfWidth) {
+        int n = books.length;
+        int[] f = new int[n + 1];
+        for (int i = 1; i <= n; ++i) {
+            int w = books[i - 1][0], h = books[i - 1][1];
+            f[i] = f[i - 1] + h;
+            for (int j = i - 1; j > 0; --j) {
+                w += books[j - 1][0];
+                if (w > shelfWidth) {
+                    break;
+                }
+                h = Math.max(h, books[j - 1][1]);
+                f[i] = Math.min(f[i], f[j - 1] + h);
+            }
+        }
+        return f[n];
+    }
+}
+
+```
+
+### Output
+```
+Input
+books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]]
+shelfWidth = 4
+Output
+6
+Expected
+6
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Find the Duplicate Number
+
+[**Question**](https://leetcode.com/problems/find-the-duplicate-number/description/): 
+
+Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+
+There is only one repeated number in nums, return this repeated number.
+
+You must solve the problem without modifying the array nums and uses only constant extra space.
+
+Example 1:
+
+Input: nums = [1,3,4,2,2]
+Output: 2
+Example 2:
+
+Input: nums = [3,1,3,4,2]
+Output: 3
+
+[**Solution**]() : 
+
+
+###  Approach
+Since we can't modify the array we need to find a solution that works on it as it is right now.
 
 ### Python Code 
 ```python
@@ -7012,7 +7129,154 @@ HAPPY
 
 <hr>
 
+## Fibonacci Number
 
+[**Question**](https://leetcode.com/problems/fibonacci-number/description/): 
+
+The Fibonacci numbers, commonly denoted F(n) form a sequence, called the Fibonacci sequence, such that each number is the sum of the two preceding ones, starting from 0 and 1. That is,
+
+F(0) = 0, F(1) = 1
+F(n) = F(n - 1) + F(n - 2), for n > 1.
+Given n, calculate F(n).
+
+ 
+
+Example 1:
+
+Input: n = 2
+Output: 1
+Explanation: F(2) = F(1) + F(0) = 1 + 0 = 1.
+
+[**Solution**](https://chatgpt.com/share/7468844b-5fef-4f1e-94c4-fbe01c43d7c7) : 
+
+
+###  Approach
+1. Define the two base cases, at $F(0)$ and at $F(1)$ and then go ahead and define the remaining condition when n has to be passed. 
+
+### Using recursion without Dynamic programming
+```java
+class Solution {
+    public int fib(int n) {
+        // We gotta use recursion
+        if(n<=1){
+            return n;
+        }
+        return fib(n-1)+fib(n-2);
+
+    }
+}
+```
+
+### Solving usnig Dynamic Programming
+```java
+class Solution {
+    public int fib(int n) {
+        int[] dp = new int[n+1];
+        for(int i=0;i<n+1;i++){
+            dp[i] = -1;
+        }
+        // We gotta use recursion
+        return fibo(n,dp);
+
+    }
+    private int fibo(int n, int[] dp){
+        if(n<=1){
+            return n;
+        }
+        if(dp[n] != -1){
+            return dp[n];
+        }
+        dp[n] = fibo(n-1, dp)+fibo(n-2, dp);
+        return dp[n];
+    }
+}
+
+```
+
+### Output
+```
+Input
+n = 2
+Output
+1
+Expected
+1
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Generating Fibonacci Sequence
+
+[**Question**](https://leetcode.com/problems/generate-fibonacci-sequence/description/): 
+
+Write a generator function that returns a generator object which yields the fibonacci sequence.
+
+The fibonacci sequence is defined by the relation Xn = Xn-1 + Xn-2.
+
+The first few numbers of the series are 0, 1, 1, 2, 3, 5, 8, 13.
+
+> Example 1:
+
+Input: callCount = 5
+Output: [0,1,1,2,3]
+Explanation:
+const gen = fibGenerator();
+gen.next().value; // 0
+gen.next().value; // 1
+gen.next().value; // 1
+gen.next().value; // 2
+gen.next().value; // 3
+
+> Example 2:
+
+Input: callCount = 0
+Output: []
+Explanation: gen.next() is never called so nothing is outputted
+ 
+
+[**Solution**](https://chatgpt.com/share/7468844b-5fef-4f1e-94c4-fbe01c43d7c7) : 
+
+
+###  Approach
+The approach in java would've been different, but since this is javascript I didn't know how to code it out.
+
+### Javascript Code 
+```javascript
+/**
+ * @return {Generator<number>}
+ */
+var fibGenerator = function*() {
+    let [a,b] = [0,1];
+    while(true){
+        yield a;
+        [a,b] = [b, a+b];
+    }
+};
+
+/**
+ * const gen = fibGenerator();
+ * gen.next().value; // 0
+ * gen.next().value; // 1
+ */
+```
+
+### Output
+```
+Input
+callCount = 5
+Output
+[0,1,1,2,3]
+Expected
+[0,1,1,2,3]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
 
 ## Template for Solving
 
