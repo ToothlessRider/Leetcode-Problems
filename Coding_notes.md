@@ -88,7 +88,8 @@
 69. :oden:[Different Consecutive Characters](#different-consecutive-characters)
 70. :doughnut:[Convert String to Title Case](#convert-string-to-title-case)
 71. :lollipop:[Add One](#add-one)
-72. [Template for solving](#template-for-solving)
+72. :cookie:[Chef and happy String](#chef-and-happy-string)
+73. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -6909,6 +6910,109 @@ Your Output
 
 <hr>
 
+## Chef and happy String
+
+[**Question**](https://www.codechef.com/practice/course/strings/STRINGS/problems/HAPPYSTR): 
+
+Chef has a string  SS  with him. Chef is happy if the string contains a  **contiguous substring**  of length  **strictly greater**  than  22  in which all its characters are vowels.
+
+Determine whether Chef is happy or not.
+
+Note that, in english alphabet, vowels are  `a`,  `e`,  `i`,  `o`, and  `u`.
+
+### Input Format
+
+-   First line will contain  T. number of test cases. Then the test cases follow.
+-   Each test case contains of a single line of input, a string  S.
+
+### Output Format
+
+For each test case, if Chef is happy, print  `HAPPY`  else print  `SAD`.
+
+You may print each character of the string in uppercase or lowercase (for example, the strings  `hAppY`,  `Happy`,  `haPpY`, and  `HAPPY`  will all be treated as identical).
+
+[**Solution**]() : 
+###  Approach
+Starta  counter
+
+### Python Code 
+```python
+t = int(input())
+
+while t > 0:
+    s_list = str(input())
+    # Your code goes here
+    counter = 0
+    for i in range(0,len(s_list)):
+        if s_list[i] == 'a' or s_list[i] == 'e' or s_list[i] == 'i' or s_list[i] == 'o' or s_list[i] == 'u':
+            counter += 1 
+            if counter > 2 : 
+                break
+                
+        else :
+            counter = 0
+            
+            
+    if counter > 2 : 
+        print("HAPPY")
+    else : 
+        print("SAD")
+    
+    t -= 1
+```
+
+### Output
+Sample Input
+
+```
+4
+aeiou
+abxy
+aebcdefghij
+abcdeeafg
+
+```
+
+Your Output
+
+```
+HAPPY
+SAD
+SAD
+HAPPY
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Template for Solving
+
+[**Question**](): 
+
+
+[**Solution**]() : 
+
+
+###  Approach
+
+
+### Python Code 
+```python
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
 
 ## Template for Solving
 
@@ -8414,81 +8518,4 @@ numSet = ()
 <hr>
 
 ## Initializing a 2d array
-To initialize a 2d array of 0's you can simply use this one line for statment
-```python
-result = [[0]* m for _ in range(m)]
-```
-
-<hr>
-
-## Reversing an array in python
-Using the in built function `reverse()` we can simply reverse a row in python using theeh following code : 
-
-
-```python 
-matrix[row].reverse()
-```
-
-But for a colum we have to do the following : 
-
-```python
-from typing import List
-
-def reverse_column(matrix: List[List[int]], col: int) -> None:
-    n = len(matrix)
-    for i in range(n // 2):
-        matrix[i][col], matrix[n - 1 - i][col] = matrix[n - 1 - i][col], matrix[i][col]
-
-# Example usage:
-matrix = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
-
-reverse_column(matrix, 1)  # Reverse the second column
-print(matrix)
-
-
-```
-
-> [Return to Table of Contents](#table-of-contents-python-functions)
-
-<hr>
-
-## Checking the case of a character
-To check the vase of a character / string in python we can use the function `isspper()` and to convert a string or character to upper case we can use the function `upper()` similarly wfor lower case we can use the `islower()` and `lower()` functions respectively
-
-```python
-
-
-```
-
-
-> [Return to Table of Contents](#table-of-contents-python-functions)
-
-<hr>
-
-
-<hr>
-
-# Lists
-Lists are a very important structure in both Java and Python and hold a lot of importance since you can keep adding to them.
-
-## Table of Contents List
-1. [Initialization](#initialization)
-2. [Size of a List](#size-of-a-list)
-3. [Template](#template-for-lists)
-4. [Index of element](#index-of-element)
-
-### Initialization 
-
->[Return to Table of Contents](#table-of-contents-list)
-```java
-List<List<Integer>> listOfLists = new ArrayList<>();
-        listOfLists.add(List.of(1, 2, 3));
-        listOfLists.add(List.of(4, 5, 6));
-        listOfLists.add(List.of(7, 8, 9));
-
-```
-During initialization you can use the `List.of( <int>, <string> )` dep
+To initialize a 2d array of 0'
