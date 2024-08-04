@@ -90,10 +90,16 @@
 71. :lollipop:[Add One](#add-one)
 72. :cookie:[Chef and happy String](#chef-and-happy-string)
 73. [Filling Bookcase shelves](#filling-bookcase-shelves)
-74. [Find the Duplicate Number](#find-the-duplicate-number)
+74. :rocket::red_circle:[Find the Duplicate Number](#find-the-duplicate-number)
 75. [Fibonacci number](#fibonacci-number)
 76. [Generating Fibonacci Sequence](#generating-fibonacci-sequence)
-77. [Template for solving](#template-for-solving)
+77. [Number of Senior Citizens](#number-of-senior-citizens)
+78. [Minimum Swaps to Group All 1's together 2](#minimum-swaps-to-group-all-1s-together-2)
+79. :rocket:[Find Missing and Repeated Values](#find-missing-and-repeated-values)
+80. [Make Two Arrays Equal by Reversing Subarrays](#make-two-arrays-equal-by-reversing-subarrays)
+- [Major Differences between sort() and sorted()](#major-differences-between-sort-and-sorted)
+81. :ninja:[Count inversions](#count-inversions)
+82. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -114,18 +120,17 @@ As a reminder, a  _binary search tree_  is a tree that satisfies these constrain
 -   The right subtree of a node contains only nodes with keys  **greater than**  the node's key.
 -   Both the left and right subtrees must also be binary search trees.
 
+![alt text](image.png)
+
 [**Solution**](https://chatgpt.com/share/b88a1a8a-d231-4faa-bd9f-7ff105bd0595)
 
 The thought process here is  : 
 - I undertsood what to do. Each key has to be replace with the sum of the keys greater than it and then it has to be made into the new tree.
 
-### Algorithm : 
-1. Define a new array to store the output values of the greater keys.
-2. Create a for loop to iterate through the nodes
-3. Then create a second for loop to iterate through that same array with an additional *If* statement.
-4. The if condition within that will use the value of *i* to check for values greater than *i* [ Current key ]
-5. Sum them up and then outside the for loop you will put the value into the new array
-6. Additionally for null values you need to make sure they are transplanted into the new array as is so create the if condition for that first, to prevent checking of values.
+### Approach: 
+1. Setup a recursive inorder traversal function for the nodes. In this way it will recursively add on the cumulative sum of the nodes to the right of the given node
+2. then we can set that as the value of the current node and after that calculate the value of the left node.
+3. Finally to print the tree we can
 
 ### Things to figure out : 
 ```python 
@@ -141,7 +146,18 @@ class  Solution:
 ```
 
 1. How to accept the values passed in the function ?
-2. Since it is inorder form of traversing we need to work on that too and figure out how it is to be done
+
+[Answer](https://chatgpt.com/share/38a53336-afef-47c3-a307-2cdb4796d169). So the value root has been used as is in the function, the use of self for cumulative_sum is so that it is treated as an instance variable and for each instance of the class solution it has a unique value.
+If we didn't use that then we would have to pass it as a parameter to the `reverse_inorder_traversal()` function and update it constantly
+
+1. Since it is REVERSE inorder form of traversing we need to work on that too and figure out how it is to be done
+
+[Answer](#). By reverse inorder they mean traveling by accessing `Right-Root-Left` instead of the usual `Left-Root-Right`
+This is done here by recursively calling the fucntion and passing right node, then calculating the cumulative sum and then passing the left node to the function recursively.
+
+3. Why was the base case criteria 'if not node' ?
+
+[Answer](https://chatgpt.com/share/38a53336-afef-47c3-a307-2cdb4796d169)
 
 ### Python Code : 
 ```python
@@ -225,7 +241,9 @@ So since the depth of the two subtrees can't differ by more than one, that means
 
 ### Things to figure out
 1. How to balance it after the inorder traversal
-2. How to perform inorder traversal ( recursively
+2. How to perform inorder traversal ( recursively ) 
+
+[Answer]() The previous question showed how to revursively do inorder traversal ( in a reverse fashion )
 
 ### Python Code : 
 ```python
@@ -776,6 +794,54 @@ Expected
 <hr>
 
 > Day : Sunday, 30th June 2024
+
+## Minimum Deletions to Make String Balanced
+
+[**Question**](https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/?envType=daily-question&envId=2024-07-30): 
+
+You are given a string s consisting only of characters 'a' and 'b'​​​​.
+
+You can delete any number of characters in s to make s balanced. s is balanced if there is no pair of indices (i,j) such that i < j and s[i] = 'b' and s[j]= 'a'.
+
+Return the minimum number of deletions needed to make s balanced.
+
+ 
+
+Example 1:
+
+Input: s = "aababbab"
+Output: 2
+Explanation: You can either:
+Delete the characters at 0-indexed positions 2 and 6 ("aababbab" -> "aaabbb"), or
+Delete the characters at 0-indexed positions 3 and 6 ("aababbab" -> "aabbbb").
+Example 2:
+
+Input: s = "bbaaaaabb"
+Output: 2
+Explanation: The only solution is to delete the first two characters.
+
+[**Solution**]() : 
+
+
+###  Approach
+1.  So we basically need to make sure the first half ( or first part ) of the array only has a's and teh remaining has b's
+2.   If we use a stack to store the values and then we pop then while check if a different letter ( a or b ) occurs then we can basically write the index for which there are values in between 
+
+
+### Python Code 
+```python
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
 
 ## Remove Max Number of Edges to Keep Graph Fully Traversable
 
@@ -6201,14 +6267,14 @@ Given an array of  `intervals` where  `intervals[i] = [starti, endi]`, merge all
 
 **Example 1:**
 
-**Input:** intervals = [[1,3],[2,6],[8,10],[15,18]]
-**Output:** [[1,6],[8,10],[15,18]]
+**Input:** intervals = `[[1,3],[2,6],[8,10],[15,18]]`
+**Output:** `[[1,6],[8,10],[15,18]]`
 **Explanation:** Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
 
 **Example 2:**
 
-**Input:** intervals = [[1,4],[4,5]]
-**Output:** [[1,5]]
+**Input:** intervals = `[[1,4],[4,5]]`
+**Output:** `[[1,5]]`
 **Explanation:** Intervals [1,4] and [4,5] are considered overlapping.
 
 [**Solution**](https://chatgpt.com/share/900ee52b-3a8a-4e84-97a9-ef1a52a04746) : 
@@ -7116,11 +7182,34 @@ Since we can't modify the array we need to find a solution that works on it as i
 
 ### Python Code 
 ```python
+class Solution {
+        public int findDuplicate(int[] nums) {
+        int slow = 0;
+        int fast = 0;
+        do {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        } while (slow != fast);
 
+        slow = 0;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        
+        return slow;
+    }
+}
 ```
 
 ### Output
 ```
+Input
+nums = [1,3,4,2,2]
+Output
+2
+Expected
+2
 
 
 ```
@@ -7278,6 +7367,416 @@ Expected
 
 <hr>
 
+## Number of Senior Citizens
+
+[**Question**](https://leetcode.com/problems/number-of-senior-citizens/description/?envType=daily-question&envId=2024-08-01): 
+
+You are given a 0-indexed array of strings details. Each element of details provides information about a given passenger compressed into a string of length 15. The system is such that:
+
+The first ten characters consist of the phone number of passengers.
+The next character denotes the gender of the person.
+The following two characters are used to indicate the age of the person.
+The last two characters determine the seat allotted to that person.
+Return the number of passengers who are strictly more than 60 years old.
+
+ 
+
+Example 1:
+
+Input: details = ["7868190130M7522","5303914400F9211","9273338290F4010"]
+Output: 2
+Explanation: The passengers at indices 0, 1, and 2 have ages 75, 92, and 40. Thus, there are 2 people who are over 60 years old.
+Example 2:
+
+Input: details = ["1313579440F2036","2921522980M5644"]
+Output: 0
+Explanation: None of the passengers are older than 60.
+
+[**Solution**]() : 
+
+
+###  Approach
+In this question we simply have to iterate through the list while accessing the indexes that need to be compared ( that show the age of the person ) and then increment a counter everytime they're about 60 ( Change the datatype to int )
+
+### Python Code 
+```python
+class Solution:
+    def countSeniors(self, details: List[str]) -> int:
+        n = len(details)
+        counter = 0
+
+        for deets in range(n):
+            value = details[deets]
+            if int(value[11:13]) > 60:
+                counter += 1
+            
+        return counter
+```
+
+### Chatgpt's One liner
+```python
+class Solution:
+    def countSeniors(self, details: List[str]) -> int:
+        # Converting this to a single line using the sum function
+        return sum(1 if int(s[11:13]) > 60 else 0 for s in details)
+
+```
+
+- Over here we basically make sure to use the sum function which returns the total sum of all the values where the given indices are > 60 while incrementing through all elements in details.
+
+### Output
+```
+Input
+details =["7868190130M7522","5303914400F9211","9273338290F4010"]
+Output
+2
+Expected
+2
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Friday, 2nd August 2024
+
+## Minimum Swaps to Group All 1's together 2
+
+[**Question**](https://leetcode.com/problems/minimum-swaps-to-group-all-1s-together-ii/description/?envType=daily-question&envId=2024-08-02): 
+
+
+[**Solution**]() : 
+
+
+###  Approach
+
+
+### My Amazing Python Code
+```python
+class Solution:
+    def minSwaps(self, nums: List[int]) -> int:
+        count = sum(1 if nums[i] == 1 else 0 for i in range(len(nums)))
+        if count == len(nums):
+            return 0
+        # Define the base case when it will return, ie, when count == len(nums)
+        
+        left = c_sum = max_sum = 0
+        right = count - 1
+        for i in range(left, right+1):
+            c_sum += nums[i]
+        # Here I wasn't including the last index 'right' since it was exclusive.
+        #Because of the missing +1 it wasn't submitting
+        
+        while left < len(nums):
+            c_sum -= nums[left]
+            left += 1
+            right += 1
+            if(right >= len(nums)):
+                right %= len(nums)
+            c_sum += nums[right]
+            max_sum = max(max_sum, c_sum)
+        
+        if max_sum == count :
+            return 0
+        else : 
+            return count - max_sum
+
+        # Haven't handled edge case where the values will lie in a cirular fashion
+        
+
+
+
+            
+
+```
+
+
+### Output
+```
+Input
+nums = [0,1,0,1,1,0,0]
+Output
+1
+Expected
+1
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## Find Missing and Repeated Values
+
+[**Question**](https://leetcode.com/problems/find-missing-and-repeated-values/description/): 
+
+You are given a 0-indexed 2D integer matrix grid of size n * n with values in the range [1, n2]. Each integer appears exactly once except a which appears twice and b which is missing. The task is to find the repeating and missing numbers a and b.
+
+Return a 0-indexed integer array ans of size 2 where ans[0] equals to a and ans[1] equals to b.
+
+ 
+
+Example 1:
+
+Input: grid = [[1,3],[2,2]]
+Output: [2,4]
+Explanation: Number 2 is repeated and number 4 is missing so the answer is [2,4].
+Example 2:
+
+Input: grid = [[9,1,7],[8,9,2],[3,4,6]]
+Output: [9,5]
+Explanation: Number 9 is repeated and number 5 is missing so the answer is [9,5].
+
+[**Solution**]() : 
+
+
+###  Approach
+Since we're given the matrix and it is mentioned that each element is mentioned once beside the missing and repeated one, we follow these steps : 
+1. First we initialize a hashset that will store all the values once visited.
+2. If it visits a value again then it has been repeated.
+3. After that we create another for loop that will iterate through the hashset and will give us the remaining value ( since we know the upper limit of the values that should be in it)
+
+### Python Code 
+```python
+class Solution:
+    def findMissingAndRepeatedValues(self, grid: List[List[int]]) -> List[int]:
+        rows = len(grid)
+        cols = len(grid[0])
+        ans = [0,0]
+        total = rows*cols
+        h_set = set()
+        # Set declaration method
+
+        for row in range(rows):
+            for col in range(cols):
+                if grid[row][col] not in h_set:
+                    h_set.add(grid[row][col])
+                else : 
+                    ans[0] = grid[row][col]
+        
+        for i in range(1,total+1):
+            if i not in h_set :
+                ans[1] = i
+        
+        return ans
+                
+        
+```
+
+[**Hard Version**](https://www.interviewbit.com/problems/repeat-and-missing-number-array/)
+
+### Python code for O(1) and no additional space complexity
+```python
+
+
+```
+
+### Output
+```
+Input
+grid = [[1,3],[2,2]]
+Output
+[2,4]
+Expected
+[2,4]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+>Day : Saturday, 3rd August 2024
+
+##  Make Two Arrays Equal by Reversing Subarrays
+
+[**Question**](https://leetcode.com/problems/make-two-arrays-equal-by-reversing-subarrays/description/?envType=daily-question&envId=2024-08-03): 
+
+You are given two integer arrays of equal length target and arr. In one step, you can select any non-empty subarray of arr and reverse it. You are allowed to make any number of steps.
+
+Return true if you can make arr equal to target or false otherwise.
+
+ 
+
+Example 1:
+
+Input: target = [1,2,3,4], arr = [2,4,1,3]
+Output: true
+Explanation: You can follow the next steps to convert arr to target:
+1- Reverse subarray [2,4,1], arr becomes [1,4,2,3]
+2- Reverse subarray [4,2], arr becomes [1,2,4,3]
+3- Reverse subarray [4,3], arr becomes [1,2,3,4]
+There are multiple ways to convert arr to target, this is not the only way to do so.
+Example 2:
+
+Input: target = [7], arr = [7]
+Output: true
+Explanation: arr is equal to target without any reverses.
+
+[**Solution**]() : 
+
+
+###  Approach
+
+
+### Python Code 
+```python
+class Solution:
+    def canBeEqual(self, target: List[int], arr: List[int]) -> bool:
+        h_set = set(arr)
+        target.sort()
+        arr.sort()
+        if target == arr:
+            return True
+        
+        for val in target :
+            if val in h_set :
+                h_set.remove(val)
+            else : 
+                return False
+        return True
+
+        
+```
+
+### Output
+```
+Input
+target = [3,7,9]
+arr = [3,7,11]
+Stdout
+[3, 7, 9]
+[3, 7, 11]
+Output
+false
+Expected
+false
+
+```
+
+## Major Differences between sort() and sorted()
+
+The `sorted()` function and the `sort()` method in Python both serve to order elements, but they have some key differences:
+
+### `sorted()`
+
+- **Type**: Built-in function.
+- **Return Value**: Returns a new list containing all elements from the iterable in sorted order.
+- **Usage**: Can be used on any iterable (e.g., list, tuple, string, etc.).
+- **Original Data**: Does not modify the original iterable; it creates a new sorted list.
+- **Syntax**: `sorted(iterable, key=None, reverse=False)`
+
+### `sort()`
+
+- **Type**: List method.
+- **Return Value**: Returns `None` as it sorts the list in place.
+- **Usage**: Can only be used on lists.
+- **Original Data**: Modifies the original list by sorting it.
+- **Syntax**: `list.sort(key=None, reverse=False)`
+
+### Example Usage
+
+#### `sorted()`
+
+```python
+numbers = [4, 2, 3, 1]
+sorted_numbers = sorted(numbers)  # [1, 2, 3, 4]
+print(numbers)  # Original list remains unchanged: [4, 2, 3, 1]
+print(sorted_numbers)  # New sorted list: [1, 2, 3, 4]
+```
+
+#### `sort()`
+
+```python
+numbers = [4, 2, 3, 1]
+numbers.sort()  # Sorts the list in place
+print(numbers)  # Original list is modified: [1, 2, 3, 4]
+```
+
+### Summary
+
+- Use `sorted()` when you need a new sorted list and want to keep the original list unchanged.
+- Use `sort()` when you want to sort a list in place without creating a new list.
+
+<br>
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Count inversions
+[**Question**](https://www.naukri.com/code360/problems/count-inversions_615?leftPanelTabValue=PROBLEM): 
+
+Problem statement
+For a given integer array/list 'ARR' of size 'N' containing all distinct values, find the total number of 'Inversions' that may exist.
+
+An inversion is defined for a pair of integers in the array/list when the following two conditions are met.
+
+A pair ('ARR[i]', 'ARR[j]') is said to be an inversion when:
+
+1. 'ARR[i] > 'ARR[j]' 
+2. 'i' < 'j'
+
+Where 'i' and 'j' denote the indices ranging from [0, 'N').
+Detailed explanation ( Input/output format, Notes, Images )
+Constraints :
+1 <= N <= 10^5 
+1 <= ARR[i] <= 10^9
+
+Where 'ARR[i]' denotes the array element at 'ith' index.
+
+Time Limit: 1 sec
+Sample Input 1 :
+3
+3 2 1
+Sample Output 1 :
+3
+Explanation of Sample Output 1:
+We have a total of 3 pairs which satisfy the condition of inversion. (3, 2), (2, 1) and (3, 1).
+
+[**Solution**]() : 
+
+
+### Brute Force Approach
+Using a $O(n^2)$ comlpexity nested for loop to solve the problem
+
+### Java Code 
+```java
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static long getInversions(long arr[], int n) {
+        // We need to check for all the values after a certain index, that has values smaller than it
+        int counter = 0;
+        for(int i =0; i<arr.length;i++){
+            for(int j = i+1;j < arr.length;j++){
+                if(arr[j] <arr[i]){
+                    counter+= 1;
+                }
+            }
+        }
+        return counter;
+    }
+}
+```
+
+### Using a modified Merge Sort
+
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+
 ## Template for Solving
 
 [**Question**](): 
@@ -7310,6 +7809,9 @@ Expected
 1. Infosys Questions
 	- [Monster Killing](#monster-killing)
 	- [Unique Birthday Gift](#unique-birthday-gift)
+	- [Easy Sample](#easy-sample)
+	- [Medium sample](#medium-sample)
+	- [Hard Sample](#hard-sample)
 
 - [Template for interview questions](#template-for-interview-questions)
 
@@ -7552,6 +8054,187 @@ Use the scanner to accept the maximum possible values for the array and then the
 
 ### Java Code 
 ```java
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-interview)
+
+<hr>
+
+## Easy sample
+
+**Question**: 
+
+You are given a binary string S.
+You can perform the following operations on S any number of
+times (possibly zero):
+• Select an index i such that S[i] is equal to
+1 and S[i+1] is equal to 0 for 0 ≤ i < len(S) -1.
+• Remove exactly one of the character from S.
+Find the smallest string S that you can get after performing
+operations on S.
+Note:
+• If there are multiple smallest strings possible then return the
+string which is lexicographically smallest.
+Constraints
+• 1 <= len(s) <= 10^5
+• 1 <= A[i] <= 10^5
+ Sample Input 1
+0000111111
+ Sample output 1
+0000111111
+
+Sample Input 3
+110
+Sample output 3
+0
+
+[**Solution**]() : 
+So in the question based on if it satisfies the given condition, we can remove one of the characters, i.e. 0 or 1
+
+### Brute force Approach
+Generate a list from it by using split and then check for the first condition. If true then remove the value 1 if another 1 subceeds the element, or remove 0 if another 0 preceeds the 0
+
+### Better approach 
+Use a stack to maintain the values instead of creating a large list.
+1. Traverse  the string from left to right 
+2. if the top of the stack is 1 and current character is 0, decide which character to remove : 
+- If there is a 1 below the 'top' then remove 1
+- Otherwise remove 0
+3. If no 10 pattern is found then push the current value into the
+
+### Two Pointer Approach 
+
+
+
+### java Code 
+```java
+String[] values = {"10101", "00001111", "1100","01010", "100100"};
+        for( String value : values){
+            System.out.println("Input: " + value);
+            subsequence("",value)
+            System.out.println("Answer" + value);
+        }
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-interview)
+
+<hr>
+
+## Medium sample
+
+**Question**: 
+
+You are given a tree consisting of N nodes.
+You are also given two arrays A and P of size N each, where the value A[i] denotes the value written on the i th node and the value P[i] denotes that there is an edge between the node i and P[i].
+We say that an edge is considered good, if after deleting this edge (this will result in formation of 2 trees), the values in each of the nodes of the trees are distinct.
+Find the total number of good edges present in tree.
+
+Input Format
+1. The first line contains an integer, N, denoting the number of
+elements in A.
+2. Each line i of the N subsequent lines (where 0 ≤ i < N)
+contains an integer describing A[i].
+3. Each line i of the N subsequent lines (where 0 ≤ i < N)
+contains an integer describing P[i].
+Constraints
+• 1 <= N <= 10^5
+• 1 <= A[i] <= 10^5
+• 1 <= P[i] <= 10^5
+Sample Input-1:
+2	
+1	
+1	
+0	
+1
+Sample output-1:
+1
+Explanation-1:
+Given N = 2, A = [1, 1], P = [0, 1] The only
+edge between the node 1 - 2 is good. Hence,
+the answer is equal to 1.
+
+[**Solution**]() : 
+
+
+###  Approach
+
+
+### Python Code 
+```python
+
+```
+
+### Output
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-interview)
+
+<hr>
+
+## Hard Sample
+
+**Question**: 
+
+You are given 2 arrays A and B, each of size N.
+You are now standing at index N and want to move to index 1 by performing the following operation one or more times until you reach index 1:
+- Let's say that the element you are currently standing on is i.
+- Choose index j such that 1 ≤ j < i.
+
+For each element between i and j, the cost of passing through it will be B[j] and the cost of standing at index j will be A[j]. Find the minimum cost to move from index N to index 1. Since, the answer can be very large return it modulo 10^9
++7.
+Input Format
+1. The first line contains an integer, N, denoting the number of
+elements in A and B.
+2. Each line i of the N subsequent lines (where 1 ≤ i ≤ N)
+contains an integer describing A[i].
+3. Each line i of the N subsequent lines (where 1 ≤ i ≤ N)
+contains an integer describing B[i].
+Constraints
+- 2 <= N <= 10^5
+- 1 <= A[i] <= 10^9
+- 1 <= B[i] <= 10^9
+
+Sample Input-1:
+5
+5
+5
+1
+4
+2
+5
+4
+1
+5
+1
+
+Sample output-1:
+13
+
+[**Solution**]() : 
+
+
+###  Approach
+
+
+### Python Code 
+```python
 
 ```
 
