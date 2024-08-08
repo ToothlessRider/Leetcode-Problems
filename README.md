@@ -6,8 +6,8 @@ There are also more notes 📝 on functions used in Java ☕ and Python 🐍 tha
 <hr>
 
 ## References
-[Strivers SDE Sheet coding interview problems](https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/)
-[Striver's A2Z course](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2)
+- [Strivers SDE Sheet coding interview problems](https://takeuforward.org/interviews/strivers-sde-sheet-top-coding-interview-problems/)
+- [Striver's A2Z course](https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2)
 
 <hr>
 
