@@ -97,9 +97,14 @@
 78. [Minimum Swaps to Group All 1's together 2](#minimum-swaps-to-group-all-1s-together-2)
 79. :rocket:[Find Missing and Repeated Values](#find-missing-and-repeated-values)
 80. [Make Two Arrays Equal by Reversing Subarrays](#make-two-arrays-equal-by-reversing-subarrays)
-- [Major Differences between sort() and sorted()](#major-differences-between-sort-and-sorted)
-81. :ninja:[Count inversions](#count-inversions)
-82. [Template for solving](#template-for-solving)
+    - [Major Differences between sort() and sorted()](#major-differences-between-sort-and-sorted)
+81. :ninja::red_circle:[Count inversions](#count-inversions)
+82. [Kth Distinct String in an Array](#kth-distinct-string-in-an-array)
+83. [Minimum Number of Pushes to Type Word 2](#minimum-number-of-pushes-to-type-word-2)
+84. [Integer to English Words](#integer-to-english-words)
+85. [Spiral Matrix 3](#spiral-matrix-3)
+86. [Majority Element](#majority-element)
+87. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -5670,11 +5675,7 @@ Expected
 
 [**Question**](https://leetcode.com/problems/maximum-subarray/description/): 
 
-Given an integer array  `nums`, find the
-
-subarray
-
-with the largest sum, and return  _its sum_.
+Given an integer array  `nums`, find the subarray with the largest sum, and return  _its sum_.
 
 **Example 1:**
 
@@ -7719,7 +7720,7 @@ A pair ('ARR[i]', 'ARR[j]') is said to be an inversion when:
 1. 'ARR[i] > 'ARR[j]' 
 2. 'i' < 'j'
 
-Where 'i' and 'j' denote the indices ranging from [0, 'N').
+Where 'i' and 'j' denote the indices ranging from [0, 'N'].
 Detailed explanation ( Input/output format, Notes, Images )
 Constraints :
 1 <= N <= 10^5 
@@ -7763,6 +7764,12 @@ public class Solution {
 ```
 
 ### Using a modified Merge Sort
+So basically while implementing merge sort( which is recursive in nature) at one of teh conditions we will return a counter that has to be incremented if the condition is met. This will help in counting the inversions with a modified merge sort
+
+```python
+
+
+```
 
 
 ### Output
@@ -7775,6 +7782,855 @@ public class Solution {
 
 <hr>
 
+> Day : Sunday, 4th August 2024
+
+## Range Sum of Sorted Subarray Sums
+
+[**Question**](https://leetcode.com/problems/range-sum-of-sorted-subarray-sums/description/?envType=daily-question&envId=2024-08-04): 
+
+You are given the array nums consisting of n positive integers. You computed the sum of all non-empty continuous subarrays from the array and then sorted them in non-decreasing order, creating a new array of n * (n + 1) / 2 numbers.
+
+Return the sum of the numbers from index left to index right (indexed from 1), inclusive, in the new array. Since the answer can be a huge number return it modulo 109 + 7.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,4], n = 4, left = 1, right = 5
+Output: 13 
+Explanation: All subarray sums are 1, 3, 6, 10, 2, 5, 9, 3, 7, 4. After sorting them in non-decreasing order we have the new array [1, 2, 3, 3, 4, 5, 6, 7, 9, 10]. The sum of the numbers from index le = 1 to ri = 5 is 1 + 2 + 3 + 3 + 4 = 13. 
+Example 2:
+
+Input: nums = [1,2,3,4], n = 4, left = 3, right = 4
+Output: 6
+Explanation: The given array is the same as example 1. We have the new array [1, 2, 3, 3, 4, 5, 6, 7, 9, 10]. The sum of the numbers from index le = 3 to ri = 4 is 3 + 3 = 6.
+
+[**Solution**](https://chatgpt.com/share/fea643e4-e08f-49d1-a5c3-e7911c7ae71c) : 
+
+
+### Brute force Approach
+In this i've basically used two pointers, but the overall time complexity, with the sorting comes to $O(n^2logn)$ .
+
+### Min heap
+
+[Min-Heap chatgpt details](https://chatgpt.com/share/fea643e4-e08f-49d1-a5c3-e7911c7ae71c)
+
+A heap is a specialized tree-based data structure that satisfies the heap property. Heaps are useful for efficiently implementing priority queues.
+
+Min-Heap
+A min-heap is a binary tree where the parent node is always less than or equal to its children. This property ensures that the smallest element is always at the root of the tree. The primary operations on a min-heap are:
+
+Insert: Add a new element to the heap, maintaining the heap property.
+Extract Min: Remove and return the smallest element (the root), then reheapify to maintain the heap property.
+Peek Min: Return the smallest element without removing it.
+
+### two-Pointer Brute force approach
+```python
+class Solution:
+    def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
+        # Using two pointer method and storing all the sums in a sum array, then sorting it
+        i = 0
+        sum_arr = []
+
+        for i in range(len(nums)):
+            c_sum = 0
+            for j in range(i, len(nums)):
+                c_sum += nums[j]
+                sum_arr.append(c_sum)
+
+        sum_arr.sort()
+        result = 0
+        
+        return sum(sum_arr[left-1:right]) % 1000000007
+
+```
+
+### Min Heap Approach
+```python
+from typing import List
+import heapq
+
+class Solution:
+    def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
+        MOD = 10**9 + 7
+        heap = []
+        
+        # Generate all subarray sums using a min-heap
+        for i in range(n):
+            current_sum = 0
+            for j in range(i, n):
+                current_sum += nums[j]
+                heapq.heappush(heap, current_sum)
+        
+        # Extract the smallest sums in the specified range
+        result = 0
+        for k in range(1, right + 1):
+            smallest_sum = heapq.heappop(heap)
+            if k >= left:
+                result = (result + smallest_sum) % MOD
+        
+        return result
+
+
+```
+
+### Output
+```
+Input
+nums = [1,2,3,4]
+n = 4
+left = 1
+right = 5
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Monday, 5th August 2024
+
+
+## Kth Distinct String in an Array
+
+[**Question**](https://leetcode.com/problems/kth-distinct-string-in-an-array/description/?envType=daily-question&envId=2024-08-05): 
+
+A distinct string is a string that is present only once in an array.
+
+Given an array of strings arr, and an integer k, return the kth distinct string present in arr. If there are fewer than k distinct strings, return an empty string "".
+
+Note that the strings are considered in the order in which they appear in the array.
+
+ 
+
+Example 1:
+
+Input: arr = ["d","b","c","b","c","a"], k = 2
+Output: "a"
+Explanation:
+The only distinct strings in arr are "d" and "a".
+"d" appears 1st, so it is the 1st distinct string.
+"a" appears 2nd, so it is the 2nd distinct string.
+Since k == 2, "a" is returned. 
+Example 2:
+
+Input: arr = ["aaa","aa","a"], k = 1
+Output: "aaa"
+Explanation:
+All strings in arr are distinct, so the 1st string "aaa" is returned.
+
+
+[**Solution**](https://chatgpt.com/share/8a3a5591-863c-4603-b9b2-2428590a7b49) : 
+
+
+### :red_circle: Approach
+Instead of keeping only a single HashSet we have to also maintain a list along with the count of how many times the element has been repeated.
+
+### Chatgpt's Code 
+```python
+from typing import List
+
+class Solution:
+    def kthDistinct(self, arr: List[str], k: int) -> str:
+        str_set = set()
+        str_list = []
+        str_count = {}
+
+        for i in range(len(arr)):
+            if arr[i] in str_count:
+                str_count[arr[i]] += 1
+                if arr[i] in str_set:
+                    str_set.remove(arr[i])
+                    str_list.remove(arr[i])
+            else:
+                str_count[arr[i]] = 1
+                str_set.add(arr[i])
+                str_list.append(arr[i])
+        
+        if k <= len(str_list):
+            return str_list[k-1]
+        else:
+            return ""
+
+```
+
+### Leetcode python few liner
+```python
+class Solution:
+    def kthDistinct(self, arr: List[str], k: int) -> str:
+        counter = Counter(arr)
+        for v in arr:
+            if counter[v] == 1:
+                k -= 1
+                if k == 0:
+                    return v
+        return ''
+
+```
+
+### Output
+```
+Input
+arr = ["d","b","c","b","c","a"]
+k = 2
+Output
+"a"
+Expected
+"a"
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Tuesday , 6th August 2024
+
+## Minimum Number of Pushes to Type Word 2
+
+[**Question**](https://leetcode.com/problems/minimum-number-of-pushes-to-type-word-ii/description/?envType=daily-question&envId=2024-08-06): 
+
+You are given a string word containing lowercase English letters.
+
+Telephone keypads have keys mapped with distinct collections of lowercase English letters, which can be used to form words by pushing them. For example, the key 2 is mapped with ["a","b","c"], we need to push the key one time to type "a", two times to type "b", and three times to type "c" .
+
+It is allowed to remap the keys numbered 2 to 9 to distinct collections of letters. The keys can be remapped to any amount of letters, but each letter must be mapped to exactly one key. You need to find the minimum number of times the keys will be pushed to type the string word.
+
+Return the minimum number of pushes needed to type word after remapping the keys.
+
+An example mapping of letters to keys on a telephone keypad is given below. Note that 1, *, #, and 0 do not map to any letters.
+
+
+ 
+
+Example 1:
+
+
+Input: word = "abcde"
+Output: 5
+Explanation: The remapped keypad given in the image provides the minimum cost.
+"a" -> one push on key 2
+"b" -> one push on key 3
+"c" -> one push on key 4
+"d" -> one push on key 5
+"e" -> one push on key 6
+Total cost is 1 + 1 + 1 + 1 + 1 = 5.
+It can be shown that no other mapping can provide a lower cost.
+Example 2:
+
+
+Input: word = "xyzxyzxyzxyz"
+Output: 12
+Explanation: The remapped keypad given in the image provides the minimum cost.
+"x" -> one push on key 2
+"y" -> one push on key 3
+"z" -> one push on key 4
+Total cost is 1 * 4 + 1 * 4 + 1 * 4 = 12
+It can be shown that no other mapping can provide a lower cost.
+Note that the key 9 is not mapped to any letter: it is not necessary to map letters to every key, but to map all the letters.
+Example 3:
+
+
+Input: word = "aabbccddeeffgghhiiiiii"
+Output: 24
+Explanation: The remapped keypad given in the image provides the minimum cost.
+"a" -> one push on key 2
+"b" -> one push on key 3
+"c" -> one push on key 4
+"d" -> one push on key 5
+"e" -> one push on key 6
+"f" -> one push on key 7
+"g" -> one push on key 8
+"h" -> two pushes on key 9
+"i" -> one push on key 9
+Total cost is 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 + 1 * 2 + 2 * 2 + 6 * 1 = 24.
+It can be shown that no other mapping can provide a lower cost.
+
+[**Solution**](https://chatgpt.com/share/8a3a5591-863c-4603-b9b2-2428590a7b49) : 
+
+
+###  Approach
+In this approach, if there is word that has a size of less than 8 then we can map each unique letter to each number. There are a few things to take care of in this 
+1. Check if the length of numbers is greater than 8
+2. If yes then check the count of individual numbers and then give priority to those that appear more frequently.
+
+### Python Code 
+```python
+class Solution:
+    def minimumPushes(self, word: str) -> int:
+        letter_count = {}
+
+        # First condition cleared
+        if len(word) < 9:
+            return len(word)
+
+        for letter in word:
+            if letter not in letter_count :
+                letter_count[letter] = 1
+            else :
+                letter_count[letter] += 1
+        num_letters = len(letter_count)
+        print(num_letters)
+        # Code here that sorts the letter_count dictionary in descending order
+        sorted_dict = sorted(letter_count.items(), key = lambda item:item[1], reverse = True)
+        sorted_values = [item[1] for item in sorted_dict]
+        if num_letters <= 8 : 
+            return sum(sorted_values[:])
+        result = 0
+        if num_letters <= 16:
+            result = sum(sorted_values[:8])+2*sum(sorted_values[8:])
+        elif num_letters <= 24:
+            result =  sum(sorted_values[:8]+2*sorted_values[8:16]+3*sorted_values[16:])
+        elif num_letters <= 26:
+             result =  sum(sorted_values[:8]+2*sorted_values[8:16]+3*sorted_values[16:24] +4*sorted_values[24:])
+
+        return result
+
+
+```
+
+### Of course Leetcode has a python one liner
+```python
+class Solution:
+    def minimumPushes(self, word: str) -> int:
+        return sum(f*(i//8+1) for i, f in enumerate(sorted(Counter(word).values(), reverse=True)))
+        
+
+```
+
+### Output
+```
+Input
+word = "xyzxyzxyzxyz"
+Stdout
+3
+Output
+12
+Expected
+12
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Wednesday, 7th July 2024
+
+
+
+## Integer to English Words
+
+[**Question**](https://leetcode.com/problems/integer-to-english-words/description/?envType=daily-question&envId=2024-08-07): 
+
+Convert a non-negative integer num to its English words representation.
+
+ 
+
+Example 1:
+
+Input: num = 123
+Output: "One Hundred Twenty Three"
+
+Example 2:
+
+Input: num = 12345
+Output: "Twelve Thousand Three Hundred Forty Five"
+
+Example 3:
+
+Input: num = 1234567
+Output: "One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
+
+[**Solution**]() : 
+
+
+###  Approach
+
+
+### Python Code 
+```python
+
+```
+
+### Leetcode solutiuon 
+```python
+
+class Solution:
+    def numberToWords(self, num: int) -> str:
+        if num == 0:
+            return "Zero"
+        
+        bigString = ["Thousand", "Million", "Billion"]
+        result = self.numberToWordsHelper(num % 1000)
+        num //= 1000
+        
+        for i in range(len(bigString)):
+            if num > 0 and num % 1000 > 0:
+                result = self.numberToWordsHelper(num % 1000) + bigString[i] + " " + result
+            num //= 1000
+        
+        return result.strip()
+
+    def numberToWordsHelper(self, num: int) -> str:
+        digitString = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"]
+        teenString = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
+        tenString = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
+        
+        result = ""
+        if num > 99:
+            result += digitString[num // 100] + " Hundred "
+        
+        num %= 100
+        if num < 20 and num > 9:
+            result += teenString[num - 10] + " "
+        else:
+            if num >= 20:
+                result += tenString[num // 10] + " "
+            num %= 10
+            if num > 0:
+                result += digitString[num] + " "
+        
+        return result
+```
+
+
+### Output
+```
+Input
+num = 1234567
+Output
+"One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
+Expected
+"One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven"
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Friday, 8th July 2024
+
+
+## Spiral Matrix 3
+
+[**Question**](https://leetcode.com/problems/spiral-matrix-iii/description/?envType=daily-question&envId=2024-08-08): 
+
+ou start at the cell (rStart, cStart) of an rows x cols grid facing east. The northwest corner is at the first row and column in the grid, and the southeast corner is at the last row and column.
+
+You will walk in a clockwise spiral shape to visit every position in this grid. Whenever you move outside the grid's boundary, we continue our walk outside the grid (but may return to the grid boundary later.). Eventually, we reach all rows * cols spaces of the grid.
+
+Return an array of coordinates representing the positions of the grid in the order you visited them.
+
+ 
+
+Example 1:
+
+
+Input: rows = 1, cols = 4, rStart = 0, cStart = 0
+Output: [[0,0],[0,1],[0,2],[0,3]]
+Example 2:
+
+
+Input: rows = 5, cols = 6, rStart = 1, cStart = 4
+Output: [[1,4],[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5],[3,5],[3,4],[3,3],[3,2],[2,2],[1,2],[0,2],[4,5],[4,4],[4,3],[4,2],[4,1],[3,1],[2,1],[1,1],[0,1],[4,0],[3,0],[2,0],[1,0],[0,0]]
+ 
+
+Constraints:
+
+1 <= rows, cols <= 100
+0 <= rStart < rows
+0 <= cStart < cols
+
+[**Solution**](https://chatgpt.com/share/5dc4ef83-2f4b-4fed-95b9-62b97b93cbe7) : 
+
+
+###  Approach
+The idea is to figure out which indices it is going to from the initial starting index and then formulate an equation that will be correct to shift the elements. 
+It should take `N` Operations where `N` is the number of elements in the matrix
+
+1. From `1,4` it does to `1,5` which is the finaly element in the row, so it then heads down
+2. For the first spiral we need to finish all the elements surrounding the initial element.
+3. Values crossed in the first iteration are : `[1,5],[2,5],[2,4],[2,3],[1,3],[0,3],[0,4],[0,5]`
+4. So for the first iteration we either add or subtract the following values `[0,1],[1,0],[1,1]`
+
+### Python Code 
+```python
+class Solution:
+    def spiralMatrixIII(self, rows: int, cols: int, rStart: int, cStart: int) -> List[List[int]]:
+
+        i,j = rStart,cStart
+        result = []
+        diri,dirj = 0,1
+        twice = 2
+        moves = 1
+        next_moves = 2
+        # Logic here is diri and dirj take care of the direction (how to append values to the current indices)
+        # If east we set diri = 0 and dirj = 1
+        # If south we set diri = -1 and dirj = 0
+        # If west we set diri = 0 and dirj = -1
+        # If north we set diri = 1 and dirj = 0
+
+        while len(result) < rows*cols:
+            if(-1 < i < rows) and (-1 < j  < cols):
+                result.append([i,j])
+            
+            i += diri
+            j += dirj
+            # Add based on direction
+            moves -=1
+            # Reduce the moves so that after every two moves we increment by 1 more
+            
+            if moves == 0:
+                #If moves is 0 that means direction change
+                diri, dirj = dirj, -diri
+                twice -= 1
+                if twice == 0:
+                    twice = 2
+                    moves = next_moves
+                    next_moves += 1
+                else : 
+                    # This is made to reset moves to 1 after the first iteration ( after each 90 degree turn )
+                    moves = next_moves - 1
+
+        return result
+
+```
+
+### Output
+```
+Input
+rows = 1
+cols = 4
+rStart = 0
+cStart = 0
+Output
+[[0,0],[0,1],[0,2],[0,3]]
+Expected
+[[0,0],[0,1],[0,2],[0,3]]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## Search a 2D Matrix
+
+[**Question**](https://leetcode.com/problems/search-a-2d-matrix/): 
+
+You are given an m x n integer matrix matrix with the following two properties:
+
+Each row is sorted in non-decreasing order.
+The first integer of each row is greater than the last integer of the previous row.
+Given an integer target, return true if target is in matrix or false otherwise.
+
+You must write a solution in O(log(m * n)) time complexity.
+
+ 
+
+>Example 1:
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3
+Output: true
+
+> Example 2:
+
+Input: matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13
+Output: false
+ 
+
+>Constraints:
+
+m == matrix.length
+n == matrix[i].length
+1 <= m, n <= 100
+-104 <= matrix[i][j], target <= 104
+
+[**Solution**](https://chatgpt.com/share/6664a634-1b79-4bf3-9666-5cc88cd56f63) : 
+Idea is to reduce the space where we are looking for the element by checking the values in the rows and columns since they're sorted
+
+
+###  Approach
+
+1. Could use two pointer approach where we set one at the start of the row and one at the end. If the value exists in between the two then we can eventually find it by changing the pointers
+2. Else we change the row and column
+
+### Python Code 
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        if not matrix or not matrix[0]:
+            return False
+
+        rows = len(matrix)
+        cols = len(matrix[0])
+        row = 0
+        col = cols - 1
+        while row < rows and col >= 0 :
+            
+            if matrix[row][col] == target:
+                return True
+            elif matrix[row][col] > target:
+                col -= 1
+            else : 
+                row += 1
+        
+        return False
+            
+            
+                
+```
+
+## Binary Search
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        if not matrix or not matrix[0]:
+            return False
+
+        rows = len(matrix)
+        cols = len(matrix[0])
+        left, right = 0, rows*cols - 1
+        # Treating the entire 2D matrix like a 1d matrix we will perform binary search on it
+
+        while left <= right:
+            mid = (left+right) // 2
+            mid_value = matrix[mid//cols][mid%cols]
+            # mid//n will return row index
+            # mid%n will return col index 
+
+            if mid_value == target:
+                return True
+            elif mid_value < target :
+                left = mid + 1
+            else : 
+                right = mid - 1
+        
+        return False
+            
+            
+```
+
+### Output
+```
+Input
+matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]]
+target = 3
+Output
+true
+Expected
+true
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Pow(x, n)
+
+[**Question**](https://leetcode.com/problems/powx-n/description/): 
+
+Implement pow(x, n), which calculates x raised to the power n (i.e., xn).
+
+ 
+
+> Example 1:
+
+Input: x = 2.00000, n = 10
+Output: 1024.00000
+
+> Example 2:
+
+Input: x = 2.10000, n = 3
+Output: 9.26100
+
+> Example 3:
+
+Input: x = 2.00000, n = -2
+Output: 0.25000
+Explanation: 2-2 = 1/22 = 1/4 = 0.25
+
+[**Solution**](https://chatgpt.com/share/2766322a-eb6f-4420-a2cc-43f1643b393a) : 
+
+
+###  Approach
+If the value of n is negative then we can simplu
+
+### My Code with correction
+```python
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        
+        if n < 0 :
+            x = 1/x
+            n = -n
+
+        val = x
+        for i in range(1,n):
+            val*=x
+        return val
+  
+```
+
+> This code was unsuccessful and timed out for the following test case : 
+
+`x = 0.00001`
+`n - 
+
+
+### Squaring the Base approach
+```python
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        
+        if n == 0 :
+            return 1
+        if n < 0 :
+            x = 1/x
+            n = -n
+
+        val = 1
+        while n:
+            if n % 2:  # If n is odd
+                val *= x
+                # Here if n is odd then we perform 1 additional multipliation ( so removing that extra 1 making the exponent even then)
+            x *= x  # Square the base
+            n //= 2  # Divide n by 2
+            # Why does this work for x = 0.00001 and n = 2147483647 is because when we square the base it will eventually tend to 0 and that will automatically return 0
+
+        return val
+                
+
+```
+
+### Output
+```
+Input
+x = 2.00000
+n = 10
+Output
+1024.00000
+Expected
+1024.00000
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## Majority Element
+
+[**Question**](https://leetcode.com/problems/majority-element/description/): 
+
+Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+
+
+> Example 1:
+
+Input: nums = [3,2,3]
+Output: 3
+
+> Example 2:
+
+Input: nums = [2,2,1,1,1,2,2]
+Output: 2
+
+[**Solution**]() : 
+Majority element is the one which appears for more than 50% of the size of the array
+###  Brute Force Approach ( Using Counter in python )
+1. Sort the array and keep a counter and max_count. Everytime the current number changes then compare max_count and update it 
+
+
+### Python Code 
+```python
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        element,count = Counter(nums).most_common(1)[0]
+
+        if count > len(nums) // 2:
+            return element
+        
+        return 0
+```
+
+### Tracking the majority element after sorting 
+```python
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        nums.sort()
+        count = max_count = 1
+        majority_element = nums[0]
+        
+        for i in range(len(nums)-1):
+            if nums[i] == nums[i+1]:
+                count += 1
+            else : 
+                count = 1
+            if count > max_count : 
+                max_count = count
+                majority_element = nums[i]
+
+
+        if max_count > len(nums)//2 :
+            return majority_element
+        
+```
+
+### Using a dictionary 
+```python
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        # Dictionary to store counts of each element
+        count_dict = {}
+        
+        # Populate the dictionary with counts
+        for num in nums:
+            if num in count_dict:
+                count_dict[num] += 1
+            else:
+                count_dict[num] = 1
+        
+        # Find the element with the maximum count
+        max_count = 0
+        majority_element = -1
+        for element, count in count_dict.items():
+            if count > max_count:
+                max_count = count
+                majority_element = element
+        
+        # Check if the max count is greater than n // 2
+        if max_count > len(nums) // 2:
+            return majority_element
+        
+
+```
+
+### Output
+```
+Input
+nums = [3,2,3]
+Output
+3
+Expected
+3
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
 
 
 ## Template for Solving
@@ -9450,7 +10306,7 @@ public class PlacePermutation {
 1. [HashSet](#hashset)
 2. [Initializing a 2d array](#initializing-a-2d-array)
 3. [Checking the case of a character](#checking-the-case-of-a-character)
-
+4. [Counter](#counter)
 
 ## HashSet
 A hashSet in python is much simpler to initiate and use than in any other language.
@@ -9465,4 +10321,142 @@ numSet = ()
 <hr>
 
 ## Initializing a 2d array
-To initialize a 2d array of 0'
+To initialize a 2d array of only 0's
+
+```python
+
+
+```
+
+
+<hr>
+
+## Checking the case of a character
+
+
+```python
+
+
+```
+
+<hr>
+
+## Counter
+The `Counter` class in Python is part of the `collections` module, and it is used to count the occurrences of elements in an iterable (like a list, tuple, or string). It returns a dictionary-like object where the keys are the elements and the values are the counts of those elements.
+
+### Importing `Counter`
+First, you need to import it from the `collections` module:
+
+```python
+from collections import Counter
+```
+
+### Basic Usage
+
+1. **Counting Elements in a List**:
+
+```python
+from collections import Counter
+
+data = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple']
+counter = Counter(data)
+print(counter)
+```
+
+**Output**:
+```
+Counter({'apple': 3, 'banana': 2, 'orange': 1})
+```
+
+2. **Counting Characters in a String**:
+
+```python
+from collections import Counter
+
+string = "hello world"
+counter = Counter(string)
+print(counter)
+```
+
+**Output**:
+```
+Counter({'l': 3, 'o': 2, 'h': 1, 'e': 1, ' ': 1, 'w': 1, 'r': 1, 'd': 1})
+```
+
+3. **Counting Elements in a Tuple**:
+
+```python
+from collections import Counter
+
+data = (1, 2, 3, 1, 2, 1)
+counter = Counter(data)
+print(counter)
+```
+
+**Output**:
+```
+Counter({1: 3, 2: 2, 3: 1})
+```
+
+### Useful Methods
+
+1. **Getting the Most Common Elements**:
+
+```python
+counter = Counter(['apple', 'banana', 'apple', 'orange', 'banana', 'apple'])
+most_common = counter.most_common(2)  # Get the two most common elements
+print(most_common)
+```
+
+**Output**:
+```
+[('apple', 3), ('banana', 2)]
+```
+
+2. **Updating Counts**:
+
+```python
+counter = Counter(['apple', 'banana'])
+counter.update(['apple', 'orange', 'banana'])
+print(counter)
+```
+
+**Output**:
+```
+Counter({'apple': 2, 'banana': 2, 'orange': 1})
+```
+
+3. **Subtracting Counts**:
+
+```python
+counter = Counter(['apple', 'banana', 'apple', 'orange'])
+counter.subtract(['apple', 'banana'])
+print(counter)
+```
+
+**Output**:
+```
+Counter({'apple': 1, 'orange': 1, 'banana': 0})
+```
+
+4. **Converting Back to a List**:
+
+If you need to convert the `Counter` object back into a list:
+
+```python
+counter = Counter(['apple', 'banana', 'apple'])
+elements = list(counter.elements())
+print(elements)
+```
+
+**Output**:
+```
+['apple', 'apple', 'banana']
+```
+
+### Summary
+The `Counter` function is a powerful tool for counting occurrences of elements in an iterable. It provides methods to work with these counts, making it very handy for frequency analysis and similar tasks.
+
+
+
+<hr>
