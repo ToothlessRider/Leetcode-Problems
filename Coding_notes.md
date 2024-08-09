@@ -104,7 +104,8 @@
 84. [Integer to English Words](#integer-to-english-words)
 85. [Spiral Matrix 3](#spiral-matrix-3)
 86. [Majority Element](#majority-element)
-87. [Template for solving](#template-for-solving)
+87. [Magic Squares in a grid](#magic-squares-in-a-grid)
+88. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -8632,26 +8633,91 @@ Expected
 
 <hr>
 
+> Day : Friday , 9th August 2024
 
-## Template for Solving
+## Magic Squares in a Grid
 
-[**Question**](): 
+[**Question**](https://leetcode.com/problems/magic-squares-in-grid/description/?envType=daily-question&envId=2024-08-09): 
 
+A 3 x 3 magic square is a 3 x 3 grid filled with distinct numbers from 1 to 9 such that each row, column, and both diagonals all have the same sum.
 
-[**Solution**]() : 
+Given a row x col grid of integers, how many 3 x 3 contiguous magic square subgrids are there?
 
+Note: while a magic square can only contain numbers from 1 to 9, grid may contain numbers up to 15.
+
+ 
+
+Example 1:
+![alt text](image-1.png)
+
+Input: grid = [[4,3,8,4],[9,5,1,9],[2,7,6,2]]
+Output: 1
+Explanation: 
+The following subgrid is a 3 x 3 magic square:
+![alt text](image-2.png)
+while this one is not:
+![alt text](image-3.png)
+In total, there is only one magic square inside the given grid.
+
+[**Solution**](https://chatgpt.com/share/0bf7e045-31db-4962-8152-2060093637a2) : 
 
 ###  Approach
-
+Creating a separate function that will deal with the calculation of the subgrids and then increment the count for whichever follow magic square pattern
 
 ### Python Code 
 ```python
+from typing import List
+
+class Solution:
+    def subgridSum(self, grid: List[List[int]], i_start: int, j_start: int) -> bool:
+        # Flatten the 3x3 subgrid into a list
+        subgrid = [
+            grid[i_start + i][j_start + j]
+            for i in range(3)
+            for j in range(3)
+        ]
+        
+        # Check if all elements are distinct and in the range 1 to 9
+        if sorted(subgrid) != list(range(1, 10)):
+            return False
+        
+        # Calculate sums
+        d_sum1 = grid[i_start][j_start] + grid[i_start + 1][j_start + 1] + grid[i_start + 2][j_start + 2]
+        d_sum2 = grid[i_start][j_start + 2] + grid[i_start + 1][j_start + 1] + grid[i_start + 2][j_start]
+        
+        row_sums = [sum(grid[i_start + i][j_start:j_start + 3]) for i in range(3)]
+        col_sums = [sum(grid[i_start + j][j_start + i] for j in range(3)) for i in range(3)]
+        
+        # Check if all sums are equal
+        if (d_sum1 == d_sum2 == row_sums[0] == row_sums[1] == row_sums[2] ==
+                col_sums[0] == col_sums[1] == col_sums[2]):
+            return True
+        
+        return False
+
+    def numMagicSquaresInside(self, grid: List[List[int]]) -> int:
+        n = len(grid)
+        m = len(grid[0])
+        count = 0
+
+        # Iterate over each possible 3x3 subgrid
+        for i in range(0, n - 2):
+            for j in range(0, m - 2):
+                if self.subgridSum(grid, i, j):
+                    count += 1
+
+        return count
 
 ```
 
 ### Output
 ```
-
+Input
+grid = [[4,3,8,4],[9,5,1,9],[2,7,6,2]]
+Output
+1
+Expected
+1
 
 ```
 
