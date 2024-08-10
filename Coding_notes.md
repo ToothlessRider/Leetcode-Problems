@@ -105,7 +105,15 @@
 85. [Spiral Matrix 3](#spiral-matrix-3)
 86. [Majority Element](#majority-element)
 87. [Magic Squares in a grid](#magic-squares-in-a-grid)
-88. [Template for solving](#template-for-solving)
+88. :red_circle:[Search Query Autocomplete](#search-query-autocomplete)
+89. [Majority Element 2](#majority-element-2)
+    - [Accesing the element and its count in a dictionary ](#accesing-the-element-and-its-count-in-a-dictionary)
+90. :red_circle:[Unique Paths](#unique-paths)
+91. [4 Sum](#4-sum)
+    - [Two Pointer](#two-pointer)
+92. [Region cut by Slashes](#region-cut-by-slashes)
+93. [List of Badges to use](#list-of-badges-to-use)
+94. [Template for solving](#template-for-solving)
 
 
 <hr>
@@ -114,7 +122,8 @@
 
 ## BST to Greater Sum Tree
 
-> Tags : Binary Search Tree, Greater Tree, Tree Nodes.
+![DFS](https://img.shields.io/badge/Depth_First_Search-blue) ![Tree](https://img.shields.io/badge/Tree-00C0C0) ![Binary Search tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
+
 
 [**Question**](https://leetcode.com/problems/binary-search-tree-to-greater-sum-tree/?envType=daily-question&envId=2024-06-25) : 
 
@@ -1195,6 +1204,7 @@ class Solution {
         Arrays.sort(nums2);
 
         // Here let us declare the while loop which is dependent on the two pointers
+
         while( i < l1 && j < l2 ){
             if(nums1[i] < nums2[j]){
                 i++;
@@ -7825,7 +7835,7 @@ Insert: Add a new element to the heap, maintaining the heap property.
 Extract Min: Remove and return the smallest element (the root), then reheapify to maintain the heap property.
 Peek Min: Return the smallest element without removing it.
 
-### two-Pointer Brute force approach
+### Two-Pointer Brute force approach
 ```python
 class Solution:
     def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
@@ -8725,6 +8735,490 @@ Expected
 
 <hr>
 
+## Search Query Autocomplete
+
+[**Question**](https://www.geeksforgeeks.org/problems/search-query-auto-complete/0?category%255B%255D=Strings&problemStatus=unsolved&difficulty%255B%255D=2&page=1&query=category%255B%255DStringsproblemStatusunsolveddifficulty%255B%255D2page1category%255B%255DStr):
+
+Design a search query autocomplete system for a search engine.
+
+The users will input a sentence ( which may have multiple words and ends with special character '#').
+
+For each character they type except '#', you need to return the top 3 previously entered and most frequently queried sentences that have prefix the same as the part of sentence already typed.
+
+Here are the specific rules:
+
+The frequency for a sentence is defined as the number of times a user typed the exactly same sentence before.
+The returned top 3 sentences should be sorted by frequency (The first is the most frequent).  If several sentences have the same frequency, you need to use ASCII-code order (smaller one appears first).
+If less than 3 valid sentences exist, then just return as many as you can.
+When the input is a special character, it means the sentence ends, and in this case, you need to return an empty list.
+
+[**Solution**](https://chatgpt.com/share/8eaaa196-35a9-459d-8cfb-39fa2fc17841):
+
+### Approach
+1. Run a loop
+2. check if the character is a `#` if not then check if the character is the first character of any sentence
+   1. 
+
+### Java Code 
+```java
+
+class AutoCompleteSystem {
+    
+    private String[] sentences;
+    private int[] times;
+    
+    public AutoCompleteSystem(String sentences[], int times[]) {
+        this.sentences = sentences;
+        this.times = times;
+    }
+
+    ArrayList<String> input(char c) {
+        ArrayList<String> result = new ArrayList<>();
+        // This is the method that has a return type of ArrayList
+        for(int i = 0; i < sentences.length;i++){
+            String[] words = sentences[i].split(" ");
+            String word = words[0];
+            if (word.charAt(0) == c){
+                // Strings are java objects so you need to use a function to access char0
+                // If you use words[0] it will give you an error here. Check other uses
+                result.add(sentences[i]);
+            }
+        
+        }
+        return result;
+    }
+}
+
+```
+
+
+### Output 
+```
+
+```
+
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## Majority Element 2
+
+[**Question**](https://leetcode.com/problems/majority-element-ii/):
+
+Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+
+ 
+
+Example 1:
+
+Input: nums = [3,2,3]
+Output: [3]
+Example 2:
+
+Input: nums = [1]
+Output: [1]
+Example 3:
+
+Input: nums = [1,2]
+Output: [1,2]
+ 
+
+
+[**Solution**]():
+
+### Approach
+Same as the last majority element, we initialize a dictionary
+
+### Python Code 
+```python
+class Solution:
+    def majorityElement(self, nums: List[int]) -> List[int]:
+        count_dict = {}
+
+        for i in range(len(nums)):
+            if nums[i] not in count_dict:
+                count_dict[nums[i]] = 1
+            else :
+                count_dict[nums[i]]+= 1
+        majority_list = []
+        for element,count in count_dict.items():
+            if count > len(nums)//3:
+                majority_list.append(element)
+        return majority_list
+
+
+
+```
+
+### Accesing the element and its count in a dictionary 
+Within adictionary we smply need to use a for loop defining two variables `element` and `count` to be able to access the two separately from a dictionary.
+The following code shows the syntax for the same : 
+```python
+for element,count in count_dict.items():
+            if count > len(nums)//3:
+                majority_list.append(element)
+
+```
+
+### Output 
+```
+Input
+nums = [3,2,3]
+Output
+[3]
+Expected
+[3]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## Unique Paths
+
+[**Question**](https://leetcode.com/problems/unique-paths/):
+
+There is a robot on an m x n grid. The robot is initially located at the top-left corner (i.e., grid[0][0]). The robot tries to move to the bottom-right corner (i.e., grid[m - 1][n - 1]). The robot can only move either down or right at any point in time.
+
+Given the two integers m and n, return the number of possible unique paths that the robot can take to reach the bottom-right corner.
+
+The test cases are generated so that the answer will be less than or equal to 2 * 109.
+
+ 
+
+> Example 1:
+
+
+Input: m = 3, n = 7
+Output: 28
+Example 2:
+
+Input: m = 3, n = 2
+Output: 3
+Explanation: From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+1. Right -> Down -> Down
+2. Down -> Down -> Right
+3. Down -> Right -> Down
+
+[**Solution**]():
+
+### Approach
+When we take a `right`we move one place to the right.
+When we move `down` we go one row down.
+Our goal should be reaching mxn, but to find the number of unique ways we need to maintain the directions used.
+
+
+
+### Python Code 
+```python
+
+
+```
+
+
+### Output 
+```
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## 4 Sum
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Two Pointers](https://img.shields.io/badge/Two_Pointers-FF8000) ![sorting](https://img.shields.io/badge/Sorting-66FFFF)
+
+[**Question**](https://leetcode.com/problems/4sum/description/):
+
+Given an array nums of n integers, return an array of all the unique quadruplets [nums[a], nums[b], nums[c], nums[d]] such that:
+
+0 <= a, b, c, d < n
+a, b, c, and d are distinct.
+nums[a] + nums[b] + nums[c] + nums[d] == target
+You may return the answer in any order.
+
+ 
+
+>Example 1:
+
+Input: nums = `[1,0,-1,0,-2,2]`, target = 0
+Output: `[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]`
+
+>Example 2:
+
+Input: nums = `[2,2,2,2,2]`, target = 8
+Output: `[[2,2,2,2]]`
+
+[**Solution**]():
+All the numbers must be unique, and we're also dealing with negative numbers in this case.
+Number being unique means the value at a given index can't be used again, but if an element itself is repeated then we can use it.
+
+### Approach
+We first sort the array and then implement a slightly modified two pointer approach to this problem
+1. 
+
+### Java Code 
+```java
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        int n = nums.length;
+        Arrays.sort(nums);
+        
+        for(int i = 0; i < n-3;i++){
+            if (i > 0 && nums[i] == nums[i-1]) continue;
+            for( int j = i+1; j < n-2;j++){
+                if(j > i+1 && nums[j] == nums[j-1]) continue;
+                int left = j+1;
+                int right = n-1;
+                while(left < right){
+                    long c_sum = (long)nums[i] + (long)nums[j] + (long)nums[left] + (long)nums[right];
+                    if (c_sum == target){
+                        result.add(Arrays.asList(nums[i],nums[j],nums[left],nums[right]));
+                        left++;
+                        right--;
+                        while(left < right && nums[left] == nums[left-1])left++;
+                        while(left < right && nums[right] == nums[right+1])right--;
+                    }
+                    else if(c_sum < target){
+                        left++;
+                    }else{
+                        right--;
+                    }
+                }
+            }
+        }
+
+        return result;
+
+    }
+}
+
+```
+
+
+### Output 
+```
+Input
+nums = [1,0,-1,0,-2,2]
+target = 0
+Output
+[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+Expected
+[[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]
+```
+
+## Two Pointer
+### Purpose
+Efficiently find pairs or sets of elements in a sorted array that meet specific conditions (e.g., sum to a target).
+
+### Mechanism
+1. **Sort the Array:** The array must be sorted first.
+2. **Initialize Pointers:** Use two pointers, one starting at the beginning (`left`) and one at the end (`right`).
+3. **Move Pointers:**
+   - Calculate the sum of elements at the pointers.
+   - If the sum matches the target, record the pair.
+   - If the sum is less than the target, move the left pointer right to increase the sum.
+   - If the sum is greater, move the right pointer left to decrease the sum.
+4. **Continue until the pointers meet or cross.**
+
+
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Saturday, 10th August 2024
+
+## Region cut by Slashes
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![DFS](https://img.shields.io/badge/Depth_First_Search-blue) ![Hash_table](https://img.shields.io/badge/Hash_table-purple) ![BFS](https://img.shields.io/badge/Breadth_First_Search-yellow) ![Matrix](https://img.shields.io/badge/Matrix-red)
+
+[**Question**](https://leetcode.com/problems/regions-cut-by-slashes/description/?envType=daily-question&envId=2024-08-10):
+
+An n x n grid is composed of 1 x 1 squares where each 1 x 1 square consists of a '/', '\', or blank space ' '. These characters divide the square into contiguous regions.
+
+Given the grid grid represented as a string array, return the number of regions.
+
+Note that backslash characters are escaped, so a '\' is represented as '\\'.
+
+ 
+
+>Example 1:
+![img](https://assets.leetcode.com/uploads/2018/12/15/1.png)
+
+Input: grid = [" /","/ "]
+Output: 2
+
+>Example 2:
+![img](https://assets.leetcode.com/uploads/2018/12/15/2.png)
+
+Input: grid = [" /","  "]
+Output: 1
+
+>Example 3:
+![img](https://assets.leetcode.com/uploads/2018/12/15/2.png)
+
+Input: grid = ["/\\","\\/"]
+Output: 5
+Explanation: Recall that because \ characters are escaped, "\\/" refers to \/, and "/\\" refers to /\.
+
+[**Solution**]():
+
+### Approach
+Completely unknown method used where a `1x1` grid is converted into a `3x3` grid and then the slashes are mapped to the different values by providing 1 and 0 to the grid places where the slash cuts.
+Then use `Union find`
+
+### Java Code 
+```java
+class Solution {
+    class UnionFind {
+        int[] parent;
+        
+        UnionFind(int n) {
+            parent = new int[n];
+            for (int i = 0; i < n; i++) {
+                parent[i] = i;
+            }
+        }
+        
+        int find(int x) {
+            if (parent[x] != x) {
+                parent[x] = find(parent[x]);
+            }
+            return parent[x];
+        }
+        
+        void union(int x, int y) {
+            parent[find(x)] = find(y);
+        }
+    }
+    
+    public int regionsBySlashes(String[] grid) {
+        int n = grid.length;
+        UnionFind uf = new UnionFind(4 * n * n);
+        
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int root = 4 * (i * n + j);
+                char val = grid[i].charAt(j);
+                
+                if (val == '/' || val == ' ') {
+                    uf.union(root + 0, root + 3);
+                    uf.union(root + 1, root + 2);
+                }
+                if (val == '\\' || val == ' ') {
+                    uf.union(root + 0, root + 1);
+                    uf.union(root + 2, root + 3);
+                }
+                
+                if (j + 1 < n) {
+                    uf.union(root + 1, root + 7);
+                }
+                if (i + 1 < n) {
+                    uf.union(root + 2, root + 4 * n);
+                }
+            }
+        }
+        
+        int regions = 0;
+        for (int i = 0; i < 4 * n * n; i++) {
+            if (uf.find(i) == i) regions++;
+        }
+        
+        return regions;
+    }
+}
+
+```
+
+### :red_circle: DFS approach
+```java
+int dfs(int[][] g, int i, int j) {
+    if (Math.min(i, j) < 0 || Math.max(i, j) >= g.length || g[i][j] != 0)
+        return 0;
+    g[i][j] = 1;
+    return 1 + dfs(g, i - 1, j) + dfs(g, i + 1, j) + dfs(g, i, j - 1) + dfs(g, i, j + 1);
+}    
+public int regionsBySlashes(String[] grid) {
+    int n = grid.length, regions = 0;
+    int[][] g = new int[n * 3][n * 3];
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
+            if (grid[i].charAt(j) == '/') 
+                g[i * 3][j * 3 + 2] = g[i * 3 + 1][j * 3 + 1] = g[i * 3 + 2][j * 3] = 1;
+            else if (grid[i].charAt(j) == '\\') 
+                g[i * 3][j * 3] = g[i * 3 + 1][j * 3 + 1] = g[i * 3 + 2][j * 3 + 2] = 1;
+    for (int i = 0; i < n * 3; ++i)
+        for (int j = 0; j < n * 3; ++j)
+            regions += dfs(g, i, j) > 0 ? 1 : 0;        
+    return regions;
+}
+```
+
+
+### Output 
+```
+Input
+grid =
+[" /","/ "]
+Output
+2
+Expected
+2
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+## Template for Solving
+
+[**Question**]():
+
+
+[**Solution**]():
+
+### Approach
+
+
+### Python Code 
+```python
+
+
+```
+
+
+### Output 
+```
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+### List of Badges to use
+
+1. ![Arrays](https://img.shields.io/badge/Arrays-green)
+2. ![DFS](https://img.shields.io/badge/Depth_First_Search-blue)
+3. ![Hash_table](https://img.shields.io/badge/Hash_table-purple)
+4. ![BFS](https://img.shields.io/badge/Breadth_First_Search-yellow)
+5. ![Matrix](https://img.shields.io/badge/Matrix-red)
+6. ![Tree](https://img.shields.io/badge/Tree-00C0C0) 
+7. ![Binary Search tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
+8. ![Two Pointers](https://img.shields.io/badge/Two_Pointers-FF8000)
+9. ![Sorting](https://img.shields.io/badge/Sorting-66FFFF)
+
+<hr>
+
 # Interview Questions
 
 ## Table of Contents interview
@@ -9026,16 +9520,13 @@ Generate a list from it by using split and then check for the first condition. I
 ### Better approach 
 Use a stack to maintain the values instead of creating a large list.
 1. Traverse  the string from left to right 
-2. if the top of the stack is 1 and current character is 0, decide which character to remove : 
+2. If the top of the stack is 1 and current character is 0, decide which character to remove : 
 - If there is a 1 below the 'top' then remove 1
 - Otherwise remove 0
 3. If no 10 pattern is found then push the current value into the
 
-### Two Pointer Approach 
 
-
-
-### java Code 
+### Two Pointer Approach
 ```java
 String[] values = {"10101", "00001111", "1100","01010", "100100"};
         for( String value : values){
