@@ -73,7 +73,7 @@
 55. :red_circle:[Find the City With the Smallest Number of Neighbors at a Threshold Distance](#find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance)
 56. [Minimum Cost to Convert String 1](#minimum-cost-to-convert-string-1)
 57. :red_circle:[Second Minimum Time to Reach Destination](#second-minimum-time-to-reach-destination)
-58. [Longest Consecutive Sequence](#longest-consecutive-sequence)
+58. :rocket:[Longest Consecutive Sequence](#longest-consecutive-sequence)
 59. :rocket:[Maximum Subarray](#maximum-subarray)
 	- :rocket:[Kadane's algorithm](#kadanes-algorithm)
 60. :rocket:[Sort Colors](#sort-colors)
@@ -103,17 +103,21 @@
 83. [Minimum Number of Pushes to Type Word 2](#minimum-number-of-pushes-to-type-word-2)
 84. [Integer to English Words](#integer-to-english-words)
 85. [Spiral Matrix 3](#spiral-matrix-3)
-86. [Majority Element](#majority-element)
+86. :rocket:[Majority Element](#majority-element)
 87. [Magic Squares in a grid](#magic-squares-in-a-grid)
 88. :red_circle:[Search Query Autocomplete](#search-query-autocomplete)
-89. [Majority Element 2](#majority-element-2)
+89. :rocket:[Majority Element 2](#majority-element-2)
     - [Accesing the element and its count in a dictionary ](#accesing-the-element-and-its-count-in-a-dictionary)
 90. :red_circle:[Unique Paths](#unique-paths)
-91. [4 Sum](#4-sum)
+91. :rocket:[4 Sum](#4-sum)
     - [Two Pointer](#two-pointer)
 92. [Region cut by Slashes](#region-cut-by-slashes)
-93. [List of Badges to use](#list-of-badges-to-use)
-94. [Template for solving](#template-for-solving)
+93. [Minimum Number of Days to Disconnect Island](#minimum-number-of-days-to-disconnect-island)
+94. [Combination Sum II](#combination-sum-ii)
+95. :red_circle::rocket:[Largest Subarray with K Sum](#largest-subarray-with-k-sum)
+96. [Template for solving](#template-for-solving)
+97. [List of Badges to use](#list-of-badges-to-use)
+
 
 
 <hr>
@@ -9178,26 +9182,533 @@ Expected
 
 <hr>
 
+> Day : Sunday, 11th August 2024
 
-## Template for Solving
+## Minimum Number of Days to Disconnect Island
 
-[**Question**]():
+[**Question**](https://leetcode.com/problems/minimum-number-of-days-to-disconnect-island/description/?envType=daily-question&envId=2024-08-11):
 
+You are given an m x n binary grid grid where 1 represents land and 0 represents water. An island is a maximal 4-directionally (horizontal or vertical) connected group of 1's.
+
+The grid is said to be connected if we have exactly one island, otherwise is said disconnected.
+
+In one day, we are allowed to change any single land cell (1) into a water cell (0).
+
+Return the minimum number of days to disconnect the grid.
+
+ 
+
+> Example 1:
+
+
+Input: grid = [[0,1,1,0],[0,1,1,0],[0,0,0,0]]
+
+Output: 2
+Explanation: We need at least 2 days to get a disconnected grid.
+Change land grid[1][1] and grid[0][2] to water and get 2 disconnected island.
 
 [**Solution**]():
 
 ### Approach
+It has a BFS approach that has yet to be completed
 
+### Java Code 
+```java
+class Solution {
+    public int minDays(int[][] grid) {
+        if (countIslands(grid) != 1) return 0;
 
-### Python Code 
-```python
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    grid[i][j] = 0;
+                    if (countIslands(grid) != 1) return 1;
+                    grid[i][j] = 1;
+                }
+            }
+        }
 
+        return 2;
+    }
+
+    private int countIslands(int[][] grid) {
+        boolean[][] seen = new boolean[grid.length][grid[0].length];
+        int islands = 0;
+
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1 && !seen[i][j]) {
+                    islands++;
+                    dfs(grid, i, j, seen);
+                }
+            }
+        }
+        return islands;
+    }
+
+    private void dfs(int[][] grid, int r, int c, boolean[][] seen) {
+        seen[r][c] = true;
+        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        for (int[] dir : directions) {
+            int nr = r + dir[0], nc = c + dir[1];
+            if (nr >= 0 && nr < grid.length && nc >= 0 && nc < grid[0].length && grid[nr][nc] == 1 && !seen[nr][nc]) {
+                dfs(grid, nr, nc, seen);
+            }
+        }
+    }
+}
 
 ```
 
 
 ### Output 
 ```
+Input
+grid = [[0,1,1,0],[0,1,1,0],[0,0,0,0]]
+Output
+2
+Expected
+2
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Monday, 12th August 2024
+
+## Kth Largest Element in a Stream
+
+![Tree](https://img.shields.io/badge/Tree-00C0C0) ![Binary Search tree](https://img.shields.io/badge/Binary_Search_Tree-330033) ![Heap (Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF)
+
+[**Question**](https://leetcode.com/problems/kth-largest-element-in-a-stream/?envType=daily-question&envId=2024-08-12):
+
+Design a class to find the kth largest element in a stream. Note that it is the kth largest element in the sorted order, not the kth distinct element.
+
+Implement KthLargest class:
+
+KthLargest(int k, int[] nums) Initializes the object with the integer k and the stream of integers nums.
+int add(int val) Appends the integer val to the stream and returns the element representing the kth largest element in the stream.
+ 
+
+> Example 1:
+
+Input
+["KthLargest", "add", "add", "add", "add", "add"]
+[[3, [4, 5, 8, 2]], [3], [5], [10], [9], [4]]
+Output
+[null, 4, 5, 5, 8, 8]
+
+Explanation
+KthLargest kthLargest = new KthLargest(3, [4, 5, 8, 2]);
+kthLargest.add(3);   // return 4
+kthLargest.add(5);   // return 5
+kthLargest.add(10);  // return 5
+kthLargest.add(9);   // return 8
+kthLargest.add(4);   // return 8
+ 
+
+[**Solution**]():
+
+### Approach
+Using stack in this case should be the best approach since we can easily concatenate the new value by putting an if condition to check it with the current stack value and pop it ( while storing it into another list maybe ) and then re inserting the elements once the new element is added in a sorted fashion
+
+Or after each addition to the List we can use the .sort() function but that would basically increase the complexity.
+
+> Wrong idea 
+
+
+Using a min heap of `K` size will help us keep a track of the $K^th$ largest element
+
+The overall time complexity for maintaining the heap as you add elements is $O(n log k)$, which is much more efficient than sorting the entire stream repeatedly.
+
+### Java Code 
+```java
+class KthLargest {
+    private int k;
+    private PriorityQueue<Integer> minHeap;
+
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        minHeap = new PriorityQueue<>(k);
+        for (int num : nums) {
+            if (minHeap.size() < k) {
+                minHeap.offer(num);
+            } else if (num > minHeap.peek()) {
+                minHeap.offer(num);
+                if (minHeap.size() > k) {
+                    minHeap.poll();
+                }
+            }
+        }
+    }
+
+    public int add(int val) {
+        if (minHeap.size() < k) {
+            minHeap.offer(val);
+        } else if (val > minHeap.peek()) {
+            minHeap.offer(val);
+            minHeap.poll();
+        }
+        return minHeap.peek();
+    }
+}
+
+```
+
+
+### Output 
+```
+Input
+["KthLargest","add","add","add","add","add"]
+[[3,[4,5,8,2]],[3],[5],[10],[9],[4]]
+Output
+[null,4,5,5,8,8]
+Expected
+[null,4,5,5,8,8]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Tuesday, 13th August 2024
+
+## Combination Sum II
+
+![Backtracking](https://img.shields.io/badge/Backtracking-FFCC99) ![Arrays](https://img.shields.io/badge/Arrays-green)
+
+[**Question**](https://leetcode.com/problems/combination-sum-ii/description/?envType=daily-question&envId=2024-08-13):
+
+Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+
+Each number in candidates may only be used once in the combination.
+
+Note: The solution set must not contain duplicate combinations.
+
+ 
+
+> Example 1:
+
+Input: candidates = [10,1,2,7,6,1,5], target = 8
+Output: 
+[ [1,1,6], [1,2,5], [1,7], [2,6] ]
+
+> Example 2:
+
+Input: candidates = [2,5,2,1,2], target = 5
+Output: 
+[ [1,2,2],[5] ]
+
+
+[**Solution**]():
+
+### Question 
+> If the list being created ( [1,1,2] at candidate[i] ==  5 ) breaks because candidate[i] > remain, then how will the array[1,1,6] ever get created ?
+
+
+You're correct in pointing out that if we break the loop when `candidate[i] > remain`, it might prevent forming valid combinations like `[1, 1, 6]` if the elements are not evaluated in the right sequence. Let's revisit the logic to clarify how the solution ensures that combinations like `[1, 1, 6]` are generated correctly.
+
+### Clarification of the Backtracking Approach
+
+The key is to correctly manage the recursive exploration of candidates, ensuring that all valid paths are considered. The break condition only stops further unnecessary exploration when adding the current candidate would exceed the remaining target.
+
+Let's break down how the solution works:
+
+1. **Initial Input**: `candidates = [10, 1, 2, 7, 6, 1, 5]`, `target = 8`.
+
+2. **Sorting the Input**: The candidates array is sorted to become `[1, 1, 2, 5, 6, 7, 10]`.
+
+3. **Backtracking Process**:
+   - Start with an empty list `tempList = []` and `remain = 8`.
+   - Explore candidates from the start, recursively adding each candidate to `tempList` and reducing `remain` accordingly.
+   - If at any step `candidate[i] > remain`, the loop breaks to avoid further exploration down that path, but not before all valid combinations up to that point are considered.
+
+### Detailed Execution to Generate `[1, 1, 6]`:
+
+1. Start with the first `1` at index `0`:
+   - `tempList = [1]`, `remain = 8 - 1 = 7`.
+
+2. Add the next `1` at index `1`:
+   - `tempList = [1, 1]`, `remain = 7 - 1 = 6`.
+
+3. Add `2` at index `2`:
+   - `tempList = [1, 1, 2]`, `remain = 6 - 2 = 4`.
+   - Continue to explore further elements but eventually break since no valid combination with `2` leads to the target.
+   - Backtrack by removing `2` from `tempList`.
+
+4. After backtracking, add `5` at index `3`:
+   - `tempList = [1, 1, 5]`, `remain = 6 - 5 = 1`.
+   - Since `1` is less than any remaining candidates, further exploration down this path isn't valid.
+   - Backtrack by removing `5`.
+
+5. Add `6` at index `4`:
+   - `tempList = [1, 1, 6]`, `remain = 6 - 6 = 0`.
+   - **This is a valid combination!** Add it to `result`.
+
+### Result:
+
+The above steps correctly explore the necessary paths and find the combination `[1, 1, 6]` along with other valid combinations.
+
+
+This code ensures that all paths are explored, including the valid one leading to `[1, 1, 6]`, by carefully managing the recursive exploration and backtracking process.
+
+### Java Code 
+
+
+```java
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(candidates);  // Sort the candidates array to handle duplicates
+        backtrack(result, new ArrayList<>(), candidates, target, 0);
+        return result;
+    }
+
+    private void backtrack(List<List<Integer>> result, List<Integer> tempList, int[] candidates, int remain, int start) {
+        if (remain == 0) {
+            result.add(new ArrayList<>(tempList)); // Found a valid combination
+            return; // No need to explore further
+        }
+        for (int i = start; i < candidates.length; i++) {
+            if (i > start && candidates[i] == candidates[i - 1]) continue; // Skip duplicates
+            if (candidates[i] > remain) break; // Stop exploring this path if the candidate exceeds the remaining target
+            tempList.add(candidates[i]);
+            backtrack(result, tempList, candidates, remain - candidates[i], i + 1); // Move to the next index
+            tempList.remove(tempList.size() - 1); // Backtrack, remove the last element and try the next candidate
+        }
+    }
+}
+```
+
+
+### Output 
+```
+Input
+candidates = [10,1,2,7,6,1,5]
+target = 8
+
+Output
+[[1,1,6],[1,2,5],[1,7],[2,6]]
+Expected
+[[1,1,6],[1,2,5],[1,7],[2,6]]
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+### Largest Subarray with K Sum
+
+![Hash](https://img.shields.io/badge/Hash-D51C1C) ![Arrays](https://img.shields.io/badge/Arrays-green)
+
+[**Question**](https://www.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1):
+
+Given an array having both positive and negative integers. The task is to compute the length of the largest subarray with sum 0.
+
+> Examples:
+
+Input: arr[] = {15,-2,2,-8,1,7,10,23}, n = 8
+Output: 5
+Explanation: The largest subarray with sum 0 is -2 2 -8 1 7.
+
+Input: arr[] = {2,10,4}, n = 3
+Output: 0
+Explanation: There is no subarray with 0 sum.
+
+Input: arr[] = {1, 0, -4, 3, 1, 0}, n = 6
+Output: 5
+Explanation: The subarray is 0 -4 3 1 0.
+
+Expected Time Complexity: O(n).
+Expected Auxiliary Space: O(n).
+
+[**Solution**]():
+### Approach
+In this case it is a subarray so we can use kadanes algorithm and make sure that the sum of the values will come to 0
+
+### Python Code
+```python
+
+
+```
+
+### Output 
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+### Reverse a Linked List
+
+![Recursion](https://img.shields.io/badge/Recursion-FF8000) ![Single Linked List](https://img.shields.io/badge/Single_Linked_List-00FF11)
+
+[**Question**](https://leetcode.com/problems/reverse-linked-list/description/):
+
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+ 
+
+> Example 1:
+
+![ex 1](https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg)
+
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+
+> Example 2:
+
+![Example](https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg)
+Input: head = [1,2]
+Output: [2,1]
+
+> Example 3:
+
+Input: head = []
+Output: []
+ 
+
+Constraints:
+
+The number of nodes in the list is the range [0, 5000].
+-5000 <= Node.val <= 5000
+
+[**Solution**]():
+### Approach
+
+### Java Code
+```java
+
+
+```
+
+### Output 
+```
+
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+## Find K-th Smallest Pair Distance
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Two Pointers](https://img.shields.io/badge/Two_Pointers-FF8000) ![Sorting](https://img.shields.io/badge/Sorting-66FFFF)
+
+[**Question**](https://leetcode.com/problems/find-k-th-smallest-pair-distance/description/?envType=daily-question&envId=2024-08-14):
+
+The distance of a pair of integers a and b is defined as the absolute difference between a and b.
+
+Given an integer array nums and an integer k, return the kth smallest distance among all the pairs nums[i] and nums[j] where 0 <= i < j < nums.length.
+
+ 
+
+Example 1:
+
+Input: nums = [1,3,1], k = 1
+Output: 0
+Explanation: Here are all the pairs:
+(1,3) -> 2
+(1,1) -> 0
+(3,1) -> 2
+Then the 1st smallest distance pair is (1,1), and its distance is 0.
+Example 2:
+
+Input: nums = [1,1,1], k = 2
+Output: 0
+Example 3:
+
+Input: nums = [1,6,1], k = 3
+Output: 5
+ 
+
+[**Solution**]():
+### Approach
+
+### Java Code
+```java
+
+import java.util.Arrays;
+
+class Solution {
+    public int smallestDistancePair(int[] numbers, int k) {
+        Arrays.sort(numbers);
+        int minDistance = 0;
+        int maxDistance = numbers[numbers.length - 1] - numbers[0];
+        
+        while (minDistance < maxDistance) {
+            int midDistance = minDistance + (maxDistance - minDistance) / 2;
+            int pairsCount = countPairsWithinDistance(numbers, midDistance);
+            
+            if (pairsCount < k) {
+                minDistance = midDistance + 1;
+            } else {
+                maxDistance = midDistance;
+            }
+        }
+        
+        return minDistance;
+    }
+
+    private int countPairsWithinDistance(int[] numbers, int targetDistance) {
+        int count = 0;
+        int left = 0;
+        
+        for (int right = 1; right < numbers.length; right++) {
+            while (numbers[right] - numbers[left] > targetDistance) {
+                left++;
+            }
+            count += right - left;
+        }
+        
+        return count;
+    }
+}
+
+```
+
+### Output 
+```
+Input
+nums = [1,3,1]
+k = 1
+Output
+0
+Expected
+0
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+### Template for Solving
+
+[**Question**]():
+
+[**Solution**]():
+### Approach
+
+### Java Code
+```java
+
+
+```
+
+### Output 
+```
+
 
 ```
 
@@ -9216,6 +9727,15 @@ Expected
 7. ![Binary Search tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
 8. ![Two Pointers](https://img.shields.io/badge/Two_Pointers-FF8000)
 9. ![Sorting](https://img.shields.io/badge/Sorting-66FFFF)
+10. ![Heap (Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF)
+11. ![Backtracking](https://img.shields.io/badge/Backtracking-FFCC99)
+12. ![Hash](https://img.shields.io/badge/Hash-D51C1C)
+13. ![Single Linked List](https://img.shields.io/badge/Single_Linked_List-00FF11)
+14. ![Doubly Linked List](https://img.shields.io/badge/Doubly_Linked_List-9781FF)
+15. ![Circular Linked List](https://img.shields.io/badge/Circular_Linked_List-FF00FF)
+16. ![Recursion](https://img.shields.io/badge/Recursion-FF8000)
+
+
 
 <hr>
 
@@ -10313,6 +10833,8 @@ Hi Aaron
 6. [Frequency calculation with HashMap](#frequency-calculation-with-hashmap)
 7. [Recursion in Java](#recursion-in-java)
 8. [Printing all permutations of an Array with recursion](#printing-all-permutations-of-an-array-with-recursion)
+9. [Stack operations in Java](#stack-operations-in-java)
+10. [Min & Max heap in Java](#min-&-max-heap-in-java)
 
 
 
@@ -10854,11 +11376,117 @@ public class PlacePermutation {
 
 <hr>
 
+## Stack Operations in Java
+In Java, a stack can be initialized using the `Stack` class from the `java.util` package. The `Stack` class represents a last-in, first-out (LIFO) stack of objects. Here's how you can initialize and use a stack in Java:
+
+### Importing the `Stack` Class
+
+First, ensure that you import the `Stack` class:
+
+```java
+import java.util.Stack;
+```
+
+### Initializing a Stack
+
+You can initialize a stack as follows:
+
+```java
+Stack<Integer> stack = new Stack<>();
+```
+
+Here, `Stack<Integer>` indicates that this is a stack that will store `Integer` objects. You can replace `Integer` with any other object type depending on your needs.
+
+### Basic Operations on a Stack
+
+Here are some basic operations you can perform on a stack:
+
+1. **Push an element onto the stack**:
+   ```java
+   stack.push(10);
+   stack.push(20);
+   stack.push(30);
+   ```
+
+2. **Pop an element from the stack**:
+   ```java
+   int topElement = stack.pop();  // Removes and returns the top element (30 in this case)
+   ```
+
+3. **Peek at the top element without removing it**:
+   ```java
+   int topElement = stack.peek();  // Returns the top element (20 in this case) without removing it
+   ```
+
+4. **Check if the stack is empty**:
+   ```java
+   boolean isEmpty = stack.isEmpty();  // Returns true if the stack is empty
+   ```
+
+5. **Check the size of the stack**:
+   ```java
+   int size = stack.size();  // Returns the number of elements in the stack
+   ```
+
+### Example
+
+Here's a complete example that demonstrates initializing a stack and performing basic operations:
+
+```java
+import java.util.Stack;
+
+public class Main {
+    public static void main(String[] args) {
+        // Initialize a stack of integers
+        Stack<Integer> stack = new Stack<>();
+
+        // Push elements onto the stack
+        stack.push(10);
+        stack.push(20);
+        stack.push(30);
+
+        // Peek at the top element
+        System.out.println("Top element: " + stack.peek());  // Output: Top element: 30
+
+        // Pop an element from the stack
+        System.out.println("Popped element: " + stack.pop());  // Output: Popped element: 30
+
+        // Check the size of the stack
+        System.out.println("Stack size: " + stack.size());  // Output: Stack size: 2
+
+        // Check if the stack is empty
+        System.out.println("Is stack empty? " + stack.isEmpty());  // Output: Is stack empty? false
+    }
+}
+```
+
+This code initializes a stack, performs several operations, and prints the results to the console.
+
+<hr>
+
+## Min & Max heap in Java
+
+A **heap** is a special tree-based data structure that satisfies the **heap property**. In a **min-heap**, for any given node `i`, the value of `i` is less than or equal to the values of its children. In a **max-heap**, the value of `i` is greater than or equal to the values of its children. The heap is typically implemented as a binary tree, but it can be stored in an array.
+
+### Properties of a Heap
+1. **Complete Binary Tree**: A heap is a complete binary tree, meaning all levels are fully filled except possibly for the last level, which is filled from left to right.
+2. **Heap Property**:
+   - **Min-Heap**: The value of each node is less than or equal to the values of its children, ensuring that the minimum element is always at the root.
+   - **Max-Heap**: The value of each node is greater than or equal to the values of its children, ensuring that the maximum element is always at the root.
+
+### Operations on a Heap
+- **Insertion**: Adding a new element to the heap, followed by adjusting the heap to maintain the heap property.
+- **Deletion**: Removing the root element (min or max), followed by adjusting the heap to maintain the heap property.
+- **Peek**: Accessing the root element without removing it.
 
 
 <hr>
 
 # Python Functions
+
+> [Websites about python](https://chatgpt.com/share/49f4c665-8590-41cd-abb7-ee7d3b5905d7)
+
+
 ## Table of Contents Python Functions
 1. [HashSet](#hashset)
 2. [Initializing a 2d array](#initializing-a-2d-array)
