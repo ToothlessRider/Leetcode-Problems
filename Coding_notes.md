@@ -9780,6 +9780,8 @@ true
 
 ### Maximum Number of Points with Cost
 
+![Dynamic Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF) ![Arrays](https://img.shields.io/badge/Arrays-green)
+
 [**Question**](https://leetcode.com/problems/maximum-number-of-points-with-cost/description/?envType=daily-question&envId=2024-08-17):
 
 You are given an m x n integer matrix points (0-indexed). Starting with 0 points, you want to maximize the number of points you can get from the matrix.
@@ -9876,6 +9878,8 @@ Expected
 
 ### Ugly Number 2
 
+![Dynamic Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)  ![Heap (Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF) ![Hash_table](https://img.shields.io/badge/Hash_table-purple)
+
 [**Question**](https://leetcode.com/problems/ugly-number-ii/description/?envType=daily-question&envId=2024-08-18):
 
 An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
@@ -9900,6 +9904,8 @@ Explanation: 1 has no prime factors, therefore all of its prime factors are limi
 
 ### Approach 
 Simple approach where you maintain three index values for each individual prime that has to be multiplied with the previous smallest ugly number to get the new ugly number ( to generate the array in a sorted order )
+1. When you find the minimum value out of the three then you increment only the index related to that and then recheck the minimum calculated from those.
+2. 
 
 ### Python Code
 ```python
@@ -9973,17 +9979,18 @@ Expected
 4. ![BFS](https://img.shields.io/badge/Breadth_First_Search-yellow)
 5. ![Matrix](https://img.shields.io/badge/Matrix-red)
 6. ![Tree](https://img.shields.io/badge/Tree-00C0C0) 
-7. ![Binary Search tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
-8. ![Two Pointers](https://img.shields.io/badge/Two_Pointers-FF8000)
+7. ![Binary_Search_tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
+8. ![Two_Pointers](https://img.shields.io/badge/Two_Pointers-FF8000)
 9. ![Sorting](https://img.shields.io/badge/Sorting-66FFFF)
-10. ![Heap (Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF)
+10. ![Heap_(Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF)
 11. ![Backtracking](https://img.shields.io/badge/Backtracking-FFCC99)
 12. ![Hash](https://img.shields.io/badge/Hash-D51C1C)
-13. ![Single Linked List](https://img.shields.io/badge/Single_Linked_List-00FF11)
-14. ![Doubly Linked List](https://img.shields.io/badge/Doubly_Linked_List-9781FF)
-15. ![Circular Linked List](https://img.shields.io/badge/Circular_Linked_List-FF00FF)
+13. ![Single_Linked_List](https://img.shields.io/badge/Single_Linked_List-00FF11)
+14. ![Doubly_Linked_List](https://img.shields.io/badge/Doubly_Linked_List-9781FF)
+15. ![Circular_Linked_List](https://img.shields.io/badge/Circular_Linked_List-FF00FF)
 16. ![Recursion](https://img.shields.io/badge/Recursion-FF8000)
 17. ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
+18. ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)
 
 
 
