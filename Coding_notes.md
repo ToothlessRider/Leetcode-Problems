@@ -115,8 +115,9 @@
 93. [Minimum Number of Days to Disconnect Island](#minimum-number-of-days-to-disconnect-island)
 94. [Combination Sum II](#combination-sum-ii)
 95. :red_circle::rocket:[Largest Subarray with K Sum](#largest-subarray-with-k-sum)
-96. [Template for solving](#template-for-solving)
-97. [List of Badges to use](#list-of-badges-to-use)
+96. [Maximum Number of Points with Cost](#maximum-number-of-points-with-cost)
+97. [Template for solving](#template-for-solving)
+98. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -9693,22 +9694,270 @@ Expected
 
 <hr>
 
-### Template for Solving
+> Day : Wednesday, 15th August 2024
 
-[**Question**]():
+
+### Lemonade Change
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
+
+[**Question**](https://leetcode.com/problems/lemonade-change/description/?envType=daily-question&envId=2024-08-15):
+
+At a lemonade stand, each lemonade costs $5. Customers are standing in a queue to buy from you and order one at a time (in the order specified by bills). Each customer will only buy one lemonade and pay with either a `$5`, `$10`, or `$20` bill. You must provide the correct change to each customer so that the net transaction is that the customer pays `$5`.
+
+Note that you do not have any change in hand at first.
+
+Given an integer array bills where bills[i] is the bill the ith customer pays, return true if you can provide every customer with the correct change, or false otherwise.
+
+ 
+> Example 1:
+
+Input: bills = [5,5,5,10,20]
+Output: true
+Explanation: 
+From the first 3 customers, we collect three `$5` bills in order. From the fourth customer, we collect a `$10` bill and give back a `$5`. From the fifth customer, we give a `$10` bill and a `$5` bill. Since all customers got correct change, we output true.
+
+> Example 2:
+
+Input: bills = [5,5,10,10,20]
+Output: false
+Explanation: 
+From the first two customers in order, we collect two `$5` bills. For the next two customers in order, we collect a `$10` bill and give back a `$5` bill. For the last customer, we can not give the change of `$15` back because we only have two `$10` bills. Since not every customer received the correct change, the answer is false.
 
 [**Solution**]():
 ### Approach
+Maintain two counters for the `$5` and `$10` so that we can check if there is 
 
 ### Java Code
 ```java
+class Solution {
+    public boolean lemonadeChange(int[] bills) {
+        int cnt5 = 0;
+        int cnt10 = 0;
 
+        for(int i = 0; i < bills.length; i++){
+            if(bills[i] == 5){
+                cnt5 += 1;
+            }
+            else if(bills[i] == 10 && cnt5 >= 1){
+                cnt10 += 1;
+                cnt5 -= 1;
+            }
+            else if(bills[i] == 20 && ((cnt5 >= 1 && cnt10 >=1) || (cnt5 >= 3))){
+                if(cnt5 >= 1 && cnt10 >=1){
+                    cnt10 -= 1;
+                    cnt5 -= 1;
+                }
+                else if(cnt5 >= 3){
+                    cnt5 -= 3;
+                }
+            }else{
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
 
 ```
 
 ### Output 
 ```
+Input
+bills = [5,5,5,10,20]
+Output
+true
+Expected
+true
 
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+### Maximum Number of Points with Cost
+
+[**Question**](https://leetcode.com/problems/maximum-number-of-points-with-cost/description/?envType=daily-question&envId=2024-08-17):
+
+You are given an m x n integer matrix points (0-indexed). Starting with 0 points, you want to maximize the number of points you can get from the matrix.
+
+To gain points, you must pick one cell in each row. Picking the cell at coordinates (r, c) will add points[r][c] to your score.
+
+However, you will lose points if you pick a cell too far from the cell that you picked in the previous row. For every two adjacent rows r and r + 1 (where 0 <= r < m - 1), picking cells at coordinates (r, c1) and (r + 1, c2) will subtract abs(c1 - c2) from your score.
+
+Return the maximum number of points you can achieve.
+
+abs(x) is defined as:
+
+x for x >= 0.
+-x for x < 0.
+ 
+
+> Example 1:
+
+Input: points = `[[1,2,3],[1,5,1],[3,1,1]]`
+Output: 9
+Explanation:
+The blue cells denote the optimal cells to pick, which have coordinates (0, 2), (1, 1), and (2, 0).
+You add 3 + 5 + 3 = 11 to your score.
+However, you must subtract abs(2 - 1) + abs(1 - 0) = 2 from your score.
+Your final score is 11 - 2 = 9.
+
+> Example 2:
+
+
+Input: points = `[[1,5],[2,3],[4,2]]`
+Output: 11
+Explanation:
+The blue cells denote the optimal cells to pick, which have coordinates (0, 1), (1, 1), and (2, 0).
+You add 5 + 3 + 4 = 12 to your score.
+However, you must subtract abs(1 - 1) + abs(1 - 0) = 1 from your score.
+Your final score is 12 - 1 = 11.
+ 
+
+Constraints:
+
+m == points.length
+n == points[r].length
+1 <= m, n <= 105
+1 <= m * n <= 105
+0 <= points[r][c] <= 105
+
+[**Solution**]():
+
+### Approach 
+We need to basially select the largest and second largest element in each column and then we can go ahead and check which value is greater when we subtract it's column number.
+
+### Python Code
+```python
+class Solution:
+    def maxPoints(self, points: List[List[int]]) -> int:
+        m, n = len(points), len(points[0])
+        prev = points[0]
+        
+        for r in range(1, m):
+            left = [0] * n
+            right = [0] * n
+            
+            # Compute left max array
+            left[0] = prev[0]
+            for c in range(1, n):
+                left[c] = max(left[c-1], prev[c] + c)
+            
+            # Compute right max array
+            right[-1] = prev[-1] - (n-1)
+            for c in range(n-2, -1, -1):
+                right[c] = max(right[c+1], prev[c] - c)
+            
+            # Update current row using left and right arrays
+            for c in range(n):
+                prev[c] = points[r][c] + max(left[c] - c, right[c] + c)
+        
+        return max(prev)
+
+```
+
+### Output
+```
+Input
+points = [[1,2,3],[1,5,1],[3,1,1]]
+Output
+9
+Expected
+9
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+### Ugly Number 2
+
+[**Question**](https://leetcode.com/problems/ugly-number-ii/description/?envType=daily-question&envId=2024-08-18):
+
+An ugly number is a positive integer whose prime factors are limited to 2, 3, and 5.
+
+Given an integer n, return the nth ugly number.
+
+ 
+
+> Example 1:
+
+Input: n = 10
+Output: 12
+Explanation: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12] is the sequence of the first 10 ugly numbers.
+
+> Example 2:
+
+Input: n = 1
+Output: 1
+Explanation: 1 has no prime factors, therefore all of its prime factors are limited to 2, 3, and 5.
+
+[**Solution**]():
+
+### Approach 
+Simple approach where you maintain three index values for each individual prime that has to be multiplied with the previous smallest ugly number to get the new ugly number ( to generate the array in a sorted order )
+
+### Python Code
+```python
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+        i2,i3,i5 = 0,0,0
+        ugly =[1]
+
+        while len(ugly) != n:
+            ugly2 = ugly[i2]*2
+            ugly3 = ugly[i3]*3
+            ugly5 = ugly[i5]*5
+
+            next_ugly = min(ugly2,ugly3,ugly5)
+            ugly.append(next_ugly)
+            if ugly2 == next_ugly:
+                i2 += 1
+            if ugly3 == next_ugly:
+                i3 += 1
+            if ugly5 == next_ugly:
+                i5 += 1
+            
+        return ugly[n-1]
+
+
+```
+
+### Output
+```
+Input
+n = 10
+Output
+12
+Expected
+12
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+### Template for Solving 
+
+[**Question**]():
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+
+
+```
+
+### Output
+```
 
 ```
 
@@ -9734,6 +9983,7 @@ Expected
 14. ![Doubly Linked List](https://img.shields.io/badge/Doubly_Linked_List-9781FF)
 15. ![Circular Linked List](https://img.shields.io/badge/Circular_Linked_List-FF00FF)
 16. ![Recursion](https://img.shields.io/badge/Recursion-FF8000)
+17. ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
 
 
 
@@ -10219,7 +10469,7 @@ Sample output-1:
 6. [Exercises - Lists, Dictionaries, Tuples](#exercises-2)
 7. [Conditional Statments](#conditional-statments)
 8. [For Loop](#for-loop)
-9. [While Loop](#while-loop) 
+9. [While Loop](#while-loop)
 10. [Template](#template)
 
 
@@ -10834,7 +11084,8 @@ Hi Aaron
 7. [Recursion in Java](#recursion-in-java)
 8. [Printing all permutations of an Array with recursion](#printing-all-permutations-of-an-array-with-recursion)
 9. [Stack operations in Java](#stack-operations-in-java)
-10. [Min & Max heap in Java](#min-&-max-heap-in-java)
+10. [Min & Max heap in Java](#min--max-heap-in-java)
+11. [Linked Lists](#linked-lists)
 
 
 
@@ -11377,6 +11628,9 @@ public class PlacePermutation {
 <hr>
 
 ## Stack Operations in Java
+
+> [Return to Table of Contents](#table-of-contents-java-functions)
+
 In Java, a stack can be initialized using the `Stack` class from the `java.util` package. The `Stack` class represents a last-in, first-out (LIFO) stack of objects. Here's how you can initialize and use a stack in Java:
 
 ### Importing the `Stack` Class
@@ -11465,6 +11719,8 @@ This code initializes a stack, performs several operations, and prints the resul
 <hr>
 
 ## Min & Max heap in Java
+
+> [Return to Table of Contents](#table-of-contents-java-functions)
 
 A **heap** is a special tree-based data structure that satisfies the **heap property**. In a **min-heap**, for any given node `i`, the value of `i` is less than or equal to the values of its children. In a **max-heap**, the value of `i` is greater than or equal to the values of its children. The heap is typically implemented as a binary tree, but it can be stored in an array.
 
