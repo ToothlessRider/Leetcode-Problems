@@ -116,8 +116,10 @@
 94. [Combination Sum II](#combination-sum-ii)
 95. :red_circle::rocket:[Largest Subarray with K Sum](#largest-subarray-with-k-sum)
 96. [Maximum Number of Points with Cost](#maximum-number-of-points-with-cost)
-97. [Template for solving](#template-for-solving)
-98. [List of Badges to use](#list-of-badges-to-use)
+97. [Stone Game 2](#stone-game-2)
+98. [Stone Game](#stone-game)
+99. [Template for solving](#template-for-solving)
+100. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -9948,9 +9950,185 @@ Expected
 
 <hr>
 
+
+### Stone Game 2
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)  ![Game Theory](https://img.shields.io/badge/Game_Theory-FF8000) ![Math](https://img.shields.io/badge/Math-FF99FF)
+
+[**Question**](https://leetcode.com/problems/stone-game-ii/description/?envType=daily-question&envId=2024-08-20):
+
+Alice and Bob continue their games with piles of stones.  There are a number of piles arranged in a row, and each pile has a positive integer number of stones piles[i].  The objective of the game is to end with the most stones. 
+
+Alice and Bob take turns, with Alice starting first.  Initially, M = 1.
+
+On each player's turn, that player can take all the stones in the first X remaining piles, where 1 <= X <= 2M.  Then, we set M = max(M, X).
+
+The game continues until all the stones have been taken.
+
+Assuming Alice and Bob play optimally, return the maximum number of stones Alice can get.
+
+ > Example 1:
+
+Input: piles = [2,7,9,4,4]
+Output: 10
+Explanation:  If Alice takes one pile at the beginning, Bob takes two piles, then Alice takes 2 piles again. Alice can get 2 + 4 + 4 = 10 piles in total. If Alice takes two piles at the beginning, then Bob can take all three piles left. In this case, Alice get 2 + 7 = 9 piles in total. So we return 10 since it's larger. 
+
+> Example 2:
+
+Input: piles = [1,2,3,4,5,100]
+Output: 104
+ 
+
+Constraints:
+
+1 <= piles.length <= 100
+1 <= piles[i] <= 104
+
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def stoneGameII(self, piles: List[int]) -> int:
+        n = len(piles)
+        
+        dp = [[0] * (n + 1) for _ in range(n)]
+        suffix_sum = [0] * n
+        suffix_sum[-1] = piles[-1]
+        
+        for i in range(n - 2, -1, -1):
+            suffix_sum[i] = suffix_sum[i + 1] + piles[i]
+        
+        for i in range(n - 1, -1, -1):
+            for m in range(1, n + 1):
+                if i + 2 * m >= n:
+                    dp[i][m] = suffix_sum[i]
+                else:
+                    for x in range(1, 2 * m + 1):
+                        dp[i][m] = max(dp[i][m], suffix_sum[i] - dp[i + x][max(m, x)])
+        
+        return dp[0][1]
+
+```
+
+### Output
+```
+Input 
+piles = [2,7,9,4,4]
+Output
+10
+Expected
+10
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
+### Stone Game
+
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)  ![Game Theory](https://img.shields.io/badge/Game_Theory-FF8000) ![Math](https://img.shields.io/badge/Math-FF99FF)
+
+[**Question**](https://leetcode.com/problems/stone-game/submissions/1362407616/):
+
+Medium
+Topics
+Companies
+Alice and Bob play a game with piles of stones. There are an even number of piles arranged in a row, and each pile has a positive integer number of stones piles[i].
+
+The objective of the game is to end with the most stones. The total number of stones across all the piles is odd, so there are no ties.
+
+Alice and Bob take turns, with Alice starting first. Each turn, a player takes the entire pile of stones either from the beginning or from the end of the row. This continues until there are no more piles left, at which point the person with the most stones wins.
+
+Assuming Alice and Bob play optimally, return true if Alice wins the game, or false if Bob wins.
+
+ 
+
+Example 1:
+
+Input: piles = [5,3,4,5]
+Output: true
+Explanation: 
+Alice starts first, and can only take the first 5 or the last 5.
+Say she takes the first 5, so that the row becomes [3, 4, 5].
+If Bob takes 3, then the board is [4, 5], and Alice takes 5 to win with 10 points.
+If Bob takes the last 5, then the board is [3, 4], and Alice takes 4 to win with 9 points.
+This demonstrated that taking the first 5 was a winning move for Alice, so we return true.
+Example 2:
+
+Input: piles = [3,7,2,3]
+Output: true
+
+[**Solution**]():
+
+### Approach 
+Since both are playing optimally we have to provide both with the same conditions. 
+1. They choose the larger pile, either from the start or end, given that the value ( either right after the start pile or right before the end pile ) is not greater than the current largest choice
+2. Based on this they can select the value and then increase the size of their pile
+3. Finally we compare the sum of the stone and then the larger pile wins
+
+### Python Code
+```python
+class Solution:
+    def stoneGame(self, piles: List[int]) -> bool:
+        sum_a = sum_b = 0
+        start = 0
+        end = len(piles) - 1
+        chance = True
+
+        while start != end :
+            if chance == True : 
+                if piles[start] > piles[end] and piles[start+1] < piles[end]:
+                    sum_a += piles[start]
+                    start += 1
+                    chance = False
+                else : 
+                    sum_a += piles[end]
+                    end -= 1
+                    chance = False
+            else : 
+                if piles[start] > piles[end] and piles[start+1] < piles[end]:
+                    sum_b += piles[start]
+                    start += 1
+                    chance = True
+                else : 
+                    sum_a += piles[end]
+                    end -= 1
+                    chance = True
+
+        if sum_a >= sum_b : 
+            return True
+        else : 
+            return False
+                
+
+```
+
+### Output
+```
+Input
+piles = [5,3,4,5]
+Output
+true
+Expected
+true
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
 ### Template for Solving 
 
 [**Question**]():
+
 
 [**Solution**]():
 
@@ -9991,6 +10169,8 @@ Expected
 16. ![Recursion](https://img.shields.io/badge/Recursion-FF8000)
 17. ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
 18. ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)
+19. ![Game Theory](https://img.shields.io/badge/Game_Theory-FF8000)
+20.  ![Math](https://img.shields.io/badge/Math-FF99FF)
 
 
 
@@ -11751,10 +11931,49 @@ A **heap** is a special tree-based data structure that satisfies the **heap prop
 
 
 ## Table of Contents Python Functions
-1. [HashSet](#hashset)
-2. [Initializing a 2d array](#initializing-a-2d-array)
-3. [Checking the case of a character](#checking-the-case-of-a-character)
-4. [Counter](#counter)
+1. [What is Python ?](#what-is-python-)
+2. [Modules, Libraries and Packages in Python](#modules-libraries-and-packages-in-python)
+3. [HashSet](#hashset)
+4. [Initializing a 2d array](#initializing-a-2d-array)
+5. [Checking the case of a character](#checking-the-case-of-a-character)
+6. [Counter](#counter)
+
+<hr>
+
+## What is Python ?
+Python is : 
+1. **a general purpose programming language** : You can use it to write code and programming tasks
+2. **an object-oriented language** : Which is highly useful to develope reusable software
+3. **a high level interpreted language** : It means python code is translated and executed one statement at a time
+
+
+<hr>
+
+## Modules, Libraries and Packages in Python
+
+Modules, packages and libraries allow you to save time by lettig you reuse existing code rather than writing things from scratch.
+
+1. Module : It is related code saved in one file
+2. Package : It is a collection of multiple modules
+3. Library : Usually contains a group of modules and interrelated packages.
+
+Data Analysis Packages :<br>
+The most famous packages for data analysis tools are `Pandas`,`NumPy` and `SciPy` which let you read and write a variety of data, perform numerical integration and interpolation and do linear algebra and more.
+
+For machine learning: <br>
+TensorFlow, PyTorch or Keras
+are the more famous packages that are used for classification, clustering, regression, etc.
+
+<hr> 
+
+> Anaconda vs Minconda
+
+| Anaconda | MiniConda |
+|--|--|
+|It contains the command line package manager, the GUI to launch apps, manage packages and env |It only contains conda and it's dependencies | 
+|It's a ready made, easy-to-use setup| It's a slightly more complex, minimal setup that you'll need good expertise to be able to customize. |
+
+<hr>
 
 ## HashSet
 A hashSet in python is much simpler to initiate and use than in any other language.
@@ -11904,7 +12123,5 @@ print(elements)
 
 ### Summary
 The `Counter` function is a powerful tool for counting occurrences of elements in an iterable. It provides methods to work with these counts, making it very handy for frequency analysis and similar tasks.
-
-
 
 <hr>
