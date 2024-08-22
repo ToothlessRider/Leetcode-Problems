@@ -14,72 +14,75 @@
 ## Table of Contents DSA
 1. [BST to Greater Sum Tree](#bst-to-greater-sum-tree )
 2. [Balanced Binary Search Tree](#balanced-binary-search-tree)
+   - [ Solve any binary tree coding problem](#solving-binary-tree-problems-with-recursion)
 3. [Two Sum problem](#two-sum)
 4. [Center of Star Graph](#center-of-star-graph)
 5. [Longest Substring](#longest-substring)
 	-	[Sliding Window Technique](#sliding-window-technique)
 6. [Median of two sorted arrays](#median-of-two-sorted-arrays)
-7. [All Ancestors of a Node in a Directed Acyclic Graph](#all-ancestors-of-a-node-in-a-directed-acyclic-graph)
-8. [Remove Max Number of Edges to Keep Graph Fully Traversable](#remove-max-number-of-edges-to-keep-graph-fully-traversable)
-9. [Longest Palindromic Substring](#longest-palindromic-substring)
-10. [Three Consecutive Odds](#three-consecutive-odds) 
-11. [Zigzag Conversion](#zigzag-conversion) 
-12. [Intersection of Two Arrays 2](#intersection-of-two-arrays-2) 
-13. [Score of a string](#score-of-a-string) 
+7. [Maximum total importance of Roads](#maximum-total-importance-of-roads)
+8. [All Ancestors of a Node in a Directed Acyclic Graph](#all-ancestors-of-a-node-in-a-directed-acyclic-graph)
+9. :red_circle:[Minimum Deletions to Make String Balanced](#minimum-deletions-to-make-string-balanced)
+10. [Remove Max Number of Edges to Keep Graph Fully Traversable](#remove-max-number-of-edges-to-keep-graph-fully-traversable)
+11. [Longest Palindromic Substring](#longest-palindromic-substring)
+12. [Three Consecutive Odds](#three-consecutive-odds) 
+13. :red_circle:[Zigzag Conversion](#zigzag-conversion) 
+14. [Intersection of Two Arrays 2](#intersection-of-two-arrays-2) 
+15. [Score of a string](#score-of-a-string) 
 	- [Math.abs() & charAt() functions](#new-things-learnt)
-14. [No repetitions](#no-repetitions)
-15. [Minimum Difference Between Largest and Smallest Value in Three Moves](#minimum-difference-between-largest-and-smallest-value-in-three-moves)
-16. [Reverse Integer](#reverse-integer)
-17. [Merge Nodes in Between Zeros](#merge-nodes-in-between-zeros)
-18. [Find the Minimum and Maximum Number of Nodes Between Critical Points](#find-the-minimum-and-maximum-number-of-nodes-between-critical-points)
-19. [Pass the Pillow](#pass-the-pillow)
-20. [Water Bottles](#water-bottles)
-21. [String to Integer](#string-to-integer)
-22. [Find the Winner of the circular game](#find-the-winner-of-the-circular-game)
-23. [Richest Customer Wealth](#richest-customer-wealth)
-24. [Fizz Buzz](#fizz-buzz)
-25. [Palindrome Number](#palindrome-number)
-26. [Average Waiting Time](#average-waiting-time)
-27. [Crawler Log Folder](#crawler-log-folder)
-28. [Reverse Substrings between each pair of Parentheses](#reverse-substrings-between-each-pair-of-parentheses)
-29. [Maximum Score from Removing substrings](#maximum-score-from-removing-substrings)
-30. [Robot Collisions](#robot-collisions)
-31. [Roman to Integer](#roman-to-integer)
-32. [Integer to Roman](#integer-to-roman)
-33. [Regular Expression Matching](#regular-expression-matching)
-34. :red_circle:[Container with Most Water](#container-with-most-water)
-35. [Longest Common Prefix](#longest-common-prefix)
-36. :red_circle:[Smallest Missing Integer Greater Than Sequential Prefix Sum](#smallest-missing-integer-greater-than-sequential-prefix-sum)
-37. [Number of Atoms](#number-of-atoms)
-38. [Create Binary Tree From Descriptions](#create-binary-tree-from-descriptions)
-39. [Step-By-Step Directions From a Binary Tree Node to Another](#step-by-step-directions-from-a-binary-tree-node-to-another)
-40. [3Sum](#three-sum)
-41. [Letter Combinations of a Phone Number](#letter-combinations-of-a-phone-number)
-42. [Valid Parenthesis](#valid-parenthesis)
+16. [No repetitions](#no-repetitions)
+17. [Minimum Difference Between Largest and Smallest Value in Three Moves](#minimum-difference-between-largest-and-smallest-value-in-three-moves)
+18. [Reverse Integer](#reverse-integer)
+19. [Merge Nodes in Between Zeros](#merge-nodes-in-between-zeros)
+20. [Find the Minimum and Maximum Number of Nodes Between Critical Points](#find-the-minimum-and-maximum-number-of-nodes-between-critical-points)
+21. [Pass the Pillow](#pass-the-pillow)
+22. [Water Bottles](#water-bottles)
+23. [String to Integer](#string-to-integer)
+24. [Find the Winner of the circular game](#find-the-winner-of-the-circular-game)
+25. [Richest Customer Wealth](#richest-customer-wealth)
+26. [Fizz Buzz](#fizz-buzz)
+27. [Palindrome Number](#palindrome-number)
+28. [Average Waiting Time](#average-waiting-time)
+29. [Crawler Log Folder](#crawler-log-folder)
+30. [Reverse Substrings between each pair of Parentheses](#reverse-substrings-between-each-pair-of-parentheses)
+31. [Maximum Score from Removing substrings](#maximum-score-from-removing-substrings)
+32. [Robot Collisions](#robot-collisions)
+33. [Roman to Integer](#roman-to-integer)
+34. [Integer to Roman](#integer-to-roman)
+35. [Regular Expression Matching](#regular-expression-matching)
+36. :red_circle:[Container with Most Water](#container-with-most-water)
+37. [Longest Common Prefix](#longest-common-prefix)
+38. :red_circle:[Smallest Missing Integer Greater Than Sequential Prefix Sum](#smallest-missing-integer-greater-than-sequential-prefix-sum)
+39. [Number of Atoms](#number-of-atoms)
+40. [Create Binary Tree From Descriptions](#create-binary-tree-from-descriptions)
+41. [Step-By-Step Directions From a Binary Tree Node to Another](#step-by-step-directions-from-a-binary-tree-node-to-another)
+42. [3Sum](#three-sum)
+43. [Letter Combinations of a Phone Number](#letter-combinations-of-a-phone-number)
+44. [Valid Parenthesis](#valid-parenthesis)
 	-	[if condition writing](#if-condition-writing)
 	-	[New shortcut for **bold** and *italicized* text](#new-shortcut-discovered)
-43. :rocket: [Set Matrix Zeroes](#set-matrix-zeroes)
-44. :red_circle:[Delete Nodes And Return Forest](#delete-nodes-and-return-forest)
-45. :red_circle:[Number of Good Leaf Nodes](#number-of-good-leaf-nodes)
-46. :star: [Lucky Numbers in a Matrix](#lucky-numbers-in-a-matrix)
-47. :rocket:[Pascals Triangle](#pascals-triangle)
-48. :rocket:[Next Permutation](#next-permutation)
-49. :red_circle:[Find Valid Matrix Given Row and Column Sums](#find-valid-matrix-given-row-and-column-sums)
-50. [Build a matrix with Conditions](#build-a-matrix-with-conditions)
-51. [Sort the People](#sort-the-people)
-52. [Sort Array by increasing Frequency](#sort-array-by-increasing-frequency)
-53. :red_circle:[Sort the Jumbled Numbers](#sort-the-jumbled-numbers)
-54. [Sort an Array](#sort-an-array)
-55. :red_circle:[Find the City With the Smallest Number of Neighbors at a Threshold Distance](#find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance)
-56. [Minimum Cost to Convert String 1](#minimum-cost-to-convert-string-1)
-57. :red_circle:[Second Minimum Time to Reach Destination](#second-minimum-time-to-reach-destination)
-58. :rocket:[Longest Consecutive Sequence](#longest-consecutive-sequence)
-59. :rocket:[Maximum Subarray](#maximum-subarray)
+45. :rocket: [Set Matrix Zeroes](#set-matrix-zeroes)
+46. :red_circle:[Delete Nodes And Return Forest](#delete-nodes-and-return-forest)
+47. :red_circle:[Number of Good Leaf Nodes](#number-of-good-leaf-nodes)
+48. :star: [Lucky Numbers in a Matrix](#lucky-numbers-in-a-matrix)
+49. :rocket:[Pascals Triangle](#pascals-triangle)
+50. :rocket:[Next Permutation](#next-permutation)
+51. :red_circle:[Find Valid Matrix Given Row and Column Sums](#find-valid-matrix-given-row-and-column-sums)
+52. [Build a matrix with Conditions](#build-a-matrix-with-conditions)
+53. [Sort the People](#sort-the-people)
+54. [Sort Array by increasing Frequency](#sort-array-by-increasing-frequency)
+55. :red_circle:[Sort the Jumbled Numbers](#sort-the-jumbled-numbers)
+56. [Sort an Array](#sort-an-array)
+57. :red_circle:[Find the City With the Smallest Number of Neighbors at a Threshold Distance](#find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance)
+58. [Minimum Cost to Convert String 1](#minimum-cost-to-convert-string-1)
+59. :red_circle:[Second Minimum Time to Reach Destination](#second-minimum-time-to-reach-destination)
+60. :rocket:[Longest Consecutive Sequence](#longest-consecutive-sequence)
+61. :rocket:[Maximum Subarray](#maximum-subarray)
 	- :rocket:[Kadane's algorithm](#kadanes-algorithm)
-60. :rocket:[Sort Colors](#sort-colors)
-61. :rocket:[Best time to buy and sell stocks](#best-time-to-buy-and-sell-stocks)
-62. :rocket:[Rotate Image](#rotate-image)
-63. [Determine whether Matrix Can Be Obtained By Rotation](#determine-whether-matrix-can-be-obtained-by-rotation)
+62. :rocket:[Sort Colors](#sort-colors)
+63. :rocket:[Best time to buy and sell stocks](#best-time-to-buy-and-sell-stocks)
+64. :rocket:[Rotate Image](#rotate-image)
+65. [Determine whether Matrix Can Be Obtained By Rotation](#determine-whether-matrix-can-be-obtained-by-rotation)
 64. [Build Array from Permutation](#build-array-from-permutation)
 65. :red_circle:[Merge Intervals](#merge-intervals)
 66. :rocket:[Merge Sorted Array](#merge-sorted-array)
@@ -118,8 +121,10 @@
 96. [Maximum Number of Points with Cost](#maximum-number-of-points-with-cost)
 97. [Stone Game 2](#stone-game-2)
 98. [Stone Game](#stone-game)
-99. [Template for solving](#template-for-solving)
-100. [List of Badges to use](#list-of-badges-to-use)
+99. [Number Complement](#number-complement)
+    - [Bitwise masking and Bitwise XOR function](#bitwise-masking-and-bitwise-xor-function)
+100. [Template for solving](#template-for-solving)
+101. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -235,7 +240,8 @@ class Solution:
 
 ## Balanced Binary Search Tree
 
-> Tags : Binary Search Tree, 
+![Binary_Search_tree](https://img.shields.io/badge/Binary_Search_Tree-330033)  ![Tree](https://img.shields.io/badge/Tree-00C0C0)  ![DFS](https://img.shields.io/badge/Depth_First_Search-blue) ![Greedy](https://img.shields.io/badge/Greedy-FF3333) ![Divide and Conquer](https://img.shields.io/badge/Divide_and_conquer-CC0066) 
+
 [**Question**](https://leetcode.com/problems/balance-a-binary-search-tree/?envType=daily-question&envId=2024-06-26) :
 
 Given the  `root`  of a binary search tree, return  _a  **balanced**  binary search tree with the same node values_. If there is more than one answer, return  **any of them**.
@@ -379,15 +385,21 @@ class Solution:
 root  = [1,null,2,null,3,null,4]
 Output = [2,1,3,null,null,null,4]
 ```
+
+
+### Solving Binary Tree Problems with recursion
+
+
+> [Solve any binary tree coding problem](https://www.youtube.com/watch?v=s2Yyk3qdy3o&ab_channel=Insidecode) 
+
+
 - [Return to TOC](#table-of-contents-dsa)
 
 <hr>
 
-## Solving Binary Tree Problems with recursion
-
-[Solve any binary tree coding problem](https://www.youtube.com/watch?v=s2Yyk3qdy3o&ab_channel=Insidecode) 
-
 ## Two-Sum
+
+![Hash_table](https://img.shields.io/badge/Hash_table-purple) ![Arrays](https://img.shields.io/badge/Arrays-green)
 
 [**Question**](https://leetcode.com/problems/two-sum/) : 
 
@@ -505,6 +517,8 @@ Expected [7,0,8]
 
 ## Center of Star Graph
 
+![Graph](https://img.shields.io/badge/Graph-FF9999)
+
 [**Question**](https://leetcode.com/problems/find-center-of-star-graph/?envType=daily-question&envId=2024-06-27):
 
 There is an undirected  **star**  graph consisting of  `n`  nodes labeled from  `1`  to  `n`. A star graph is a graph where there is one  **center**  node and  **exactly**  `n - 1`  edges that connect the center node with every other node.
@@ -552,7 +566,10 @@ Expected
 
 ## Longest Substring
 
-[***Question**](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) : 
+
+![Sliding Window](https://img.shields.io/badge/Sliding_Window-FFFF00) ![Hash_table](https://img.shields.io/badge/Hash_table-purple) ![String](https://img.shields.io/badge/String-grey)
+
+[**Question**](https://leetcode.com/problems/longest-substring-without-repeating-characters/description/) : 
 
 Given a string  `s`, find the length of the  **longest substring** without repeating characters.
 
@@ -615,6 +632,8 @@ Expected
 
 ## Median of two sorted arrays
 
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Divide and Conquer](https://img.shields.io/badge/Divide_and_conquer-CC0066) ![Binary Search](https://img.shields.io/badge/Binary_Search-3333FF)
+
 [**Question**](https://leetcode.com/problems/median-of-two-sorted-arrays/description/) : 
 
 Given two sorted arrays  `nums1`  and  `nums2`  of size  `m`  and  `n`  respectively, return  **the median**  of the two sorted arrays.
@@ -668,6 +687,8 @@ Expected
 
 
 ## Maximum total importance of Roads
+
+ ![Heap_(Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF) ![Sorting](https://img.shields.io/badge/Sorting-66FFFF)  ![Graph](https://img.shields.io/badge/Graph-FF9999)  ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
 
 [**Question**](https://leetcode.com/problems/maximum-total-importance-of-roads/?envType=daily-question&envId=2024-06-28) : 
 
@@ -729,7 +750,10 @@ class Solution:
 
 ## All Ancestors of a Node in a Directed Acyclic Graph
 
+![Topological Sort](https://img.shields.io/badge/Topological_sort-FC0D94) ![DFS](https://img.shields.io/badge/Depth_First_Search-blue) ![Graph](https://img.shields.io/badge/Graph-FF9999) ![BFS](https://img.shields.io/badge/Breadth_First_Search-yellow)
+
 [**Question**](https://leetcode.com/problems/all-ancestors-of-a-node-in-a-directed-acyclic-graph/description/?envType=daily-question&envId=2024-06-29) : 
+
 
 You are given a positive integer  `n`  representing the number of nodes of a  **Directed Acyclic Graph**  (DAG). The nodes are numbered from  `0`  to  `n - 1`  (**inclusive**).
 
@@ -819,6 +843,8 @@ Expected
 
 ## Minimum Deletions to Make String Balanced
 
+ ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF) ![String](https://img.shields.io/badge/String-grey) ![Stack](https://img.shields.io/badge/Stack-FC540D)
+
 [**Question**](https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/?envType=daily-question&envId=2024-07-30): 
 
 You are given a string s consisting only of characters 'a' and 'b'​​​​.
@@ -866,6 +892,8 @@ Explanation: The only solution is to delete the first two characters.
 <hr>
 
 ## Remove Max Number of Edges to Keep Graph Fully Traversable
+
+![Graph](https://img.shields.io/badge/Graph-FF9999) ![Union Find](https://img.shields.io/badge/Union_Find-006633)
 
 [**Question**](https://leetcode.com/problems/remove-max-number-of-edges-to-keep-graph-fully-traversable/description/?envType=daily-question&envId=2024-06-30):
 
@@ -1000,6 +1028,9 @@ class UnionFind {
 
 ## Longest Palindromic Substring
 
+
+![Two_Pointers](https://img.shields.io/badge/Two_Pointers-FF8000) ![String](https://img.shields.io/badge/String-grey) ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)
+
 [**Question**](https://leetcode.com/problems/longest-palindromic-substring/description/) : 
 
 Given a string  `s`, return  _the longest palindromic substring_ in  `s`.
@@ -1062,6 +1093,8 @@ class Solution {
 
 ## Three Consecutive Odds
 
+![Arrays](https://img.shields.io/badge/Arrays-green)
+
 [**Question**](https://leetcode.com/problems/three-consecutive-odds/description/?envType=daily-question&envId=2024-07-01):
 
 Given an integer array `arr`, return `true` if there are three consecutive odd numbers in the array. Otherwise, return `false`.
@@ -1118,6 +1151,8 @@ class Solution {
 
 ## Zigzag Conversion
 
+![String](https://img.shields.io/badge/String-grey)
+
 [**Question**](https://leetcode.com/problems/zigzag-conversion/description/):
 
 The string  `"PAYPALISHIRING"`  is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
@@ -1156,7 +1191,6 @@ To solve this problem we need to figure out how to split them to create a zig za
 ## Issues to solve : 
 
 
-
 ### Java Code 
 ```java
 
@@ -1169,6 +1203,8 @@ To solve this problem we need to figure out how to split them to create a zig za
 > Day : Tuesday, 2nd July 2024
 
 ## Intersection of Two Arrays 2
+
+![Arrays](https://img.shields.io/badge/Arrays-green)  ![Sorting](https://img.shields.io/badge/Sorting-66FFFF) ![Hash_table](https://img.shields.io/badge/Hash_table-purple)  ![Binary Search](https://img.shields.io/badge/Binary_Search-3333FF)  ![Two_Pointers](https://img.shields.io/badge/Two_Pointers-FF8000)
 
 [**Question**](https://leetcode.com/problems/intersection-of-two-arrays-ii/description/?envType=daily-question&envId=2024-07-02):
 
@@ -1234,6 +1270,8 @@ class Solution {
 
 ## Score of a string
 
+![String](https://img.shields.io/badge/String-grey)
+
 [**Question**](https://leetcode.com/problems/score-of-a-string/description/?envType=daily-question&envId=2024-06-01) : 
 
 You are given a string  `s`. The  **score**  of a string is defined as the sum of the absolute difference between the  **ASCII**  values of adjacent characters.
@@ -1282,6 +1320,8 @@ class Solution {
 <hr>
 
 ## No repetitions
+
+![Arrays](https://img.shields.io/badge/Arrays-green)
 
 **Question** : 
 You are giving an array of characters and you must return an array of only unique characters from the initial array.
@@ -1399,6 +1439,8 @@ public class UniqueCharacters {
 
 ## Minimum Difference Between Largest and Smallest Value in Three Moves
 
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Sorting](https://img.shields.io/badge/Sorting-66FFFF) ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
+
 [**Question**](https://leetcode.com/problems/minimum-difference-between-largest-and-smallest-value-in-three-moves/?envType=daily-question&envId=2024-07-03) : 
 
 You are given an integer array  `nums`.
@@ -1468,6 +1510,8 @@ class Solution {
 
 ## Reverse Integer
 
+![Math](https://img.shields.io/badge/Math-FF99FF)
+
 [**Question**](https://leetcode.com/problems/reverse-integer/description/): 
 
 Given a signed 32-bit integer  `x`, return  `x` _with its digits reversed_. If reversing  `x`  causes the value to go outside the signed 32-bit integer range  `[-231, 231 - 1]`, then return  `0`.
@@ -1520,6 +1564,8 @@ class Solution {
 > Day : Thursday, 4th July 2024
 
 ## Merge Nodes in Between Zeros
+
+![Simulation](https://img.shields.io/badge/Simulation-008080)  ![Single_Linked_List](https://img.shields.io/badge/Single_Linked_List-00FF11)
 
 [**Question**](https://leetcode.com/problems/merge-nodes-in-between-zeros/description/?envType=daily-question&envId=2024-07-04): 
 
@@ -1599,6 +1645,8 @@ Expected
 > Day : Friday, 5th July 2024
 
 ##  Find the Minimum and Maximum Number of Nodes Between Critical Points
+
+![Single_Linked_List](https://img.shields.io/badge/Single_Linked_List-00FF11)
 
 [**Question**](https://leetcode.com/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/description/?envType=daily-question&envId=2024-07-05): 
 
@@ -1700,6 +1748,8 @@ Expected
 
 ## Pass the Pillow
 
+![Simulation](https://img.shields.io/badge/Simulation-008080) ![Math](https://img.shields.io/badge/Math-FF99FF)
+
 [**Question**](https://leetcode.com/problems/pass-the-pillow/description/?envType=daily-question&envId=2024-07-06): 
 
 There are  `n`  people standing in a line labeled from  `1`  to  `n`. The first person in the line is holding a pillow initially. Every second, the person holding the pillow passes it to the next person standing in the line. Once the pillow reaches the end of the line, the direction changes, and people continue passing the pillow in the opposite direction.
@@ -1779,6 +1829,8 @@ class Solution:
 
 ## Water Bottles
 
+![Simulation](https://img.shields.io/badge/Simulation-008080) ![Math](https://img.shields.io/badge/Math-FF99FF)
+
 [**Question**](https://leetcode.com/problems/water-bottles/description/?envType=daily-question&envId=2024-07-07): 
 
 There are  `numBottles`  water bottles that are initially full of water. You can exchange  `numExchange`  empty water bottles from the market with one full water bottle.
@@ -1855,6 +1907,8 @@ class Solution(object):
 <hr>
 
 ## String to Integer
+
+![String](https://img.shields.io/badge/String-grey)
 
 [**Question**](https://leetcode.com/problems/string-to-integer-atoi/): 
 
@@ -1960,6 +2014,8 @@ Expected
 > Day : Monday, 8th July 2024
 
 ## Find the Winner of the circular game	
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Recursion](https://img.shields.io/badge/Recursion-FF8000) ![Simulation](https://img.shields.io/badge/Simulation-008080) ![Queue](https://img.shields.io/badge/Queue-800000) ![Math](https://img.shields.io/badge/Math-FF99FF)
 
 [**Question**](https://leetcode.com/problems/find-the-winner-of-the-circular-game/description/?envType=daily-question&envId=2024-07-08): 
 
@@ -2112,6 +2168,8 @@ linked_list.display()
 
 ## Richest Customer Wealth
 
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Matrix](https://img.shields.io/badge/Matrix-red)
+
 [**Question**](https://leetcode.com/problems/richest-customer-wealth/description/): 
 
 You are given an  `m x n`  integer grid  `accounts`  where  `accounts[i][j]`  is the amount of money the  `i​​​​​​​​​​​th​​​​`  customer has in the  `j​​​​​​​​​​​th`​​​​ bank. Return _the  **wealth**  that the richest customer has._
@@ -2179,14 +2237,14 @@ Expected
 
 ```
 
-### Points to remember 
-
 
 - [Return to TOC](#table-of-contents-dsa)
 
 <hr>
 
 ## Fizz Buzz
+
+![Math](https://img.shields.io/badge/Math-FF99FF) ![String](https://img.shields.io/badge/String-grey) ![Simulation](https://img.shields.io/badge/Simulation-008080)
 
 [**Question**](https://leetcode.com/problems/fizz-buzz/description/): 
 
@@ -2277,6 +2335,8 @@ Expected
 
 ## Palindrome Number
 
+![Math](https://img.shields.io/badge/Math-FF99FF)
+
 [**Question**](https://leetcode.com/problems/palindrome-number/description/): 
 
 Given an integer  `x`, return  `true` _if_ `x` _is a_
@@ -2354,6 +2414,8 @@ true
 
 ##  Average Waiting Time
 
+![Simulation](https://img.shields.io/badge/Simulation-008080) ![Arrays](https://img.shields.io/badge/Arrays-green)
+
 [**Question**](https://leetcode.com/problems/average-waiting-time/description/?envType=daily-question&envId=2024-07-09): 
 
 There is a restaurant with a single chef. You are given an array  `customers`, where  `customers[i] = [arrivali, timei]:`
@@ -2369,7 +2431,8 @@ Return  _the  **average**  waiting time of all customers_. Solutions within  `10
 
 **Input:** customers = [[1,2],[2,5],[4,3]]
 **Output:** 5.00000
-**Explanation:** 1) The first customer arrives at time 1, the chef takes his order and starts preparing it immediately at time 1, and finishes at time 3, so the waiting time of the first customer is 3 - 1 = 2.
+**Explanation:** 
+1) The first customer arrives at time 1, the chef takes his order and starts preparing it immediately at time 1, and finishes at time 3, so the waiting time of the first customer is 3 - 1 = 2.
 2) The second customer arrives at time 2, the chef takes his order and starts preparing it at time 3, and finishes at time 8, so the waiting time of the second customer is 8 - 2 = 6.
 3) The third customer arrives at time 4, the chef takes his order and starts preparing it at time 8, and finishes at time 11, so the waiting time of the third customer is 11 - 4 = 7.
 So the average waiting time = (2 + 6 + 7) / 3 = 5.
@@ -2421,6 +2484,8 @@ Expected
 > Day : Wednesday, 10th July 2024
 
 ## Crawler Log Folder
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![String](https://img.shields.io/badge/String-grey) ![Stack](https://img.shields.io/badge/Stack-FC540D)
 
 [**Question**](https://leetcode.com/problems/crawler-log-folder/description/?envType=daily-question&envId=2024-07-10): 
 
@@ -2487,6 +2552,9 @@ Expected
 > Day : Thursday, 11th July 2024
 
 ## Reverse Substrings between each pair of Parentheses
+
+![String](https://img.shields.io/badge/String-grey) ![Stack](https://img.shields.io/badge/Stack-FC540D)
+
 
 [**Question**](https://leetcode.com/problems/reverse-substrings-between-each-pair-of-parentheses/description/?envType=daily-question&envId=2024-07-11): 
 
@@ -10125,6 +10193,67 @@ true
 <hr>
 
 
+### Number Complement
+
+[**Question**](https://leetcode.com/problems/number-complement/description/?envType=daily-question&envId=2024-08-22):
+
+The complement of an integer is the integer you get when you flip all the 0's to 1's and all the 1's to 0's in its binary representation.
+
+For example, The integer 5 is "101" in binary and its complement is "010" which is the integer 2.
+Given an integer num, return its complement.
+
+ 
+
+> Example 1:
+
+Input: num = 5
+Output: 2
+Explanation: The binary representation of 5 is 101 (no leading zero bits), and its complement is 010. So you need to output 2.
+
+
+[**Solution**]():
+
+### Approach 
+Get the binary string for the number and then create the binary range value above it ( so for 5, next is 8 ) and then subtract then number from Binary_highest - 1 
+
+### Python Code
+```python
+class Solution:
+    def findComplement(self, num: int) -> int:
+        return 2**len(bin(num)[2:])-1 - num
+
+```
+
+### Leecode  Code
+```python
+class Solution:
+    def findComplement(self, num: int) -> int:
+        bit_length = num.bit_length()
+        
+        mask = (1 << bit_length) - 1
+        
+        return num ^ mask
+```
+
+### Bitwise masking and Bitwise XOR function
+
+:red_circle:
+
+### Output
+```
+Input
+num = 5
+Output
+2
+Expected
+2
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+
 ### Template for Solving 
 
 [**Question**]():
@@ -10154,23 +10283,33 @@ true
 1. ![Arrays](https://img.shields.io/badge/Arrays-green)
 2. ![DFS](https://img.shields.io/badge/Depth_First_Search-blue)
 3. ![Hash_table](https://img.shields.io/badge/Hash_table-purple)
-4. ![BFS](https://img.shields.io/badge/Breadth_First_Search-yellow)
-5. ![Matrix](https://img.shields.io/badge/Matrix-red)
-6. ![Tree](https://img.shields.io/badge/Tree-00C0C0) 
-7. ![Binary_Search_tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
-8. ![Two_Pointers](https://img.shields.io/badge/Two_Pointers-FF8000)
-9. ![Sorting](https://img.shields.io/badge/Sorting-66FFFF)
-10. ![Heap_(Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF)
-11. ![Backtracking](https://img.shields.io/badge/Backtracking-FFCC99)
-12. ![Hash](https://img.shields.io/badge/Hash-D51C1C)
-13. ![Single_Linked_List](https://img.shields.io/badge/Single_Linked_List-00FF11)
-14. ![Doubly_Linked_List](https://img.shields.io/badge/Doubly_Linked_List-9781FF)
-15. ![Circular_Linked_List](https://img.shields.io/badge/Circular_Linked_List-FF00FF)
-16. ![Recursion](https://img.shields.io/badge/Recursion-FF8000)
-17. ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
-18. ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)
-19. ![Game Theory](https://img.shields.io/badge/Game_Theory-FF8000)
-20.  ![Math](https://img.shields.io/badge/Math-FF99FF)
+4. ![String](https://img.shields.io/badge/String-grey)
+5. ![BFS](https://img.shields.io/badge/Breadth_First_Search-yellow)
+6. ![Matrix](https://img.shields.io/badge/Matrix-red)
+7. ![Queue](https://img.shields.io/badge/Queue-800000)
+8. ![Stack](https://img.shields.io/badge/Stack-FC540D)
+9. ![Tree](https://img.shields.io/badge/Tree-00C0C0) 
+10. ![Binary_Search_tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
+11. ![Two_Pointers](https://img.shields.io/badge/Two_Pointers-FF8000)
+12. ![Sorting](https://img.shields.io/badge/Sorting-66FFFF)
+13. ![Heap_(Priority_Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF)
+14. ![Backtracking](https://img.shields.io/badge/Backtracking-FFCC99)
+15. ![Hash](https://img.shields.io/badge/Hash-D51C1C)
+16. ![Single_Linked_List](https://img.shields.io/badge/Single_Linked_List-00FF11)
+17. ![Simulation](https://img.shields.io/badge/Simulation-008080)
+18. ![Doubly_Linked_List](https://img.shields.io/badge/Doubly_Linked_List-9781FF)
+19. ![Circular_Linked_List](https://img.shields.io/badge/Circular_Linked_List-FF00FF)
+20. ![Recursion](https://img.shields.io/badge/Recursion-FF8000)
+21. ![Greedy](https://img.shields.io/badge/Greedy-FF3333)
+22. ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)
+23. ![Game_Theory](https://img.shields.io/badge/Game_Theory-FF8000)
+24. ![Union_Find](https://img.shields.io/badge/Union_Find-006633)
+25. ![Math](https://img.shields.io/badge/Math-FF99FF)
+26. ![Divide_and_Conquer](https://img.shields.io/badge/Divide_and_conquer-CC0066)
+27. ![Graph](https://img.shields.io/badge/Graph-FF9999)
+28. ![Sliding_Window](https://img.shields.io/badge/Sliding_Window-FFFF00)
+29. ![Binary_Search](https://img.shields.io/badge/Binary_Search-3333FF)
+30. ![Topological_Sort](https://img.shields.io/badge/Topological_sort-FC0D94)
 
 
 
