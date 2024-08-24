@@ -9946,6 +9946,8 @@ Expected
 
 <hr>
 
+> Day : Wednesday, 21st August 2024
+
 ### Ugly Number 2
 
 ![Dynamic Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)  ![Heap (Priority Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF) ![Hash_table](https://img.shields.io/badge/Hash_table-purple)
@@ -10017,6 +10019,8 @@ Expected
 - [Return to TOC](#table-of-contents-dsa)
 
 <hr>
+
+> Day : Thursday, 22nd August 2024
 
 
 ### Stone Game 2
@@ -10100,7 +10104,6 @@ Expected
 
 ### Stone Game
 
-
 ![Arrays](https://img.shields.io/badge/Arrays-green) ![Dynamic_Programming](https://img.shields.io/badge/Dynamic_Programming-00FFFF)  ![Game Theory](https://img.shields.io/badge/Game_Theory-FF8000) ![Math](https://img.shields.io/badge/Math-FF99FF)
 
 [**Question**](https://leetcode.com/problems/stone-game/submissions/1362407616/):
@@ -10118,7 +10121,7 @@ Assuming Alice and Bob play optimally, return true if Alice wins the game, or fa
 
  
 
-Example 1:
+> Example 1:
 
 Input: piles = [5,3,4,5]
 Output: true
@@ -10192,6 +10195,8 @@ true
 
 <hr>
 
+> Day : Friday, 23rd August 2024
+
 
 ### Number Complement
 
@@ -10254,6 +10259,157 @@ Expected
 <hr>
 
 
+### Fraction Addition and Subtraction
+
+[**Question**](https://leetcode.com/problems/fraction-addition-and-subtraction/description/?envType=daily-question&envId=2024-08-23):
+
+Given a string expression representing an expression of fraction addition and subtraction, return the calculation result in string format.
+
+The final result should be an irreducible fraction. If your final result is an integer, change it to the format of a fraction that has a denominator 1. So in this case, 2 should be converted to 2/1.
+
+ 
+
+> Example 1:
+
+Input: expression = "-1/2+1/2"
+Output: "0/1"
+
+> Example 2:
+
+Input: expression = "-1/2+1/2+1/3"
+Output: "1/3"
+
+> Example 3:
+
+Input: expression = "1/3-1/2"
+Output: "-1/6"
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def fractionAddition(self, expression: str) -> str:
+        nums = list(map(int, re.findall(r'[+-]?\d+', expression)))
+        numerator = 0
+        denominator = 1
+        
+        for i in range(0, len(nums), 2):
+            num, den = nums[i], nums[i + 1]
+            numerator = numerator * den + num * denominator
+            denominator *= den
+        
+        common_divisor = gcd(numerator, denominator)
+        return f"{numerator // common_divisor}/{denominator // common_divisor}"
+
+```
+
+### Output
+```
+Input
+expression = "-1/2+1/2"
+Output
+"0/1"
+Expected
+"0/1"
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Saturday, 24th August 2024
+
+### Find the Closest Palindrome
+
+![String](https://img.shields.io/badge/String-grey) ![Math](https://img.shields.io/badge/Math-FF99FF)
+
+[**Question**](https://leetcode.com/problems/find-the-closest-palindrome/description/?envType=daily-question&envId=2024-08-24):
+
+
+Given a string n representing an integer, return the closest integer (not including itself), which is a palindrome. If there is a tie, return the smaller one.
+
+The closest is defined as the absolute difference minimized between two integers.
+
+> Example 1:
+
+Input: n = "123"
+Output: "121"
+
+> Example 2:
+
+Input: n = "1"
+Output: "0"
+Explanation: 0 and 2 are the closest palindromes but we return the smallest which is 0.
+
+[**Solution**](https://chatgpt.com/share/a1221101-92a0-471e-b407-d899e8f088f5):
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def nearestPalindromic(self, numberStr: str) -> str:
+        number = int(numberStr)
+        if number <= 10:
+            return str(number - 1)
+        if number == 11:
+            return "9"
+
+        length = len(numberStr)
+        leftHalf = int(numberStr[:(length + 1) // 2])
+        
+        palindromeCandidates = [
+            self.generatePalindromeFromLeft(leftHalf - 1, length % 2 == 0),
+            self.generatePalindromeFromLeft(leftHalf, length % 2 == 0),
+            self.generatePalindromeFromLeft(leftHalf + 1, length % 2 == 0),
+            10**(length - 1) - 1,
+            10**length + 1
+        ]
+
+        nearestPalindrome = 0
+        minDifference = float('inf')
+
+        for candidate in palindromeCandidates:
+            if candidate == number:
+                continue
+            difference = abs(candidate - number)
+            if difference < minDifference or (difference == minDifference and candidate < nearestPalindrome):
+                minDifference = difference
+                nearestPalindrome = candidate
+
+        return str(nearestPalindrome)
+
+    def generatePalindromeFromLeft(self, leftHalf: int, isEvenLength: bool) -> int:
+        palindrome = leftHalf
+        if not isEvenLength:
+            leftHalf //= 10
+        while leftHalf > 0:
+            palindrome = palindrome * 10 + leftHalf % 10
+            leftHalf //= 10
+        return palindrome
+
+
+#https://leetcode.com/problems/find-the-closest-palindrome/submissions/1365095966/
+
+```
+
+### Output
+```
+Input
+n = 123"
+Output
+"121"
+Expected
+"121"
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
 ### Template for Solving 
 
 [**Question**]():
@@ -10277,6 +10433,8 @@ Expected
 - [Return to TOC](#table-of-contents-dsa)
 
 <hr>
+
+
 
 ### List of Badges to use
 
