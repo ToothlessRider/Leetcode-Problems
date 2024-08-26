@@ -123,8 +123,10 @@
 98. [Stone Game](#stone-game)
 99. [Number Complement](#number-complement)
     - [Bitwise masking and Bitwise XOR function](#bitwise-masking-and-bitwise-xor-function)
-100. [Template for solving](#template-for-solving)
-101. [List of Badges to use](#list-of-badges-to-use)
+100. [Binary Tree Postorder traversal](#binary-tree-postorder-traversal)
+101. [N-ary Tree Postorder Traversal](#n-ary-tree-postorder-traversal)
+102. [Template for solving](#template-for-solving)
+103. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -10410,6 +10412,120 @@ Expected
 
 <hr>
 
+
+### Binary Tree Postorder traversal
+
+![Stack](https://img.shields.io/badge/Stack-FC540D) ![Tree](https://img.shields.io/badge/Tree-00C0C0) ![DFS](https://img.shields.io/badge/Depth_First_Search-blue) ![Binary_Search_tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
+
+[**Question**](https://leetcode.com/problems/binary-tree-postorder-traversal/description/?envType=daily-question&envId=2024-08-25):
+
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
+
+> Example 1:
+
+
+Input: root = [1,null,2,3]
+Output: [3,2,1]
+
+> Example 2:
+
+Input: root = []
+Output: []
+
+> Example 3:
+
+Input: root = [1]
+Output: [1]
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+
+
+```
+
+### Output
+```
+
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
+> Day : Monday, 26th August 2024
+
+
+### N-ary Tree Postorder Traversal
+
+![Stack](https://img.shields.io/badge/Stack-FC540D) ![Tree](https://img.shields.io/badge/Tree-00C0C0) ![DFS](https://img.shields.io/badge/Depth_First_Search-blue)
+
+[**Question**](https://leetcode.com/problems/n-ary-tree-postorder-traversal/description/?envType=daily-question&envId=2024-08-26):
+
+Given the root of an n-ary tree, return the postorder traversal of its nodes' values.
+
+Nary-Tree input serialization is represented in their level order traversal. Each group of children is separated by the null value (See examples)
+
+ 
+
+Example 1:
+
+
+Input: root = [1,null,3,2,4,null,5,6]
+Output: [5,6,3,2,4,1]
+Example 2:
+
+
+Input: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
+Output: [2,6,14,11,7,3,12,8,4,13,9,10,5,1]
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution(object):
+    def postorder(self, root):
+        # If the root is None, return an empty list
+        if not root:
+            return []
+
+        res = []
+
+        # Define the DFS function
+        def dfs(root):
+            # Recursively call dfs for each child of the current node
+            for x in root.children:
+                dfs(x)
+            # Append the value of the current node to the result list
+            res.append(root.val)
+
+        # Start DFS from the root
+        dfs(root)
+
+        # Return the result list containing node values in post-order
+        return res
+
+```
+
+### Output
+```
+Input
+root = [1,null,3,2,4,null,5,6]
+Output
+[5,6,3,2,4,1]
+Expected
+[5,6,3,2,4,1]
+```
+
+- [Return to TOC](#table-of-contents-dsa)
+
+<hr>
+
 ### Template for Solving 
 
 [**Question**]():
@@ -10433,7 +10549,6 @@ Expected
 - [Return to TOC](#table-of-contents-dsa)
 
 <hr>
-
 
 
 ### List of Badges to use
