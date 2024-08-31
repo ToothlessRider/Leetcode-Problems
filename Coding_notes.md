@@ -10415,6 +10415,7 @@ Expected
 
 ### Binary Tree Postorder traversal
 
+
 ![Stack](https://img.shields.io/badge/Stack-FC540D) ![Tree](https://img.shields.io/badge/Tree-00C0C0) ![DFS](https://img.shields.io/badge/Depth_First_Search-blue) ![Binary_Search_tree](https://img.shields.io/badge/Binary_Search_Tree-330033)
 
 [**Question**](https://leetcode.com/problems/binary-tree-postorder-traversal/description/?envType=daily-question&envId=2024-08-25):
@@ -10443,13 +10444,96 @@ Output: [1]
 
 ### Python Code
 ```python
+class Solution:
+    def modifiedGraphEdges(self, n, edges, source, destination, target):
+        adjacency_list = [[] for _ in range(n)]
+        for i, (nodeA, nodeB, weight) in enumerate(edges):
+            adjacency_list[nodeA].append((nodeB, i))
+            adjacency_list[nodeB].append((nodeA, i))
+
+        distances = [[float('inf')] * 2 for _ in range(n)]
+        distances[source][0] = distances[source][1] = 0
+
+        self.run_dijkstra(adjacency_list, edges, distances, source, 0, 0)
+        difference = target - distances[destination][0]
+
+        if difference < 0:
+            return []
+
+        self.run_dijkstra(adjacency_list, edges, distances, source, difference, 1)
+
+        if distances[destination][1] < target:
+            return []
+
+        for edge in edges:
+            if edge[2] == -1:
+                edge[2] = 1
+
+        return edges
+
+    def run_dijkstra(self, adjacency_list, edges, distances, source, difference, run):
+        n = len(adjacency_list)
+        priority_queue = [(0, source)]
+        distances[source][run] = 0
+
+        while priority_queue:
+            current_distance, current_node = heapq.heappop(priority_queue)
+            if current_distance > distances[current_node][run]:
+                continue
+
+            for next_node, edge_index in adjacency_list[current_node]:
+                weight = edges[edge_index][2]
+                if weight == -1:
+                    weight = 1
+                if run == 1 and edges[edge_index][2] == -1:
+                    new_weight = difference + distances[next_node][0] - distances[current_node][1]
+                    if new_weight > weight:
+                        edges[edge_index][2] = weight = new_weight
+
+                if distances[next_node][run] > distances[current_node][run] + weight:
+                    distances[next_node][run] = distances[current_node][run] + weight
+                    heapq.heappush(priority_queue, (distances[next_node][run], next_node))
+
+def main():
+    input_data = sys.stdin.read().strip()
+    lines = input_data.splitlines()
+    
+    num_test_cases = len(lines) // 5
+    results = []
+
+    for i in range(num_test_cases):
+        n = int(lines[i*5])
+        edges = json.loads(lines[i*5 + 1])
+        source = int(lines[i*5 + 2])
+        destination = int(lines[i*5 + 3])
+        target = int(lines[i*5 + 4])
+        
+        result = Solution().modifiedGraphEdges(n, edges, source, destination, target)
+        results.append(json.dumps(result))
+
+    with open('user.out', 'w') as f:
+        for result in results:
+            f.write(f"{result}\n")
+
+if __name__ == "__main__":
+    main()
+    exit(0)
 
 
 ```
 
 ### Output
 ```
-
+Input
+n = 5
+edges = [[4,1,-1],[2,0,-1],[0,3,-1],[4,3,-1]]
+source = 0
+destination = 1
+target = 5
+Output
+[[4, 1, 1], [2, 0, 3], [0, 3, 3], [4, 3, 1]]
+Expected
+[[4,1,1],[2,0,1],[0,3,3],[4,3,1]]
 ```
 
 - [Return to TOC](#table-of-contents-dsa)
@@ -10526,6 +10610,374 @@ Expected
 
 <hr>
 
+
+> Day : Wednesday, 28th August 2024
+
+### Count Sub Islands
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Union_Find](https://img.shields.io/badge/Union_Find-006633) ![DFS](https://img.shields.io/badge/Depth_First_Search-blue) ![BFS](https://img.shields.io/badge/Breadth_First_Search-yellow) ![Matrix](https://img.shields.io/badge/Matrix-red) 
+
+[**Question**](https://leetcode.com/problems/count-sub-islands/?envType=daily-question&envId=2024-08-28):
+
+You are given two m x n binary matrices grid1 and grid2 containing only 0's (representing water) and 1's (representing land). An island is a group of 1's connected 4-directionally (horizontal or vertical). Any cells outside of the grid are considered water cells.
+
+An island in grid2 is considered a sub-island if there is an island in grid1 that contains all the cells that make up this island in grid2.
+
+Return the number of islands in grid2 that are considered sub-islands.
+
+ 
+
+Example 1:
+
+
+Input: grid1 = [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]], grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]]
+Output: 3
+Explanation: In the picture above, the grid on the left is grid1 and the grid on the right is grid2.
+The 1s colored red in grid2 are those considered to be part of a sub-island. There are three sub-islands.
+Example 2:
+
+
+Input: grid1 = [[1,0,1,0,1],[1,1,1,1,1],[0,0,0,0,0],[1,1,1,1,1],[1,0,1,0,1]], grid2 = [[0,0,0,0,0],[1,1,1,1,1],[0,1,0,1,0],[0,1,0,1,0],[1,0,0,0,1]]
+Output: 2 
+Explanation: In the picture above, the grid on the left is grid1 and the grid on the right is grid2.
+The 1s colored red in grid2 are those considered to be part of a sub-island. There are two sub-islands.
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def countSubIslands(self, grid1: List[List[int]], grid2: List[List[int]]) -> int:
+        if not grid1 or not grid1[0] or not grid2 or not grid2[0]:
+            return 0
+
+        ROWS, COLS = len(grid1), len(grid1[0])
+        DIRECTIONS = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        island_count = 0
+
+        def dfs_explore(r, c):
+            if r < 0 or r >= ROWS or c < 0 or c >= COLS or grid2[r][c] == 0:
+                return True 
+            
+            # Mark cell as visited
+            grid2[r][c] = 0
+
+            # Disqualify as sub-island if cell is water in grid1
+            if grid1[r][c] == 0:
+                nonlocal is_sub_island 
+                is_sub_island = False
+
+            for dr, dc in DIRECTIONS:
+                dfs_explore(r + dr, c + dc)
+            
+            return is_sub_island
+
+        for row in range(ROWS):
+            for col in range(COLS):
+                if grid2[row][col] == 1:
+                    is_sub_island = True 
+                    if dfs_explore(row, col):
+                        island_count += 1
+
+        return island_count
+
+```
+
+### Output
+```
+Input
+grid1 = [[1,1,1,0,0],[0,1,1,1,1],[0,0,0,0,0],[1,0,0,0,0],[1,1,0,1,1]]
+grid2 = [[1,1,1,0,0],[0,0,1,1,1],[0,1,0,0,0],[1,0,1,1,0],[0,1,0,1,0]]
+Output
+3
+Expected
+3
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+> Day : Thursday, 29th August 2024
+
+### Most Stones Removed with Same Row or Column
+
+![Hash_table](https://img.shields.io/badge/Hash_table-purple) ![Graph](https://img.shields.io/badge/Graph-FF9999) ![Union_Find](https://img.shields.io/badge/Union_Find-006633) ![DFS](https://img.shields.io/badge/Depth_First_Search-blue) 
+
+[**Question**](https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/?envType=daily-question&envId=2024-08-29):
+
+On a 2D plane, we place n stones at some integer coordinate points. Each coordinate point may have at most one stone.
+
+A stone can be removed if it shares either the same row or the same column as another stone that has not been removed.
+
+Given an array stones of length n where stones[i] = [xi, yi] represents the location of the ith stone, return the largest possible number of stones that can be removed.
+
+ 
+
+Example 1:
+
+Input: stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
+Output: 5
+Explanation: One way to remove 5 stones is as follows:
+1. Remove stone [2,2] because it shares the same row as [2,1].
+2. Remove stone [2,1] because it shares the same column as [0,1].
+3. Remove stone [1,2] because it shares the same row as [1,0].
+4. Remove stone [1,0] because it shares the same column as [0,0].
+5. Remove stone [0,1] because it shares the same row as [0,0].
+Stone [0,0] cannot be removed since it does not share a row/column with another stone still on the plane.
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def __init__(self):
+        self.connected_component_count = 0
+
+    def removeStones(self, stone_positions: List[List[int]]) -> int:
+        set_representatives = [0] * 20003
+        for stone_position in stone_positions:
+            self.merge_components(stone_position[0] + 1, stone_position[1] + 10002, set_representatives)
+        return len(stone_positions) - self.connected_component_count
+
+    def find_representative(self, element: int, set_representatives: List[int]) -> int:
+        if set_representatives[element] == 0:
+            set_representatives[element] = element
+            self.connected_component_count += 1
+        if set_representatives[element] != element:
+            set_representatives[element] = self.find_representative(set_representatives[element], set_representatives)
+        return set_representatives[element]
+
+    def merge_components(self, element_a: int, element_b: int, set_representatives: List[int]) -> None:
+        rep_a = self.find_representative(element_a, set_representatives)
+        rep_b = self.find_representative(element_b, set_representatives)
+        if rep_a != rep_b:
+            set_representatives[rep_b] = rep_a
+            self.connected_component_count -= 1
+
+
+
+
+```
+
+### Output
+```
+Input
+stones = [[0,0],[0,1],[1,0],[1,2],[2,1],[2,2]]
+Output
+5
+Expected
+5
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+
+> Day : Friday, 30th August 2024
+
+### Modify Graph Edge Weights
+
+![Heap_(Priority_Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF) ![Shortest_Path](https://img.shields.io/badge/Shortest_Path-66B2FF) ![Graph](https://img.shields.io/badge/Graph-FF9999)
+
+[**Question**](https://leetcode.com/problems/modify-graph-edge-weights/?envType=daily-question&envId=2024-08-30):
+
+You are given an undirected weighted connected graph containing n nodes labeled from 0 to n - 1, and an integer array edges where edges[i] = [ai, bi, wi] indicates that there is an edge between nodes ai and bi with weight wi.
+
+Some edges have a weight of -1 (wi = -1), while others have a positive weight (wi > 0).
+
+Your task is to modify all edges with a weight of -1 by assigning them positive integer values in the range [1, 2 * 109] so that the shortest distance between the nodes source and destination becomes equal to an integer target. If there are multiple modifications that make the shortest distance between source and destination equal to target, any of them will be considered correct.
+
+Return an array containing all edges (even unmodified ones) in any order if it is possible to make the shortest distance from source to destination equal to target, or an empty array if it's impossible.
+
+Note: You are not allowed to modify the weights of edges with initial positive weights.
+
+ 
+
+> Example 1:
+
+
+
+Input: n = 5, edges = [[4,1,-1],[2,0,-1],[0,3,-1],[4,3,-1]], source = 0, destination = 1, target = 5
+Output: [[4,1,1],[2,0,1],[0,3,3],[4,3,1]]
+Explanation: The graph above shows a possible modification to the edges, making the distance from 0 to 1 equal to 5.
+
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def modifiedGraphEdges(self, n, edges, source, destination, target):
+        adjacency_list = [[] for _ in range(n)]
+        for i, (nodeA, nodeB, weight) in enumerate(edges):
+            adjacency_list[nodeA].append((nodeB, i))
+            adjacency_list[nodeB].append((nodeA, i))
+
+        distances = [[float('inf')] * 2 for _ in range(n)]
+        distances[source][0] = distances[source][1] = 0
+
+        self.run_dijkstra(adjacency_list, edges, distances, source, 0, 0)
+        difference = target - distances[destination][0]
+
+        if difference < 0:
+            return []
+
+        self.run_dijkstra(adjacency_list, edges, distances, source, difference, 1)
+
+        if distances[destination][1] < target:
+            return []
+
+        for edge in edges:
+            if edge[2] == -1:
+                edge[2] = 1
+
+        return edges
+
+    def run_dijkstra(self, adjacency_list, edges, distances, source, difference, run):
+        n = len(adjacency_list)
+        priority_queue = [(0, source)]
+        distances[source][run] = 0
+
+        while priority_queue:
+            current_distance, current_node = heapq.heappop(priority_queue)
+            if current_distance > distances[current_node][run]:
+                continue
+
+            for next_node, edge_index in adjacency_list[current_node]:
+                weight = edges[edge_index][2]
+                if weight == -1:
+                    weight = 1
+                if run == 1 and edges[edge_index][2] == -1:
+                    new_weight = difference + distances[next_node][0] - distances[current_node][1]
+                    if new_weight > weight:
+                        edges[edge_index][2] = weight = new_weight
+
+                if distances[next_node][run] > distances[current_node][run] + weight:
+                    distances[next_node][run] = distances[current_node][run] + weight
+                    heapq.heappush(priority_queue, (distances[next_node][run], next_node))
+
+def main():
+    input_data = sys.stdin.read().strip()
+    lines = input_data.splitlines()
+    
+    num_test_cases = len(lines) // 5
+    results = []
+
+    for i in range(num_test_cases):
+        n = int(lines[i*5])
+        edges = json.loads(lines[i*5 + 1])
+        source = int(lines[i*5 + 2])
+        destination = int(lines[i*5 + 3])
+        target = int(lines[i*5 + 4])
+        
+        result = Solution().modifiedGraphEdges(n, edges, source, destination, target)
+        results.append(json.dumps(result))
+
+    with open('user.out', 'w') as f:
+        for result in results:
+            f.write(f"{result}\n")
+
+if __name__ == "__main__":
+    main()
+    exit(0)
+
+
+```
+
+### Output
+```
+n = 5
+edges = [[4,1,-1],[2,0,-1],[0,3,-1],[4,3,-1]]
+source = 0
+destination = 1
+target = 5
+Output
+[[4, 1, 1], [2, 0, 3], [0, 3, 3], [4, 3, 1]]
+Expected
+[[4,1,1],[2,0,1],[0,3,3],[4,3,1]]
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+> Day : Saturday  31st August 2024
+
+### Path with Maximum Probability
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Graph](https://img.shields.io/badge/Graph-FF9999) ![Heap_(Priority_Queue)](https://img.shields.io/badge/Heap(_Priority_Queue_)-FFCCFF) ![Shortest_Path](https://img.shields.io/badge/Shortest_Path-66B2FF)
+
+[**Question**](https://leetcode.com/problems/path-with-maximum-probability/?envType=daily-question&envId=2024-08-31):
+
+You are given an undirected weighted graph of n nodes (0-indexed), represented by an edge list where edges[i] = [a, b] is an undirected edge connecting the nodes a and b with a probability of success of traversing that edge succProb[i].
+
+Given two nodes start and end, find the path with the maximum probability of success to go from start to end and return its success probability.
+
+If there is no path from start to end, return 0. Your answer will be accepted if it differs from the correct answer by at most 1e-5.
+> Example 1:
+
+Input: n = 3, edges = [[0,1],[1,2],[0,2]], succProb = [0.5,0.5,0.2], start = 0, end = 2
+Output: 0.25000
+Explanation: There are two paths from start to end, one having a probability of success = 0.2 and the other has 0.5 * 0.5 = 0.25.
+
+> Example 2:
+
+Input: n = 3, edges = [[0,1],[1,2],[0,2]], succProb = [0.5,0.5,0.3], start = 0, end = 2
+Output: 0.30000
+
+[**Solution**]():
+
+### :red_circle: Approach 
+
+### Python Code
+```python
+class Solution:
+    def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
+        dist = [0] * n
+        dist[start] = 1
+        
+        for _ in range(n - 1):
+            updated = False
+            for i, (u, v) in enumerate(edges):
+                if dist[u] * succProb[i] > dist[v]:
+                    dist[v] = dist[u] * succProb[i]
+                    updated = True
+                if dist[v] * succProb[i] > dist[u]:
+                    dist[u] = dist[v] * succProb[i]
+                    updated = True
+            if not updated:
+                break
+        
+        return dist[end]
+
+```
+
+### Output
+```
+Input
+n = 3
+edges = [[0,1],[1,2],[0,2]]
+succProb = [0.5,0.5,0.2]
+start_node = 0
+end_node = 2
+Output
+0.25000
+Expected
+0.25000
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
 ### Template for Solving 
 
 [**Question**]():
@@ -10546,9 +10998,10 @@ Expected
 
 ```
 
-- [Return to TOC](#table-of-contents-dsa)
+- [Return to TOC](#table-of-contents-dsa) 
 
 <hr>
+
 
 
 ### List of Badges to use
@@ -10583,6 +11036,7 @@ Expected
 28. ![Sliding_Window](https://img.shields.io/badge/Sliding_Window-FFFF00)
 29. ![Binary_Search](https://img.shields.io/badge/Binary_Search-3333FF)
 30. ![Topological_Sort](https://img.shields.io/badge/Topological_sort-FC0D94)
+31. ![Shortest_Path](https://img.shields.io/badge/Shortest_Path-66B2FF)
 
 
 
@@ -12333,6 +12787,12 @@ A **heap** is a special tree-based data structure that satisfies the **heap prop
 - **Insertion**: Adding a new element to the heap, followed by adjusting the heap to maintain the heap property.
 - **Deletion**: Removing the root element (min or max), followed by adjusting the heap to maintain the heap property.
 - **Peek**: Accessing the root element without removing it.
+
+<hr>
+
+## Linked List
+
+> [Return to Table of Contents](#table-of-contents-java-functions)
 
 
 <hr>
