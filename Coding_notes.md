@@ -129,8 +129,9 @@
 103. :red_circle:[Most Stones Removed with Same Row or Column](#most-stones-removed-with-same-row-or-column)
 104. :red_circle:[Modify Graph Edge Weights](#modify-graph-edge-weights)
 105. :red_circle:[Path with Maximum Probability](#path-with-maximum-probability)
-106. [Template for solving](#template-for-solving)
-107. [List of Badges to use](#list-of-badges-to-use)
+106. [Convert ID Array Into 2D Array](#convert-id-array-into-2d-array)
+107. [Template for solving](#template-for-solving)
+108. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -10982,6 +10983,95 @@ Expected
 
 <hr>
 
+> Day : Sunday, 1st September 2024
+
+
+### Convert ID Array Into 2D Array
+
+[**Question**](https://leetcode.com/problems/convert-1d-array-into-2d-array/description/?envType=daily-question&envId=2024-09-01):
+
+You are given a 0-indexed 1-dimensional (1D) integer array original, and two integers, m and n. You are tasked with creating a 2-dimensional (2D) array with  m rows and n columns using all the elements from original.
+
+The elements from indices 0 to n - 1 (inclusive) of original should form the first row of the constructed 2D array, the elements from indices n to 2 * n - 1 (inclusive) should form the second row of the constructed 2D array, and so on.
+
+Return an m x n 2D array constructed according to the above procedure, or an empty 2D array if it is impossible.
+
+ 
+
+> Example 1:
+
+
+Input: original = [1,2,3,4], m = 2, n = 2
+Output: [[1,2],[3,4]]
+Explanation: The constructed 2D array should contain 2 rows and 2 columns.
+The first group of n=2 elements in original, [1,2], becomes the first row in the constructed 2D array.
+The second group of n=2 elements in original, [3,4], becomes the second row in the constructed 2D array.
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def construct2DArray(self, original, m, n):
+        result = [[] for _ in range(m)]
+        i = 0
+        match m * n == len(original):
+            case True:
+                while i < m:
+                    result[i] = original[i * n:(i * n + n)]
+                    i += 1
+            case _:
+                return []
+        return result
+
+
+def format_output(result):
+    return '[' + ','.join(str(row).replace(' ', '') for row in result) + ']'
+
+def kdsmain():
+    input_data = sys.stdin.read().strip()
+    lines = input_data.splitlines()
+    
+    num_test_cases = len(lines) // 3
+    results = []
+
+    for i in range(num_test_cases):
+        original = json.loads(lines[i*3])
+        m = int(lines[i*3 + 1])
+        n = int(lines[i*3 + 2])
+        
+        result = Solution().construct2DArray(original, m, n)
+        formatted_result = format_output(result)
+        results.append(formatted_result)
+
+    with open('user.out', 'w') as f:
+        for result in results:
+            f.write(f"{result}\n")
+
+if __name__ == "__main__":
+    kdsmain()
+    exit(0)
+```
+
+### Output
+```
+Input
+original = [1,2,3,4]
+m = 2
+n = 2
+Output
+[[1,2],[3,4]]
+Expected
+[[1,2],[3,4]]
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+
 ### Template for Solving 
 
 [**Question**]():
@@ -11005,7 +11095,6 @@ Expected
 - [Return to TOC](#table-of-contents-dsa) 
 
 <hr>
-
 
 
 ### List of Badges to use
