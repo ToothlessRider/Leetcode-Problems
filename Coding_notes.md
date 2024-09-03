@@ -130,8 +130,9 @@
 104. :red_circle:[Modify Graph Edge Weights](#modify-graph-edge-weights)
 105. :red_circle:[Path with Maximum Probability](#path-with-maximum-probability)
 106. [Convert ID Array Into 2D Array](#convert-id-array-into-2d-array)
-107. [Template for solving](#template-for-solving)
-108. [List of Badges to use](#list-of-badges-to-use)
+107. [Sum of Digits of String After Convert](#sum-of-digits-of-string-after-convert)
+108. [Template for solving](#template-for-solving)
+109. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -11089,6 +11090,97 @@ Expected
 
 ### Output
 ```
+
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+> Day : Tuesday, 3rd September 2024
+
+
+### Sum of Digits of String After Convert
+
+[**Question**](https://leetcode.com/problems/sum-of-digits-of-string-after-convert/description/?envType=daily-question&envId=2024-09-03):
+
+You are given a string s consisting of lowercase English letters, and an integer k.
+
+First, convert s into an integer by replacing each letter with its position in the alphabet (i.e., replace 'a' with 1, 'b' with 2, ..., 'z' with 26). Then, transform the integer by replacing it with the sum of its digits. Repeat the transform operation k times in total.
+
+For example, if s = "zbax" and k = 2, then the resulting integer would be 8 by the following operations:
+
+Convert: "zbax" ➝ "(26)(2)(1)(24)" ➝ "262124" ➝ 262124
+Transform #1: 262124 ➝ 2 + 6 + 2 + 1 + 2 + 4 ➝ 17
+Transform #2: 17 ➝ 1 + 7 ➝ 8
+Return the resulting integer after performing the operations described above.
+
+ 
+> Example 1:
+
+Input: s = "iiii", k = 1
+Output: 36
+Explanation: The operations are as follows:
+- Convert: "iiii" ➝ "(9)(9)(9)(9)" ➝ "9999" ➝ 9999
+- Transform #1: 9999 ➝ 9 + 9 + 9 + 9 ➝ 36
+Thus the resulting integer is 36.
+
+[**Solution**]():
+
+### Approach 
+First we use ASCII functions to convert the given string values to their alphanumeric values.
+- Then with a while loop we can pass a condition to check if they length of the number is 1 ( or if number is < 10)
+- This wil give us our final output
+
+### My Python Code
+```python
+class Solution:
+    def getLucky(self, s: str, k: int) -> int:
+        str_num = ""
+        for i in range ( len(s)):
+            str_num += str(ord(s[i])-ord('a')+1)
+            # this should successfully give me the number
+        
+        for loops in range(k):
+            total = 0
+            num = int(str_num)
+            for i in range(len(str_num)):
+                digit = num%10
+                total += digit
+                num = num//10
+                # There was an error here where I just wrtote num / 10, but since I want int values and not float, this would be better
+            str_num = str(total)
+
+        return int(str_num)
+
+```
+
+### Shorter ( But not Better ) Python Code 
+```python
+class Solution:
+    def getLucky(self, s: str, k: int) -> int:
+        str_num = ""
+        for i in range (len(s)):
+            str_num += str(ord(s[i])-ord('a')+1)
+            # this should successfully give me the number
+        
+        for loops in range(k):
+            total = sum(int(digit) for digit in str_num)
+            str_num = str(total)
+
+        return int(str_num)
+
+```
+
+### Output
+```
+Input
+s = "iiii"
+k = 1
+Output
+36
+Expected
+36
 
 ```
 
