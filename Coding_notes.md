@@ -118,21 +118,26 @@
 93. [Minimum Number of Days to Disconnect Island](#minimum-number-of-days-to-disconnect-island)
 94. [Combination Sum II](#combination-sum-ii)
 95. :red_circle::rocket:[Largest Subarray with K Sum](#largest-subarray-with-k-sum)
-96. :red_circle:[Maximum Number of Points with Cost](#maximum-number-of-points-with-cost)
-97. [Stone Game 2](#stone-game-2)
-98. [Stone Game](#stone-game)
-99. [Number Complement](#number-complement)
+96. :rocket:[Reverse a Linked List](#reverse-a-linked-list)
+97. :red_circle:[Maximum Number of Points with Cost](#maximum-number-of-points-with-cost)
+98. [Stone Game 2](#stone-game-2)
+99. [Stone Game](#stone-game)
+100. [Number Complement](#number-complement)
     - [Bitwise masking and Bitwise XOR function](#bitwise-masking-and-bitwise-xor-function)
-100. :red_circle:[Binary Tree Postorder traversal](#binary-tree-postorder-traversal)
-101. :red_circle:[N-ary Tree Postorder Traversal](#n-ary-tree-postorder-traversal)
-102. :red_circle:[Count Sub Islands](#count-sub-islands)
-103. :red_circle:[Most Stones Removed with Same Row or Column](#most-stones-removed-with-same-row-or-column)
-104. :red_circle:[Modify Graph Edge Weights](#modify-graph-edge-weights)
-105. :red_circle:[Path with Maximum Probability](#path-with-maximum-probability)
-106. [Convert ID Array Into 2D Array](#convert-id-array-into-2d-array)
-107. [Sum of Digits of String After Convert](#sum-of-digits-of-string-after-convert)
-108. [Template for solving](#template-for-solving)
-109. [List of Badges to use](#list-of-badges-to-use)
+101. :red_circle:[Binary Tree Postorder traversal](#binary-tree-postorder-traversal)
+102. :red_circle:[N-ary Tree Postorder Traversal](#n-ary-tree-postorder-traversal)
+103. :red_circle:[Count Sub Islands](#count-sub-islands)
+104. :red_circle:[Most Stones Removed with Same Row or Column](#most-stones-removed-with-same-row-or-column)
+105. :red_circle:[Modify Graph Edge Weights](#modify-graph-edge-weights)
+106. :red_circle:[Path with Maximum Probability](#path-with-maximum-probability)
+107. [Convert ID Array Into 2D Array](#convert-id-array-into-2d-array)
+108. [Sum of Digits of String After Convert](#sum-of-digits-of-string-after-convert)
+109. :red_circle:[Walking Robot Simulation](#walking-robot-simulation)
+110. :red_circle:[Find Missing Observations](#find-missing-observations)
+111. :red_circle:[Delete Nodes From Linked List Present in Array](#delete-nodes-from-linked-list-present-in-array)
+112. [Count the Number of Consistent Strings](#count-the-number-of-consistent-strings)
+113. [Template for solving](#template-for-solving)
+114. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -9627,56 +9632,77 @@ In this case it is a subarray so we can use kadanes algorithm and make sure that
 
 <hr>
 
+
 ### Reverse a Linked List
 
-![Recursion](https://img.shields.io/badge/Recursion-FF8000) ![Single Linked List](https://img.shields.io/badge/Single_Linked_List-00FF11)
+![Single_Linked_List](https://img.shields.io/badge/Single_Linked_List-00FF11) ![Recursion](https://img.shields.io/badge/Recursion-FF8000)
 
-[**Question**](https://leetcode.com/problems/reverse-linked-list/description/):
+[**Question**](https://leetcode.com/problems/reverse-linked-list/):
 
 Given the head of a singly linked list, reverse the list, and return the reversed list.
 
- 
-
 > Example 1:
 
-![ex 1](https://assets.leetcode.com/uploads/2021/02/19/rev1ex1.jpg)
 
 Input: head = [1,2,3,4,5]
 Output: [5,4,3,2,1]
 
 > Example 2:
 
-![Example](https://assets.leetcode.com/uploads/2021/02/19/rev1ex2.jpg)
+
 Input: head = [1,2]
 Output: [2,1]
 
-> Example 3:
-
-Input: head = []
-Output: []
- 
-
-Constraints:
-
-The number of nodes in the list is the range [0, 5000].
--5000 <= Node.val <= 5000
-
 [**Solution**]():
-### Approach
+
+### Approach 
+In this method we will reverse the connections of the head to the new dummy node ( initially pointing to null ) to create the reversed linked list 
 
 ### Java Code
 ```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        // I think we can solve this using recursion where we will recursively go through the list and then once we encounter the last value we will start appending it to the new one
+        ListNode newHead = null;
+        // This the new dummy node
 
+        while ( head != null){
+            ListNode next = head.next;
+            // This sets it to the next value of the current head
+            head.next = newHead;
+            // This reverses the connection
+            newHead = head;
+            // This replaces the head node ( value and pointer )
+            head = next; 
+            // and this will finally change the pointer value
+        }
+        return newHead;
+    }
+}
 
 ```
 
-### Output 
+### Output
+```
+Input
+head = [1,2,3,4,5]
+Output
+[5,4,3,2,1]
+Expected
+[5,4,3,2,1]
 ```
 
-
-```
-
-- [Return to TOC](#table-of-contents-dsa)
+- [Return to TOC](#table-of-contents-dsa) 
 
 <hr>
 
@@ -11073,30 +11099,6 @@ Expected
 <hr>
 
 
-### Template for Solving 
-
-[**Question**]():
-
-
-[**Solution**]():
-
-### Approach 
-
-### Python Code
-```python
-
-
-```
-
-### Output
-```
-
-```
-
-- [Return to TOC](#table-of-contents-dsa) 
-
-<hr>
-
 > Day : Tuesday, 3rd September 2024
 
 
@@ -11188,6 +11190,355 @@ Expected
 
 <hr>
 
+> Day : Wednesday, 4th September 2024
+
+### Walking Robot Simulation
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Hash_table](https://img.shields.io/badge/Hash_table-purple) ![Simulation](https://img.shields.io/badge/Simulation-008080)
+
+[**Question**](https://leetcode.com/problems/walking-robot-simulation/description/?envType=daily-question&envId=2024-09-04):
+
+A robot on an infinite XY-plane starts at point (0, 0) facing north. The robot receives an array of integers commands, which represents a sequence of moves that it needs to execute. There are only three possible types of instructions the robot can receive:
+
+-2: Turn left 90 degrees.
+-1: Turn right 90 degrees.
+1 <= k <= 9: Move forward k units, one unit at a time.
+Some of the grid squares are obstacles. The ith obstacle is at grid point obstacles[i] = (xi, yi). If the robot runs into an obstacle, it will stay in its current location (on the block adjacent to the obstacle) and move onto the next command.
+
+Return the maximum squared Euclidean distance that the robot reaches at any point in its path (i.e. if the distance is 5, return 25).
+
+Note:
+
+There can be an obstacle at (0, 0). If this happens, the robot will ignore the obstacle until it has moved off the origin. However, it will be unable to return to (0, 0) due to the obstacle.
+North means +Y direction.
+East means +X direction.
+South means -Y direction.
+West means -X direction.
+ 
+
+> Example 1:
+
+Input: commands = [4,-1,3], obstacles = []
+
+Output: 25
+
+Explanation:
+
+The robot starts at (0, 0):
+
+Move north 4 units to (0, 4).
+Turn right.
+Move east 3 units to (3, 4).
+The furthest point the robot ever gets from the origin is (3, 4), which squared is 32 + 42 = 25 units away.
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def robotSim(self,commands,obstacles):
+        x,y,d=0,0,0
+        direction=[(0,1),(1,0),(0,-1),(-1,0)]
+        max_distance=0
+        obstacles=set(map(tuple,obstacles))
+        
+        for cmd in commands:
+            if cmd==-1:
+                d=(d+1)%4
+            elif cmd==-2:
+                d=(d-1)%4
+            else:
+                for _ in range(cmd):
+                    nx,ny=x+direction[d][0],y+direction[d][1]
+                    if (nx,ny) in obstacles:
+                        break
+                    x,y=nx,ny
+                    max_distance=max(max_distance,x*x+y*y)
+        
+        return max_distance
+
+```
+
+### Output
+```
+Input
+commands = [4,-1,3]
+obstacles = []
+Output
+25
+Expected
+25
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+> Day : Thurssday, 5th September 2024
+
+
+### Find Missing Observations
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Math](https://img.shields.io/badge/Math-FF99FF) ![Simulation](https://img.shields.io/badge/Simulation-008080)
+
+[**Question**](https://leetcode.com/problems/find-missing-observations/?envType=daily-question&envId=2024-09-05):
+
+You have observations of n + m 6-sided dice rolls with each face numbered from 1 to 6. n of the observations went missing, and you only have the observations of m rolls. Fortunately, you have also calculated the average value of the n + m rolls.
+
+You are given an integer array rolls of length m where rolls[i] is the value of the ith observation. You are also given the two integers mean and n.
+
+Return an array of length n containing the missing observations such that the average value of the n + m rolls is exactly mean. If there are multiple valid answers, return any of them. If no such array exists, return an empty array.
+
+The average value of a set of k numbers is the sum of the numbers divided by k.
+
+Note that mean is an integer, so the sum of the n + m rolls should be divisible by n + m.
+
+ 
+
+> Example 1:
+
+Input: rolls = [3,2,4,3], mean = 4, n = 2
+Output: [6,6]
+Explanation: The mean of all n + m rolls is (3 + 2 + 4 + 3 + 6 + 6) / 6 = 4.
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+class Solution:
+    def missingRolls(self, rolls, mean, n):
+        m = len(rolls)
+        total_sum = mean * (n + m)
+        observed_sum = sum(rolls)
+        
+        missing_sum = total_sum - observed_sum
+        
+        if missing_sum < n or missing_sum > 6 * n:
+            return []
+        
+        base = missing_sum // n
+        remainder = missing_sum % n
+        
+        result = [base] * n
+        for i in range(remainder):
+            result[i] += 1
+        
+        return result
+
+```
+
+### Output
+```
+Input
+rolls = [3,2,4,3]
+mean = 4
+n = 2
+Output
+[6,6]
+Expected
+[6,6]
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+
+
+> Day : Friday, 6th September 2024
+
+### Delete Nodes From Linked List Present in Array
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Hash_table](https://img.shields.io/badge/Hash_table-purple) ![Single_Linked_List](https://img.shields.io/badge/Single_Linked_List-00FF11)
+
+[**Question**](https://leetcode.com/problems/delete-nodes-from-linked-list-present-in-array/description/?envType=daily-question&envId=2024-09-06):
+
+You are given an array of integers nums and the head of a linked list. Return the head of the modified linked list after removing all nodes from the linked list that have a value that exists in nums.
+
+ 
+
+> Example 1:
+
+Input: nums = [1,2,3], head = [1,2,3,4,5]
+
+Output: [4,5]
+
+Explanation:
+
+Remove the nodes with values 1, 2, and 3.
+
+
+> Example 2:
+
+Input: nums = [1], head = [1,2,1,2,1,2]
+
+Output: [2,2,2]
+
+Explanation:
+
+Remove the nodes with value 1.
+
+
+> Example 3:
+
+Input: nums = [5], head = [1,2,3,4]
+
+Output: [1,2,3,4]
+
+Explanation:
+
+
+
+No node has value 5.
+
+[**Solution**]():
+
+### Approach 
+
+
+
+### Python Code
+```python
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def modifiedList(self, nums: List[int], head: Optional[ListNode]) -> Optional[ListNode]:
+        max_val = -1
+        for num in nums:
+            max_val = max(num, max_val)
+
+        freq = [False] * (max_val + 1)
+
+        for num in nums:
+            freq[num] = True
+
+        temp = ListNode()
+        current = temp
+
+        while head:
+            if head.val >= len(freq) or not freq[head.val]:
+                current.next = head
+                current = current.next
+            head = head.next
+
+        current.next = None
+
+        return temp.next
+
+        
+```
+
+### Output
+```
+Input
+nums = [1,2,3]
+head = [1,2,3,4,5]
+Output
+[4,5]
+Expected
+[4,5]
+
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+> Day : Friday, 13th September 2024
+
+
+### Count the Number of Consistent Strings
+
+![Arrays](https://img.shields.io/badge/Arrays-green) ![Hash_table](https://img.shields.io/badge/Hash_table-purple) ![String](https://img.shields.io/badge/String-grey) ![Bit_Manipulation](https://img.shields.io/badge/Bit_Manipulation-9999FF) ![Counting](https://img.shields.io/badge/Counting-BC3434)
+
+[**Question**](https://leetcode.com/problems/count-the-number-of-consistent-strings/?envType=daily-question&envId=2024-09-12):
+
+You are given a string allowed consisting of distinct characters and an array of strings words. A string is consistent if all characters in the string appear in the string allowed.
+
+Return the number of consistent strings in the array words.
+
+
+> Example 1:
+
+Input: allowed = "ab", words = ["ad","bd","aaab","baa","badab"]
+Output: 2
+Explanation: Strings "aaab" and "baa" are consistent since they only contain characters 'a' and 'b'.
+
+[**Solution**]():
+
+### Approach 
+1. Create a hashSet that contains the letters that are to be check
+2. Use one for loop to split the words and another nested one to check if the word is made up of the allowed letters
+3. If yes then set the bool value to `True` and update the counter based on that
+
+### Python Code
+```python
+class Solution:
+    def countConsistentStrings(self, allowed: str, words: List[str]) -> int:
+        str_set = set(allowed)
+        
+        count = 0
+        for word in words : 
+            word_arr = list(word)
+            bool = True
+            for letter in word_arr : 
+                if letter not in str_set :
+                    bool = False
+            if bool == True :
+                count += 1
+
+        return count
+
+```
+
+### Output
+```
+Input
+allowed = "ab"
+words = ["ad","bd","aaab","baa","badab"]
+Output
+2
+Expected
+2
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
+
+### Template for Solving 
+
+[**Question**]():
+
+
+[**Solution**]():
+
+### Approach 
+
+### Python Code
+```python
+
+
+```
+
+### Output
+```
+
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
 
 ### List of Badges to use
 
@@ -11222,6 +11573,8 @@ Expected
 29. ![Binary_Search](https://img.shields.io/badge/Binary_Search-3333FF)
 30. ![Topological_Sort](https://img.shields.io/badge/Topological_sort-FC0D94)
 31. ![Shortest_Path](https://img.shields.io/badge/Shortest_Path-66B2FF)
+32. ![Bit_Manipulation](https://img.shields.io/badge/Bit_Manipulation-9999FF)
+33. ![Counting](https://img.shields.io/badge/Counting-BC3434)
 
 
 
