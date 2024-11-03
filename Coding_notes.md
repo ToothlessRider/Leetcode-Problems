@@ -136,8 +136,9 @@
 110. :red_circle:[Find Missing Observations](#find-missing-observations)
 111. :red_circle:[Delete Nodes From Linked List Present in Array](#delete-nodes-from-linked-list-present-in-array)
 112. [Count the Number of Consistent Strings](#count-the-number-of-consistent-strings)
-113. [Template for solving](#template-for-solving)
-114. [List of Badges to use](#list-of-badges-to-use)
+113. [Rotate String](#rotate-string)
+114. [Template for solving](#template-for-solving)
+115. [List of Badges to use](#list-of-badges-to-use)
 
 
 
@@ -11514,6 +11515,67 @@ Expected
 
 <hr>
 
+### Rotate String
+
+![String](https://img.shields.io/badge/String-grey) ![String_Matching](https://img.shields.io/badge/String_Matching-DB5353)
+
+[**Question**](https://leetcode.com/problems/rotate-string/?envType=daily-question&envId=2024-11-03):
+Given two strings s and goal, return true if and only if s can become goal after some number of shifts on s.
+
+A shift on s consists of moving the leftmost character of s to the rightmost position.
+
+For example, if s = "abcde", then it will be "bcdea" after one shift.
+ 
+
+`Example 1`:
+
+Input: s = "abcde", goal = "cdeab"
+Output: true
+
+`Example 2`:
+
+Input: s = "abcde", goal = "abced"
+Output: false
+
+[**Solution**]():
+
+### Approach 
+- You simply need to remove the first character and append it to the end of the string to  perform the rotation. 
+- An if statement to check with the goal string will be the only other requirement. Easy
+
+### Python Code
+```python
+class Solution:
+    def rotateString(self, s: str, goal: str) -> bool:
+        # To rotate the string we can pop the first character and then connect it to the end
+
+        for i in range (0, len(s)):
+            char = s[0]
+            s = s[1:]+char
+            if s == goal:
+                return True
+        
+        return False
+
+```
+
+### Output
+```
+Input
+s =
+"abcde"
+goal =
+"cdeab"
+Output
+true
+Expected
+true
+```
+
+- [Return to TOC](#table-of-contents-dsa) 
+
+<hr>
+
 
 ### Template for Solving 
 
@@ -11575,7 +11637,7 @@ Expected
 31. ![Shortest_Path](https://img.shields.io/badge/Shortest_Path-66B2FF)
 32. ![Bit_Manipulation](https://img.shields.io/badge/Bit_Manipulation-9999FF)
 33. ![Counting](https://img.shields.io/badge/Counting-BC3434)
-
+34. ![String_Matching](https://img.shields.io/badge/String_Matching-DB5353)
 
 
 <hr>
